@@ -65,8 +65,6 @@ public class JP_Reserve extends JPanel {
 		tfName.setBounds(215, 111, 200, 25);
 		tfName.setColumns(10);
 		
-		tfName.setText(UserVO.getCheck_in());
-		
 		add(tfName);
 		
 		tfTel.setBounds(215, 155, 200, 25);
