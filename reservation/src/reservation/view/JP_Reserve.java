@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import reservation.model.vo.ReservationDAO;
 import reservation.model.vo.ReservationVO;
+import reservation.model.vo.UserVO;
 
 public class JP_Reserve extends JPanel {
 
@@ -63,6 +64,9 @@ public class JP_Reserve extends JPanel {
 		// Component 양식 설정
 		tfName.setBounds(215, 111, 200, 25);
 		tfName.setColumns(10);
+		
+		tfName.setText(UserVO.getCheck_in());
+		
 		add(tfName);
 		
 		tfTel.setBounds(215, 155, 200, 25);

@@ -18,6 +18,7 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import reservation.model.vo.ReservationVO;
+import reservation.model.vo.UserVO;
 
 public class JP_Cal extends JPanel {
 
@@ -169,6 +170,8 @@ public class JP_Cal extends JPanel {
 						return;
 					} else {
 						testSearch();
+						UserVO.setCheck_in(String.valueOf(selectedDate));
+						UserVO.setStayDays(String.valueOf(cb_Stay.getSelectedItem()));
 					}
 				}
 				else {
@@ -179,6 +182,45 @@ public class JP_Cal extends JPanel {
 				}
 			}
 		});
+	
+		/*
+		 * 사이트 선택 버튼 액션리스너 1~5
+		 */
+		bSite_1.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) { 
+				UserVO.setSite_no("1");
+				clearSearch();
+				F.toJP_Reserve(); 
+			}
+		});
+		bSite_2.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) { 
+				UserVO.setSite_no("2");
+				clearSearch();
+				F.toJP_Reserve(); 
+			}
+		});	
+		bSite_3.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) { 
+				UserVO.setSite_no("3");
+				clearSearch();
+				F.toJP_Reserve(); 
+			}
+		});	
+		bSite_4.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) { 
+				UserVO.setSite_no("4");
+				clearSearch();
+				F.toJP_Reserve(); 
+			}
+		});	
+		bSite_5.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) { 
+				UserVO.setSite_no("5");
+				clearSearch();
+				F.toJP_Reserve(); 
+			}
+		});	
 	}
 	
 	/*
@@ -191,8 +233,6 @@ public class JP_Cal extends JPanel {
 		bSite_3.setVisible(true);
 		bSite_4.setVisible(true);
 		bSite_5.setVisible(true);
-		
-		bSite_1.setEnabled(false);
 		
 		lb_able_sen.setVisible(true);
 		

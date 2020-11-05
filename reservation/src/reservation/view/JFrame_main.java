@@ -43,7 +43,6 @@ public class JFrame_main extends JFrame {
 	 * 작성: 김영권
 	 */
 	public void toLogin() { 
-		//cards.next(this.getContentPane()); 
 		cards.show(getContentPane(),"JP_Login");
 	}
 	
@@ -53,7 +52,6 @@ public class JFrame_main extends JFrame {
 	 * 작성: 김영권
 	 */
 	public void LoginSuccess() { 
-		//cards.next(this.getContentPane()); 
 		cards.show(getContentPane(),"JP_MainMenu");
 	}
 	
@@ -63,7 +61,6 @@ public class JFrame_main extends JFrame {
 	 * 작성: 김영권
 	 */
 	public void toJP_Cal() { 
-		//cards.next(this.getContentPane()); 
 		cards.show(getContentPane(),"JP_Cal");
 	}
 	
@@ -73,7 +70,6 @@ public class JFrame_main extends JFrame {
 	 * 작성: 김영권
 	 */
 	public void toJP_CheckResNo() { 
-		//cards.next(this.getContentPane()); 
 		cards.show(getContentPane(),"JP_CheckResNo");
 	}
 	
@@ -83,7 +79,7 @@ public class JFrame_main extends JFrame {
 	 * 작성: 김영권
 	 */
 	public void toJP_Reserve() { 
-		//cards.next(this.getContentPane()); 
+		getContentPane().add("JP_Reserve", new JP_Reserve(this));
 		cards.show(getContentPane(),"JP_Reserve");
 	}
 	
