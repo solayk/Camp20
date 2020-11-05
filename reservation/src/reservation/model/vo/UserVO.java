@@ -2,12 +2,12 @@ package reservation.model.vo;
 
 import java.util.Date;
 
-public class UserVO {
+public class UserVO { // 페이지간 데이터를 저장하기위한 용도의 VO
 	
 	static String customer_id;
 	static Date check_in;
 	static String site_no;
-	static String stayDays;
+	static int stayDays;
 	
 	public UserVO() {
 		
@@ -37,11 +37,11 @@ public class UserVO {
 		UserVO.site_no = site_no;
 	}
 
-	public static String getStayDays() {
+	public static int getStayDays() {
 		return stayDays;
 	}
 
-	public static void setStayDays(String stayDays) {
+	public static void setStayDays(int stayDays) {
 		UserVO.stayDays = stayDays;
 	}
 	

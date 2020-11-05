@@ -176,13 +176,17 @@ public class JP_Cal extends JPanel {
 				if(selectedDate!=null) {
 					int compare = date.compareTo(selectedDate); // 오늘 ~ 어제이하 1, 내일부터 -1
 					if(compare==1) {
+					
 						JLabel error = new JLabel("오늘날짜 이후로 날짜를 다시 선택하세요.");
 						error.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 						JOptionPane.showMessageDialog(null,error,"오류메시지",JOptionPane.WARNING_MESSAGE);
 						return;
 					} else {
 						UserVO.setCheck_in(selectedDate);
-						UserVO.setStayDays(String.valueOf(cb_Stay.getSelectedItem()));
+					//	String a =(String)cb_Stay.getSelectedItem();
+						//int b= Integer.parseInt((String)cb_Stay.getSelectedItem());
+						//System.out.println(b);
+						UserVO.setStayDays(Integer.parseInt((String)cb_Stay.getSelectedItem())); //  getSelectedItem의 객체가 String이기때문에 String으로 변환후 Int로바꿔야함 
 						testSearch();
 					}
 				}
