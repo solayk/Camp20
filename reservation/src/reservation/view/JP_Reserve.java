@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import reservation.model.vo.ReservationDAO;
 import reservation.model.vo.ReservationVO;
 
 public class JP_Reserve extends JPanel {
@@ -23,6 +24,12 @@ public class JP_Reserve extends JPanel {
 	
 	JFrame_main F; 
 	
+	private JComboBox personNumComboBox;
+	private JComboBox estArrComboBox;
+	private JComboBox comboBox_2;
+	
+	ReservationDAO reserve_dao;   //  ReservationDAO 변수 생성 . 
+	
 	/*
 	 * 이름: JP_MainMenu 기본생성자
 	 * 역할: 메인메뉴 JPanel
@@ -30,6 +37,13 @@ public class JP_Reserve extends JPanel {
 	 */
 	public JP_Reserve(JFrame_main f) { 
 		
+		// 
+		try {
+			reserve_dao = new ReservationDAO();
+			System.out.println("DB 연결 성공 ");
+		} catch (Exception e) {
+			System.out.println("DB 연결실패 :" + e.toString());
+		}
 		// 배경 설정
 		setBackground(Color.WHITE); 
 		setBounds(100, 100, 600, 600);
@@ -71,16 +85,18 @@ public class JP_Reserve extends JPanel {
 		bRegist.setBounds(215, 514, 97, 23);
 		add(bRegist);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(215, 264, 96, 21);
-		add(comboBox);
+		Integer []cbJanreStr = {1,2,3,4};  										// 인원수 콤보박스 데이터 추가 
+		personNumComboBox = new JComboBox(cbJanreStr);
+		personNumComboBox.setBounds(215, 264, 96, 21);
+		add(personNumComboBox);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(215, 317, 96, 21);
-		add(comboBox_1);
+		String []cbJanreStr1 = {"12시~2시","2시~4시","4시~6시","6시~8시"}; 			// 도착예정시간 콤보박스 데이터 추가
+		estArrComboBox = new JComboBox(cbJanreStr1);
+		estArrComboBox.setBounds(215, 317, 96, 21);
+		add(estArrComboBox);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(215, 211, 96, 21);
+		JComboBox comboBox_2 = new JComboBox();									//숙박기간 콤보박스 [삭제예정]		
+		comboBox_2.setBounds(215, 211, 96, 21);	
 		add(comboBox_2);
 		
 		JLabel lblNewLabel_2 = new JLabel("예약정보 입력");
@@ -151,9 +167,37 @@ public class JP_Reserve extends JPanel {
 		 */
 		bRegist.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
+				reserve();
 				F.toLogin(); 
 			}
 		});
 	} 
+	/*
+	 * 함수명 : reserve
+	 * 인자 : 없음
+	 * 반환값 : 없음 
+	 * 역할 : 결제완료를눌렀을때 실행되며 입력한 데이터를 VO에 담고 DAO의 PAMENT를실행해 DB에 저장한다. 
+	 */
+	public void reserve() {
+		ReservationVO rvo = new ReservationVO();
+	//	CustomerVO cvo = new CustomerVO;  
+	//	cvo.setMemberID(memberID);
+		
+		rvo.setPerson_no((int)personNumComboBox.getSelectedItem());   			// 창에 입력된 인원수를 가져온다. 
+		rvo.setEst_arr_time((String)estArrComboBox.getSelectedItem()); 			// 창에 입력된 도착예정시간을 가져온다.
+		rvo.setCar_no(tfCarNo.getText());										// 창에 입력된 차번호를 가져온다. 
+		
+		try {
+			
+			reserve_dao.Payment(rvo);
+			
+		} catch (Exception e) {
+			System.out.println("결제 실패 : "+ e.toString());
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 	
 }
