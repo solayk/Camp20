@@ -1,9 +1,11 @@
 package reservation.model.vo;
 
+import java.util.Date;
+
 public class UserVO {
 	
 	static String customer_id;
-	static String check_in;
+	static Date check_in;
 	static String site_no;
 	static String stayDays;
 	
@@ -18,12 +20,12 @@ public class UserVO {
 	public static void setCustomer_id(String customer_id) {
 		UserVO.customer_id = customer_id;
 	}
-
-	public static String getCheck_in() {
+	
+	public static Date getCheck_in() {
 		return check_in;
 	}
 
-	public static void setCheck_in(String check_in) {
+	public static void setCheck_in(Date check_in) {
 		UserVO.check_in = check_in;
 	}
 
