@@ -12,11 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import reservation.model.vo.ReservationVO;
+
 public class JP_Reserve extends JPanel {
 
-	private JTextField tfName, tfTel, tfCarNo, tfPrice;
-	private JButton bToLogin, bRegist; 
-	private JFrame_main F; 
+	JTextField tfName, tfTel, tfCarNo, tfPrice;
+	JButton bToLogin, bRegist; 
+	
+	static ReservationVO vo;
+	
+	JFrame_main F; 
 	
 	/*
 	 * 이름: JP_MainMenu 기본생성자
@@ -38,6 +43,8 @@ public class JP_Reserve extends JPanel {
 		tfTel = new JTextField();
 		tfCarNo = new JTextField();
 		tfPrice = new JTextField();
+		
+		vo = new ReservationVO();
  				
 		// Component 양식 설정
 		tfName.setBounds(215, 111, 200, 25);
@@ -148,4 +155,5 @@ public class JP_Reserve extends JPanel {
 			}
 		});
 	} 
+	
 }

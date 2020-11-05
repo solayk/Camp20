@@ -121,10 +121,5 @@ public class ReservationVO {
 	public void setManager_id(String manager_id) {
 		this.manager_id = manager_id;
 	}
-
-	
-	
-	
-	
 	
 }

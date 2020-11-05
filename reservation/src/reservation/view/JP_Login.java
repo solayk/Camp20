@@ -11,10 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import reservation.model.vo.ReservationVO;
+
 public class JP_Login extends JPanel {
 	
 	private JTextField tf_id, tf_pw;
 	private JButton bNewRegister, bLogin, bToManager; 
+	
 	private JFrame_main F; 
 	
 	/*

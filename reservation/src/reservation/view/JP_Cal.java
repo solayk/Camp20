@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import reservation.model.vo.ReservationVO;
 
 public class JP_Cal extends JPanel {
 
@@ -47,7 +48,6 @@ public class JP_Cal extends JPanel {
 		bSite_3 = new JButton("사이트 3");
 		bSite_4 = new JButton("사이트 4");
 		bSite_5 = new JButton("사이트 5");
-		
  				
 		// Component 양식 설정
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -167,7 +167,9 @@ public class JP_Cal extends JPanel {
 						error.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 						JOptionPane.showMessageDialog(null,error,"오류메시지",JOptionPane.WARNING_MESSAGE);
 						return;
-					} else testSearch();
+					} else {
+						testSearch();
+					}
 				}
 				else {
 					JLabel error = new JLabel("날짜를 선택하세요.");
@@ -178,16 +180,6 @@ public class JP_Cal extends JPanel {
 			}
 		});
 	}
-	
-	/*
-	 * 함수명: getInstance
-	 * 역할: JP_Reserve JPanel로 데이터 이관
-	 */
-	/*
-	public static JP_Cal getInstance() {
-		
-	} end of getInstance
-	*/
 	
 	/*
 	 * 함수명: testSearch
