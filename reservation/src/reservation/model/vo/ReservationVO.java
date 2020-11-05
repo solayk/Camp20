@@ -31,7 +31,7 @@ public class ReservationVO {
 		this.car_no = car_no;
 		this.est_arr_time = est_arr_time;
 		this.status = status;
-		this.manager_id = manager_id;
+		this.manager_id = manager_id ;
 	}
 
 	public String getReserv_no() {
