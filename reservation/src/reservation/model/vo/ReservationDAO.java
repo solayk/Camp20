@@ -3,9 +3,10 @@ package reservation.model.vo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.*;
 
 import javax.swing.JComboBox;
-
 
 public class ReservationDAO {
 
@@ -73,5 +74,48 @@ public class ReservationDAO {
 		return ;
 	}
 	
+	/*
+	 * 함수명: CheckAvailable
+	 * 역할: JP_Cal에서 "예약조회"버튼 클릭시 사이트 남은 자리 확인 목적 
+	 * 작성자: 김영권
+	 */
+	public ArrayList CheckAvailable (Date selectedDate) throws Exception{
+		
+		ArrayList<ReservationVO> list = new ArrayList<ReservationVO>();
+
+		System.out.println("Check");
+		System.out.println(selectedDate);
+		
+		java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
+		
+		String sql = "SELECT site_no, check_in, check_out\r\n" + 
+				"FROM reservation\r\n" + 
+				"WHERE check_in = ? OR check_out-1 = ?"
+				;
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs;
+		
+		st.setDate(1, sqlDate);
+		st.setDate(2, sqlDate);
+		
+		System.out.println(sql);
+		
+		rs = st.executeQuery();
+		
+		while(rs.next()) {
+			ReservationVO vo = new ReservationVO();
+			vo.setSite_no(rs.getString("site_no"));			
+			vo.setCheck_in(rs.getString("check_in"));			
+			vo.setCheck_out(rs.getString("check_out"));			
+			list.add(vo);
+		}
+		
+		System.out.println(list.size());
+		
+		st.close();
+		
+		return list;
+	}
 	
 }

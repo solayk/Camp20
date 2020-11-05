@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -17,13 +18,16 @@ import javax.swing.JTextField;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import reservation.model.vo.ReservationDAO;
 import reservation.model.vo.ReservationVO;
 import reservation.model.vo.UserVO;
 
 public class JP_Cal extends JPanel {
 
-	private JButton bToLogin, bTestReserve, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
-	private JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num;
+	JButton bToLogin, bTestReserve, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
+	JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num;
+	
+	ReservationDAO reserve_dao;
 	
 	private JFrame_main F; 
 	
@@ -39,6 +43,14 @@ public class JP_Cal extends JPanel {
 		setBounds(100, 100, 600, 600);
 		setLayout(null); 
 		F = f; 
+		
+		// ReservationDAO 연결
+		try {
+			reserve_dao = new ReservationDAO();
+			System.out.println("JP_Cal ReservationDAO DB 연결 성공");
+		} catch (Exception e) {
+			System.out.println("JP_Cal ReservationDAO DB 연결 ===실패=== :" + e.toString());
+		}
 		
 		// Component 생성
 		bToLogin = new JButton("홈"); 
@@ -169,9 +181,9 @@ public class JP_Cal extends JPanel {
 						JOptionPane.showMessageDialog(null,error,"오류메시지",JOptionPane.WARNING_MESSAGE);
 						return;
 					} else {
-						testSearch();
-						UserVO.setCheck_in(String.valueOf(selectedDate));
+						UserVO.setCheck_in(selectedDate);
 						UserVO.setStayDays(String.valueOf(cb_Stay.getSelectedItem()));
+						testSearch();
 					}
 				}
 				else {
@@ -228,6 +240,34 @@ public class JP_Cal extends JPanel {
 	 * 역할: "예약조회" 버튼 클릭 시 버튼 보이기
 	 */
 	void testSearch() {
+		
+		ArrayList<ReservationVO> list = new ArrayList<ReservationVO>();	
+		
+		System.out.println(UserVO.getCheck_in());
+		
+		bSite_1.setEnabled(true);
+		bSite_2.setEnabled(true);
+		bSite_3.setEnabled(true);
+		bSite_4.setEnabled(true);
+		bSite_5.setEnabled(true);
+		
+		try {
+			list = reserve_dao.CheckAvailable(UserVO.getCheck_in());
+		} catch (Exception e) {
+			System.out.println("JP_Cal list 받아오지 못함: " + e.toString());
+		}
+		
+		for(ReservationVO data: list) {
+			System.out.println(data.getSite_no());
+			switch(data.getSite_no()){
+				case "1": bSite_1.setEnabled(false); break;
+				case "2": bSite_2.setEnabled(false); break;
+				case "3": bSite_3.setEnabled(false); break;
+				case "4": bSite_4.setEnabled(false); break;
+				case "5": bSite_5.setEnabled(false); break;
+			}
+		}
+		
 		bSite_1.setVisible(true);
 		bSite_2.setVisible(true);
 		bSite_3.setVisible(true);
@@ -256,7 +296,6 @@ public class JP_Cal extends JPanel {
 		lb_able_sen.setVisible(false);
 		lb_able_Num.setText("");
 		lb_able_Num.setVisible(false);
-		bSite_1.setEnabled(true);
 	}
 	
 }
