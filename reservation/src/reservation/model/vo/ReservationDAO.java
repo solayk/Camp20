@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.sql.SQLException;
 import java.util.*;
 
 import javax.swing.JComboBox;
@@ -167,6 +167,57 @@ public class ReservationDAO {
 		}
 		
 		return list;
+	}
+	/*
+	 * 역할 : 예약번호로 CheckRes페이지를 세팅 한다. 
+	 * 
+	 */
+	public ReservationVO SettingRes(String resNum) {
+		ReservationVO vo = new ReservationVO();
+		ResultSet rs;
+		
+		try {
+			String sql = "SELECT * FROM reservation r, customer c ,site s WHERE r.customer_id=c.customer_id and  r.site_no=s.site_no and reserv_no = ?";
+			System.out.println(sql);
+			PreparedStatement ps;
+			ps = con.prepareStatement(sql);
+			ps.setString(1, resNum); 	
+			
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				vo.setSite_type(rs.getString("site_type"));
+				
+				//TODO 선생님한테 물어볼것
+//				vo.setReserve_date(rs.getString("reserve_date"));
+				String resDate = rs.getString("reserve_date");			
+				vo.setReserve_date(resDate.substring(0,10));
+				String chInDate = rs.getString("check_in");	
+				vo.setCheck_in(chInDate.substring(0,10));
+				String chOutDate = rs.getString("check_out");
+				vo.setCheck_out(chOutDate.substring(0,10));
+				
+				vo.setPerson_no(rs.getInt("person_no"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setStatus(rs.getString("status"));
+				vo.setReserv_no(rs.getString("reserv_no"));
+				vo.setCustomer_name(rs.getString("name"));
+				vo.setTel(rs.getString("tel"));
+				vo.setEst_arr_time(rs.getString("est_arr_time"));
+				vo.setRequestTerm(rs.getString("requestedterm"));
+
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("무슨예외인지 알고싶지않아 ");
+			e.printStackTrace();
+		} 
+		
+		
+		
+		
+		return vo;
 	}
 	
 	

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -72,31 +73,6 @@ public class JP_CheckResNo extends JPanel {
 			Center.add(new JScrollPane(tbl)); 					// JTable 은 스크롤을 반드시넣어서 붙여줘야한다
 		add(Center);
 		F = f; 
-	
-		// Component 생성
-//		tf_resNo = new JTextField();
-//		bToReserve = new JButton("예약조회"); //변경예정
- 				
-		// Component 양식 설정
-//		tf_resNo.setBounds(207, 247, 150, 21);
-//		tf_resNo.setColumns(10);
-//		add(tf_resNo);
-		
-
-		
-//		bToReserve.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-//		bToReserve.setBounds(238, 301, 97, 23);
-//		add(bToReserve);
-		
-	
-
-		
-//		JLabel lb_notice = new JLabel("예약번호를 입력하세요");
-//		lb_notice.setHorizontalAlignment(SwingConstants.CENTER);
-//		lb_notice.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-//		lb_notice.setBounds(190, 222, 173, 15);
-//		add(lb_notice);
-
 		
 		try {
 			ArrayList reserveList = new ArrayList();
@@ -118,15 +94,25 @@ public class JP_CheckResNo extends JPanel {
 		
 
 		
-//		JTable에 마우스 이벤트
+		//JTable에 마우스 이벤트
 		tbl.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int col = 0;
 				int row =  tbl.getSelectedRow(); // 선택한 행이무엇이냐  // 어떤행을선택해도 0번째열 가져온다 (예약번호)
-				String resNum = (String)tbl.getValueAt(row, col); // 내가선택한 애의 예약만 가져온다.
-				System.out.println(resNum);
+				
+				if(e.getClickCount()>1) {		//더블클릭시 이벤트 발생 
+					System.out.println("더블클릭");
+
+					int reply = JOptionPane.showConfirmDialog(null, "해당 예약번호로 조회하시겠습니까? ", "예약 조회", JOptionPane.YES_NO_OPTION);
+					if (reply == JOptionPane.YES_OPTION) {
+						String resNum = (String)tbl.getValueAt(row, col); // 내가선택한 애의 예약만 가져온다.
+						System.out.println(resNum);
+						UserVO.setReserv_no(resNum);
+						F.toJP_CheckRes(); 							//JP_CheckRes 페이지로 넘어간다. 
+					}
+				}
 				
 				
 			}
@@ -144,39 +130,7 @@ public class JP_CheckResNo extends JPanel {
 			}
 		});
 		
-		
-		/*
-		 * 이름: 버튼 액션 리스너
-		 * 역할: "예약조회" 버튼 클릭 시 동작 설정
-		 */
-//		bToReserve.addActionListener(new ActionListener() { 
-//			public void actionPerformed(ActionEvent arg0) { 
-//					
-//					F.toJP_CheckRes(); 							//JP_CheckRes 페이지로 넘어간다. 
-//		
-//			}
-//		});
-		
 	}
-	// 
-	void change() {
-//		try {
-//			ArrayList reserveList = new ArrayList();
-//			
-//			reserveList = reserve_dao.CheckResList(UserVO.getCustomer_id());
-//			
-//			
-//		} catch (Exception e) {
-//			System.out.println("예약리스트 조회 실패 :" + e.toString() );
-//			e.printStackTrace();
-//		}
-//
-//		tbModel.list = reserveList;  // 2차원배열을 모델클래스의 list에 저장 
-//		//tbl.setModel(tbModel); // 테이블의 테이블모델 지정 [없어도될수도있음 ] - 없어도되었음. 
-//		tbModel.fireTableDataChanged(); // 데이타가 화면한테 내용바꼇다는 신호  
-		
-	} // end of change
-	
 	
 	//이너 클래스  // 테이블 모델 - JTable 의 데이타를 관리하는 클래스  
 	class MyTableModel extends AbstractTableModel{ // 디폴트 테이블 모델을 쓰면 더 쉬움 
@@ -200,5 +154,6 @@ public class JP_CheckResNo extends JPanel {
 		}
 		
 	}
+	
 	
 }
