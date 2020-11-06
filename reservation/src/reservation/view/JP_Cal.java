@@ -24,7 +24,7 @@ import reservation.model.vo.UserVO;
 
 public class JP_Cal extends JPanel {
 
-	JButton bToLogin, bTestReserve, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
+	JButton bToLogin, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
 	JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num;
 	
 	ReservationDAO reserve_dao;
@@ -54,7 +54,6 @@ public class JP_Cal extends JPanel {
 		
 		// Component 생성
 		bToLogin = new JButton("홈"); 
-		bTestReserve = new JButton("테스트");
 		bTestSearch = new JButton("예약조회");
 		bSite_1 = new JButton("사이트 1");
 		bSite_2 = new JButton("사이트 2");
@@ -66,10 +65,6 @@ public class JP_Cal extends JPanel {
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bToLogin.setBounds(457, 23, 97, 23);
 		add(bToLogin);
-		
-		bTestReserve.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bTestReserve.setBounds(300, 23, 97, 23);
-		add(bTestReserve);
 		
 		bTestSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bTestSearch.setBounds(200, 270, 97, 40);
@@ -156,13 +151,6 @@ public class JP_Cal extends JPanel {
 			public void actionPerformed(ActionEvent arg0) { 
 				clearSearch();
 				F.toLogin();
-			}
-		});
-		
-		bTestReserve.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent arg0) { 
-				clearSearch();
-				F.toJP_Reserve(); 
 			}
 		});
 		
