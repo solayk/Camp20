@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -25,7 +26,7 @@ import reservation.model.vo.UserVO;
 public class JP_Cal extends JPanel {
 
 	JButton bToLogin, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
-	JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num;
+	JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num, lb_able_gae;
 	
 	ReservationDAO reserve_dao;
 	
@@ -115,17 +116,23 @@ public class JP_Cal extends JPanel {
 		add(lb_numStay);
 		
 		// "예약조회" 클릭 시 보이는 라벨
-		lb_able_sen = new JLabel("예약 가능한 사이트 수: ");
-		lb_able_sen.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lb_able_sen.setBounds(100, 350, 150, 30);
+		lb_able_sen = new JLabel("예약 가능한 사이트 수 ");
+		lb_able_sen.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		lb_able_sen.setBounds(100, 350, 250, 30);
 		add(lb_able_sen);
 		lb_able_sen.setVisible(false);
 		
 		lb_able_Num = new JLabel("");
-		lb_able_Num.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
-		lb_able_Num.setBounds(260, 350, 200, 30);
+		lb_able_Num.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		lb_able_Num.setBounds(300, 349, 200, 30);
 		add(lb_able_Num);
 		lb_able_Num.setVisible(false);
+		
+		lb_able_gae = new JLabel("개");
+		lb_able_gae.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+		lb_able_gae.setBounds(350, 350, 250, 30);
+		add(lb_able_gae);
+		lb_able_gae.setVisible(false);
 				
 		// 체크IN 날짜 선택 달력 팝업
 		UtilDateModel model1 = new UtilDateModel();
@@ -246,8 +253,18 @@ public class JP_Cal extends JPanel {
 			System.out.println("JP_Cal list 받아오지 못함: " + e.toString());
 		}
 		
+		// 남은 사이트 수 표시 목적 배열
+		String[] chk = new String[]{"1","2","3","4","5"};
+		ArrayList<String> chk_Site_no = new ArrayList<String>(Arrays.asList(chk));
+		System.out.println(chk_Site_no.size());
+		
 		for(ReservationVO data: list) {
-			System.out.println(data.getSite_no());
+			
+			// 남은 사이트 수 표시를 위해 예약완료 사이트 번호 배열에서 제거
+			for(int i=0; i<chk_Site_no.size(); i++) {
+				if(data.getSite_no().equals(chk_Site_no.get(i))) chk_Site_no.remove(i);
+			}
+								
 			switch(data.getSite_no()){
 				case "1": bSite_1.setEnabled(false); break;
 				case "2": bSite_2.setEnabled(false); break;
@@ -265,9 +282,10 @@ public class JP_Cal extends JPanel {
 		
 		lb_able_sen.setVisible(true);
 		
-		int k = 1;
-		lb_able_Num.setText(Integer.toString(k));
+		lb_able_Num.setText(Integer.toString(chk_Site_no.size()));
 		lb_able_Num.setVisible(true);
+		
+		lb_able_gae.setVisible(true);
 		
 		setVisible(true);
 	}
@@ -285,6 +303,7 @@ public class JP_Cal extends JPanel {
 		lb_able_sen.setVisible(false);
 		lb_able_Num.setText("");
 		lb_able_Num.setVisible(false);
+		lb_able_gae.setVisible(false);
 	}
 	
 }
