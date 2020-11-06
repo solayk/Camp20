@@ -263,7 +263,7 @@ public class JP_Reserve extends JPanel {
 	 * 역할 : 결제완료를눌렀을때 실행되며 입력한 데이터를 VO에 담고 DAO의 PAMENT를실행해 DB에 저장한다. 
 	 */
 	public void reserve() {
-		ReservationVO rvo = new ReservationVO();
+		ReservationVO rvo = new ReservationVO(); 
 	//	CustomerVO cvo = new CustomerVO;  
 	//	cvo.setMemberID(memberID);
 		
