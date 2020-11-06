@@ -95,9 +95,6 @@ public class ReservationDAO {
 	public ArrayList CheckAvailable (Date selectedDate) throws Exception{
 		
 		ArrayList<ReservationVO> list = new ArrayList<ReservationVO>();
-
-		System.out.println("Check");
-		System.out.println(selectedDate);
 		
 		java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 		
@@ -130,8 +127,6 @@ public class ReservationDAO {
 		st.setDate(3, sqlDate);
 		st.setDate(4, sqlDate);
 		
-		System.out.println(sql);
-		
 		rs = st.executeQuery();
 		
 		while(rs.next()) {
@@ -141,8 +136,6 @@ public class ReservationDAO {
 			vo.setCheck_out(rs.getString("check_out"));			
 			list.add(vo);
 		}
-		
-		System.out.println(list.size());
 		
 		st.close();
 		
