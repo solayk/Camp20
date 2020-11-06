@@ -223,7 +223,7 @@ public class JP_Reserve extends JPanel {
 		});
 		/*
 		 *  체크 박스 환불 규정 동의 
-		 */
+		 */ 
 		chckbxNewCheckBox_1.addActionListener(new ActionListener() {  //환불규정 동의 누르면
 			@Override
 			public void actionPerformed(ActionEvent e) {
