@@ -24,6 +24,7 @@ public class JFrame_main extends JFrame {
 		getContentPane().add("JP_MainMenu", new JP_MainMenu(this));
 		getContentPane().add("JP_Cal", new JP_Cal(this));
 		getContentPane().add("JP_CheckResNo", new JP_CheckResNo(this));
+		getContentPane().add("JP_CheckRes", new JP_CheckRes(this));
 		getContentPane().add("JP_Reserve", new JP_Reserve(this));
 		setVisible(true); 
 	} 
@@ -81,6 +82,15 @@ public class JFrame_main extends JFrame {
 	public void toJP_Reserve() { 
 		getContentPane().add("JP_Reserve", new JP_Reserve(this));
 		cards.show(getContentPane(),"JP_Reserve");
+	}
+	/*
+	 * 함수명: toJP_Reserve
+	 * 역할: "예약조회" 버튼 클릭 시 JP_Reserve로 화면 전환 ***테스트 버튼 바이패스
+	 * 작성: 김영권
+	 */
+	public void toJP_CheckRes() { 
+		getContentPane().add("JP_CheckRes", new JP_CheckRes(this));
+		cards.show(getContentPane(),"JP_CheckRes");
 	}
 	
 	/*

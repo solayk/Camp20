@@ -56,7 +56,7 @@ public class JP_CheckResNo extends JPanel {
 		JLabel lb_notice = new JLabel("예약번호를 입력하세요");
 		lb_notice.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_notice.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lb_notice.setBounds(207, 222, 173, 15);
+		lb_notice.setBounds(190, 222, 173, 15);
 		add(lb_notice);
 				
 		setVisible(true);
@@ -73,11 +73,11 @@ public class JP_CheckResNo extends JPanel {
 		
 		/*
 		 * 이름: 버튼 액션 리스너
-		 * 역할: "" 버튼 클릭 시 동작 설정
+		 * 역할: "예약조회" 버튼 클릭 시 동작 설정
 		 */
 		bToReserve.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
-				F.toLogin(); 
+				F.toJP_CheckRes(); 
 			}
 		});
 		
