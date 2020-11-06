@@ -27,7 +27,7 @@ public class UserVO { // 페이지간 데이터를 저장하기위한 용도의 
 
 	public static void setCheck_in(Date check_in) {
 		UserVO.check_in = check_in;
-	}
+	} 
 
 	public static String getSite_no() {
 		return site_no;
