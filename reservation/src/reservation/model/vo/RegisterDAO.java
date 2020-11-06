@@ -74,9 +74,44 @@ public class RegisterDAO {
 		
 	}
 	
-	//
-	//
-	//
+	/*
+	 * 함수명: toSend_pw
+	 * 작성자: 김영권
+	 * 역할: 패스워드 전송
+	 */
+	public CustomerVO toSend_pw(String id) throws Exception {
+		
+		String sql = "SELECT * \r\n" + 
+				" FROM CUSTOMER\r\n" + 
+				" WHERE customer_id = ? \r\n" 
+				;
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs;
+		
+		st.setString(1, id);
+		
+		rs = st.executeQuery();
+		
+		CustomerVO vo = new CustomerVO();
+		while(rs.next()) {
+			vo.setMemberName(rs.getString("NAME"));
+			vo.setMemberEmail(rs.getString("EMAIL"));
+			vo.setMemberPw(rs.getString("CUSTOMER_PW"));
+		}
+		
+		st.close();
+		rs.close();
+		
+		return vo;
+	}
+	
+	
+	/*
+	 * 함수명: chk_idpw
+	 * 작성자: 김영권
+	 * 역할: 아이디와 패스워드 일치여부 확인
+	 */
 	public int chk_idpw(String id, String pw) throws Exception {
 		
 		String sql1 = "SELECT * \r\n" + 
@@ -97,16 +132,20 @@ public class RegisterDAO {
 			chk_id_only = rs1.getString("CUSTOMER_ID");
 		}
 		
+		st1.close();
+		rs1.close();
+		
+		PreparedStatement st2;
+		ResultSet rs2;
+		
 		// 아이디 존재여부 확인 => 만일 chk_id_only가 null이면 없는 id 
 		if(chk_id_only != null) {
-			System.out.println("아이디 존재함");
-			
 			String sql2 = "SELECT * \r\n" + 
 					" FROM CUSTOMER\r\n" + 
 					" WHERE customer_id = ? AND customer_pw = ? \r\n" 
 					;
-			PreparedStatement st2 = con.prepareStatement(sql2);
-			ResultSet rs2;
+			st2 = con.prepareStatement(sql2);
+			
 			
 			st2.setString(1, id);
 			st2.setString(2, pw);
@@ -118,6 +157,10 @@ public class RegisterDAO {
 			while(rs2.next()) {
 				chk_both = rs2.getString("CUSTOMER_ID");
 			}
+			
+			st2.close();
+			rs2.close();
+			
 				if(chk_both != null) return 1; // 아이디 비밀번호 일치 = 로그인 성공
 				else return 3;	// 에러: 아이디 비밀번호 불일치			
 		}

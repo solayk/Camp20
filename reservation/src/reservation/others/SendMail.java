@@ -15,20 +15,30 @@ public class SendMail {
 	String subject;
 	String body;
 	
+	String host = "smtp.naver.com";  
+	String username = "kimykarsenal";  
+	String password = "rladudrnjs20!";  
+	
 	public SendMail() {
+	}
+	
+	public void send_pw(String name, String email, String pw) {
+		
+		recipient = email;  
+		subject = "캄파진현 비밀번호를 확인하세요";  
+		body = "\r\n" +
+			   " 안녕하세요.\r\n" +
+			   " 캄파진현입니다.\r\n" +
+			   name + " 회원님의 비밀번호는 " + pw + " 입니다.\r\n" +
+			   " 감사합니다. \r\n"
+			   ;
+		
 		sending();
 	}
 	
 	public void sending() {
-		String host = "smtp.naver.com";  
-		final String username = "kimykarsenal";  
-		final String password = "rladudrnjs20!";  
 
 		int port=465; 
-
-		recipient = "ykkim.java@gmail.com"; //받는 사람의 메일주소  
-		subject = "김영권 메일 테스트입니다."; //메일 제목  
-		body = "김영권의 메일 성공입니다."; //메일 내용  
 
 		Properties props = System.getProperties();  
 		// SMTP 서버 정보 설정  

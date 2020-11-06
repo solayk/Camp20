@@ -16,9 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import reservation.model.vo.CustomerVO;
 import reservation.model.vo.RegisterDAO;
 import reservation.model.vo.ReservationVO;
 import reservation.model.vo.UserVO;
@@ -60,7 +62,7 @@ public class JP_Login extends JPanel {
 		// Component 생성
 		// 로그인, 패스워드 입력 TextField 도움말 HintTextField로 추가
 		tf_id = new HintTextField("아이디를 입력하세요");
-		tf_pw = new HintTextField("비밀번호를 입력하세요");
+		tf_pw = new JPasswordField();
 		
 		bNewRegister = new JButton("회원가입"); 
 		bLogin = new JButton("로그인");
@@ -191,7 +193,6 @@ public class JP_Login extends JPanel {
 					F.LoginSuccess();
 					tf_id.setText("");
 					tf_pw.setText("");
-					SendMail mail = new SendMail();
 				}
 				else if(i==2) { // 존재하지 않는 아이디
 					JOptionPane.showMessageDialog(null, "존재하지 않는 아이디 입니다");
@@ -202,8 +203,21 @@ public class JP_Login extends JPanel {
 					/*
 					 * 추후 비밀번호 재설정에 대한 로직 추가 필요  
 					 */
-					else JOptionPane.showMessageDialog(null, "비밀번호를 5번 틀리셨습니다. 비밀번호를 재설정하시기 바랍니다.");
-					tf_pw.setText("");
+					else {
+						JOptionPane.showMessageDialog(null, "비밀번호를 5번 틀리셨습니다. 비밀번호를 재설정하시기 바랍니다.");
+						// 비밀번호 메일로 보내기
+						CustomerVO vo = new CustomerVO();
+						try {
+							vo = dao.toSend_pw(tf_id.getText());
+						} catch (Exception e) {
+							System.out.println("toSend_pw 에러: " + e.toString());
+						}
+						SendMail mail = new SendMail();
+						mail.send_pw(vo.getMemberName(), vo.getMemberEmail(), vo.getMemberPw());
+						tf_id.setText("");
+						tf_pw.setText("");
+					}
+					
 				}
 				else System.out.println("로그인 bLogin 버튼 액션 리스너 확인");	
 			}
