@@ -33,6 +33,8 @@ public class JP_Login extends JPanel {
 	/*
 	 * 테스트
 	 */
+	JButton bGaebal;
+	
 	JPanel test;
 	
 	RegisterDAO dao;
@@ -60,6 +62,11 @@ public class JP_Login extends JPanel {
 		bNewRegister = new JButton("회원가입"); 
 		bLogin = new JButton("로그인");
 		bToManager = new JButton("관리자");
+		
+		/*
+		 * 
+		 */
+		bGaebal = new JButton("개발모드");
 		
 		try {
 			dao = new RegisterDAO();
@@ -89,6 +96,10 @@ public class JP_Login extends JPanel {
 		bToManager.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bToManager.setBounds(251, 375, 97, 23);
 		add(bToManager);
+		
+		bGaebal.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bGaebal.setBounds(10, 10, 97, 23);
+		add(bGaebal);
 		
 		/*
 		 * 테스트
@@ -128,6 +139,13 @@ public class JP_Login extends JPanel {
 		add(lb_pw);
 		
 		setVisible(true);
+		
+		bGaebal.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) { 
+				F.LoginSuccess();
+			}
+		});
+		
 		
 		/*
 		 * 이름: bNewRegister 버튼 액션 리스너
