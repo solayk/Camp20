@@ -123,10 +123,11 @@ public class JP_CheckResNo extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int r = tbl.getSelectedRow();    // 선택한 행
-				int c = tbl.getSelectedColumn(); // 선택한 열
+				int col = 0;
+				int row =  tbl.getSelectedRow(); // 선택한 행이무엇이냐  // 어떤행을선택해도 0번째열 가져온다 (예약번호)
+				String resNum = (String)tbl.getValueAt(row, col); // 내가선택한 애의 예약만 가져온다.
+				System.out.println(resNum);
 				
-				System.out.println(r+":"+c);
 				
 			}
 		});
