@@ -24,6 +24,7 @@ import reservation.model.vo.ReservationVO;
 import reservation.model.vo.UserVO;
 import reservation.others.HintTextField;
 import reservation.others.JPanelWithBackground;
+import reservation.others.SendMail;
 
 public class JP_Login extends JPanel {
 	
@@ -35,11 +36,13 @@ public class JP_Login extends JPanel {
 	 */
 	JButton bGaebal;
 	
-	JPanel test;
+	JPanel photo_1, photo_2;
 	
 	RegisterDAO dao;
 	
-	JFrame_main F; 
+	JFrame_main F;
+	
+	int count=0; // 로그인 반복 실패 처리
 	
 	/*
 	 * 이름: JP_Login 기본생성자
@@ -64,7 +67,7 @@ public class JP_Login extends JPanel {
 		bToManager = new JButton("관리자");
 		
 		/*
-		 * 
+		 * 임시 ****************************************
 		 */
 		bGaebal = new JButton("개발모드");
 		
@@ -104,14 +107,25 @@ public class JP_Login extends JPanel {
 		/*
 		 * 테스트
 		 */
-		test = null;
+		photo_1 = null;
 		try {		
-			test = new JPanelWithBackground("D:\\test_3_cropped.gif");
+			photo_1 = new JPanelWithBackground("D:\\test_3_cropped.gif");
 			} catch (Exception e) {
 				System.out.println("이미지 불러오기 실패");
 			}
-		test.setBounds(370, 360, 226, 226);
-		add(test);
+		photo_1.setBounds(370, 360, 226, 226);
+		add(photo_1);
+		
+		/* 추후 반영 목적
+		photo_2 = null;
+		try {		
+			photo_2 = new JPanelWithBackground("");
+			} catch (Exception e) {
+				System.out.println("이미지 불러오기 실패");
+			}
+		photo_2.setBounds(0, 400, 300, 184);
+		add(photo_2);
+		*/
 		
 		/*
 		 * 테스트
@@ -165,30 +179,30 @@ public class JP_Login extends JPanel {
 			public void actionPerformed(ActionEvent arg0) { 
 				
 				int i=0; // 로그인 성공 또는 실패 구분
-				int count=0; // 로그인 반복 실패 처리
 								
 				try {
-					//i = dao.chk_idpw(tf_id.getText());
+					i = dao.chk_idpw(tf_id.getText(), tf_pw.getText());
 				} catch (Exception e) {
 					System.out.println("JP_Login chk_idpw 실행 에러: " + e.toString());
 				}
 				
 				if(i==1) {
 					UserVO.setCustomer_id(tf_id.getText());
-					F.LoginSuccess(); 
+					F.LoginSuccess();
+					tf_id.setText("");
+					tf_pw.setText("");
+					SendMail mail = new SendMail();
 				}
 				else if(i==2) { // 존재하지 않는 아이디
 					JOptionPane.showMessageDialog(null, "존재하지 않는 아이디 입니다");
 					tf_id.setText("");
 				}
 				else if(i==3) { // 아이디, 비밀번호 불일치 
-					++count;
-					if(count<5) JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 일치하지 않습니다./n 틀린횟수 " + count + "번");
+					if(count<4) JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 일치하지 않습니다. 틀린횟수 " + ++count + "번");
 					/*
 					 * 추후 비밀번호 재설정에 대한 로직 추가 필요  
 					 */
 					else JOptionPane.showMessageDialog(null, "비밀번호를 5번 틀리셨습니다. 비밀번호를 재설정하시기 바랍니다.");
-					tf_id.setText("");
 					tf_pw.setText("");
 				}
 				else System.out.println("로그인 bLogin 버튼 액션 리스너 확인");	
