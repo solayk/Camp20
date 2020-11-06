@@ -24,7 +24,7 @@ public class SendMail {
 	
 	public void send_pw(String name, String email, String pw) {
 		
-		recipient = email;  
+		recipient = email;   
 		subject = "캄파진현 비밀번호를 확인하세요";  
 		body = "\r\n" +
 			   " 안녕하세요.\r\n" +

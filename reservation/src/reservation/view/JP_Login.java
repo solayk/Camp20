@@ -188,7 +188,7 @@ public class JP_Login extends JPanel {
 					System.out.println("JP_Login chk_idpw 실행 에러: " + e.toString());
 				}
 				
-				if(i==1) {
+				if(i==1) { 
 					UserVO.setCustomer_id(tf_id.getText());
 					F.LoginSuccess();
 					tf_id.setText("");

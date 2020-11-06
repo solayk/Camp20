@@ -75,7 +75,7 @@ public class RegisterDAO {
 	}
 	
 	/*
-	 * 함수명: toSend_pw
+	 * 함수명: toSend_pw 
 	 * 작성자: 김영권
 	 * 역할: 패스워드 전송
 	 */
