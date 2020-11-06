@@ -11,7 +11,7 @@ import java.awt.event.FocusEvent;
  */
 
 public class HintTextField extends JTextField {
-	// 폰트 수정
+	// 폰트 수정 
     Font gainFont = new Font("완도희망체", Font.PLAIN, 11);
     Font lostFont = new Font("완도희망체", Font.PLAIN, 11);
 
