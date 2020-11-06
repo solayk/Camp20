@@ -3,6 +3,7 @@ package reservation.model.vo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import reservation.model.vo.CustomerVO;
@@ -53,24 +54,42 @@ public class RegisterDAO {
 	
 	
 //	ID중복 확인 _201103 원우
-	public int overlapDeny(CustomerVO customer) throws Exception {
+	public boolean overlapDeny(String id) throws Exception {
 		
-		int a = 0;
+		String sql = "SELECT customer_id FROM customer WHERE customer_id = ?";
+		System.out.println(sql);
 		
-		String sql = "INSERT INTO customer(customer_id, tel, customer_pw, name, email, addr) VALUES(?, ?, ?, ?, ?, ?)";
+		PreparedStatement joongbok = con.prepareStatement(sql);
+		joongbok.setString(1, id);
+		ResultSet rs = joongbok.executeQuery();
 		
-		PreparedStatement gaib = con.prepareStatement(sql);
-		
-		int result = gaib.executeUpdate();
-		if(result>0) {
-			
+		if(rs.next()) {
+			int cnt = rs.getInt("cnt");
+			if(cnt>0) {
+				return true;
+			}
 		}
-		
-		return a;
-		
-		
+		return false;
 	}
-	
+		
+		
+//------------------------------------------------------------------------------		
+//		** 이거 왜 이렇게 하려 했는지 기억 중 _201103 원우
+//			
+//		int a = 0;
+//		
+//		String sql = "INSERT INTO customer(customer_id, tel, customer_pw, name, email, addr) VALUES(?, ?, ?, ?, ?, ?)";
+//		
+//		PreparedStatement gaib = con.prepareStatement(sql);
+//		
+//		int result = gaib.executeUpdate();
+//		if(result>0) {
+//			
+//		}
+//		
+//		return a;
+//------------------------------------------------------------------------------		
+		
 	
 }
 

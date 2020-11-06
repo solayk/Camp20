@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
@@ -14,9 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import reservation.others.HintTextField;
-import reservation.model.vo.RegisterDAO;
 import reservation.model.vo.CustomerVO;
+import reservation.model.vo.RegisterDAO;
+import reservation.others.HintTextField;
 
 public class JP_Register extends JPanel implements ActionListener {
 	
@@ -104,6 +106,14 @@ public class JP_Register extends JPanel implements ActionListener {
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel.setBounds(100, 107, 57, 15);
 		add(lblNewLabel);
+		
+
+//		중복검사 _201106 원우
+		JLabel lblNewLabel_overlap = new JLabel("사용가능");
+		lblNewLabel_overlap.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_overlap.setBounds(400, 107, 57, 15);
+		add(lblNewLabel_overlap);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("전화번호");
 		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -272,7 +282,7 @@ public class JP_Register extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, "id 8글자이상", "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			// 1-4. 중복검사 해야하는데............ > 이건 버튼으로???
+			// 1-4. 중복검사 해야하는데............ > 바로 뜨게
 			
 			
 			// 2. 전화번호 유효성 검사 _201105 원우
@@ -337,7 +347,29 @@ public class JP_Register extends JPanel implements ActionListener {
 	} // end of insertMember()
 	
 	
+/*	
+	// ID 중복 검사 _201106 원우
+	public void overlapId() {
+		
+		
+		overlapDeny()
+		
+	}
 	
+	
+	@Override
+	public synchronized void addKeyListener(KeyListener l) {
+		// TODO Auto-generated method stub
+		super.addKeyListener(l);
+	}
+	
+	public void keyPress(KeyEvent e) {
+		dao = 
+	}
+*/	
+	
+	
+	// email = textfield + dropbox _201105 원우
 	public void emailAdd() {
 		String mailadr =  (String) emailBox.getSelectedItem();
 		String writeMail = tfEmail.getText();
@@ -345,7 +377,6 @@ public class JP_Register extends JPanel implements ActionListener {
 		vo.setMemberEmail(writeMail+mailadr);
 				
 	}
-	
 
 
 	
