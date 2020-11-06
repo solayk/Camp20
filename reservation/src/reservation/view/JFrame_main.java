@@ -23,7 +23,7 @@ public class JFrame_main extends JFrame {
 		getContentPane().add("JP_Register", new JP_Register(this));
 		getContentPane().add("JP_MainMenu", new JP_MainMenu(this));
 		getContentPane().add("JP_Cal", new JP_Cal(this));
-		getContentPane().add("JP_CheckResNo", new JP_CheckResNo(this));
+
 		getContentPane().add("JP_CheckRes", new JP_CheckRes(this));
 		getContentPane().add("JP_Reserve", new JP_Reserve(this));
 		setVisible(true); 
@@ -71,6 +71,7 @@ public class JFrame_main extends JFrame {
 	 * 작성: 김영권
 	 */
 	public void toJP_CheckResNo() { 
+		getContentPane().add("JP_CheckResNo", new JP_CheckResNo(this));
 		cards.show(getContentPane(),"JP_CheckResNo");
 	}
 	

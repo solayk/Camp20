@@ -134,6 +134,40 @@ public class ReservationDAO {
 		
 		return list;
 	}
+	
+	/*
+	 * 함수명  : CheckResList
+	 * 인자 : ?
+	 * 반환값 : ?
+	 * 역할 : id값으로 예약내역을 Jtable에 출력하기위한 함수 
+	 * 
+	 */
+	public ArrayList CheckResList(String Customer_id) throws Exception {
+		ResultSet rs;
 
+		String sql = "SELECT reserv_no,reserve_date,check_in,check_out,status FROM reservation WHERE customer_id = ?";
+		
+		System.out.println(sql);
+		
+		PreparedStatement ps = con.prepareStatement(sql); 
+		ps.setString(1, Customer_id);  		  				
+		
+		rs = ps.executeQuery();
+		
+		ArrayList list = new ArrayList();
+		while(rs.next()) {
+			ArrayList aa = new ArrayList();
+			aa.add(rs.getString("reserv_no"));
+			aa.add(rs.getDate("reserve_date"));
+			aa.add(rs.getDate("check_in"));
+			aa.add(rs.getDate("check_out"));
+			aa.add(rs.getString("status"));
+			
+			list.add(aa);
+		}
+		
+		return list;
+	}
+	
 	
 }
