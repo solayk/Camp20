@@ -95,7 +95,7 @@ public class JP_Login extends JPanel {
 		 */
 		test = null;
 		try {		
-			test = new JPanelWithBackground("C:\\Users\\kosmo20\\Desktop\\test_3_cropped.gif");
+			test = new JPanelWithBackground("D:\\test_3_cropped.gif");
 			} catch (Exception e) {
 				System.out.println("이미지 불러오기 실패");
 			}
@@ -150,7 +150,7 @@ public class JP_Login extends JPanel {
 				int count=0; // 로그인 반복 실패 처리
 								
 				try {
-					i = dao.chk_idpw(tf_id.getText());
+					//i = dao.chk_idpw(tf_id.getText());
 				} catch (Exception e) {
 					System.out.println("JP_Login chk_idpw 실행 에러: " + e.toString());
 				}
