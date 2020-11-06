@@ -183,9 +183,6 @@ public class JP_Cal extends JPanel {
 						return;
 					} else {
 						UserVO.setCheck_in(selectedDate);
-					//	String a =(String)cb_Stay.getSelectedItem();
-						//int b= Integer.parseInt((String)cb_Stay.getSelectedItem());
-						//System.out.println(b);
 						UserVO.setStayDays(Integer.parseInt((String)cb_Stay.getSelectedItem())); //  getSelectedItem의 객체가 String이기때문에 String으로 변환후 Int로바꿔야함 
 						testSearch();
 					}
@@ -248,7 +245,7 @@ public class JP_Cal extends JPanel {
 		ArrayList<ReservationVO> list = new ArrayList<ReservationVO>();	
 		
 		System.out.println(UserVO.getCheck_in());
-		
+
 		bSite_1.setEnabled(true);
 		bSite_2.setEnabled(true);
 		bSite_3.setEnabled(true);

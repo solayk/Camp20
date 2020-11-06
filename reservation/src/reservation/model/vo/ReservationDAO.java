@@ -101,16 +101,34 @@ public class ReservationDAO {
 		
 		java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 		
-		String sql = "SELECT site_no, check_in, check_out\r\n" + 
-				"FROM reservation\r\n" + 
-				"WHERE check_in = ? OR check_out-1 = ?"
-				;
+		String sql = null;
+		int StayDays = UserVO.getStayDays();
+		
+		switch(StayDays) {
+			case 1:
+				sql = "SELECT site_no, check_in, check_out\r\n" + 
+						" FROM reservation\r\n" + 
+						" WHERE ((check_in = ? OR check_out-1 = ?)\r\n" + 
+						" 		OR (check_in = ? OR check_out-1 = ?))\r\n" +
+						" 		AND status IN ('입금대기','예약확정')"
+						;
+				break;
+			case 2:
+				sql = "SELECT site_no, check_in, check_out\r\n" + 
+						" FROM reservation\r\n" + 
+						" WHERE ((check_in = ? OR check_out-1 = ?) \r\n" + 
+						" 		OR (check_in = ?+1 OR check_out-1 = ?+1))\r\n" + 
+						"    	AND status IN ('입금대기','예약확정')"
+						;
+		}
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		ResultSet rs;
 		
 		st.setDate(1, sqlDate);
 		st.setDate(2, sqlDate);
+		st.setDate(3, sqlDate);
+		st.setDate(4, sqlDate);
 		
 		System.out.println(sql);
 		
