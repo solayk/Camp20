@@ -11,11 +11,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import reservation.model.vo.ReservationDAO;
+import reservation.model.vo.UserVO;
+
 public class JP_CheckResNo extends JPanel {
 
 	private JTextField tf_resNo;
 	private JButton bToLogin, bToReserve; 
 	private JFrame_main F; 
+	
+	ReservationDAO reserve_dao;   //  ReservationDAO 변수 생성 . 
 	
 	/*
 	 * 이름: JP_MainMenu 기본생성자
@@ -24,6 +29,12 @@ public class JP_CheckResNo extends JPanel {
 	 */
 	public JP_CheckResNo(JFrame_main f) { 
 		
+		try {
+			reserve_dao = new ReservationDAO();
+			System.out.println("DB 연결 성공 ");
+		} catch (Exception e) {
+			System.out.println("DB 연결실패 :" + e.toString());
+		}
 		// 배경 설정
 		setBackground(Color.WHITE); 
 		setBounds(100, 100, 600, 600);
@@ -77,9 +88,12 @@ public class JP_CheckResNo extends JPanel {
 		 */
 		bToReserve.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
-				F.toJP_CheckRes(); 
+					
+					F.toJP_CheckRes(); 							//JP_CheckRes 페이지로 넘어간다. 
+		
 			}
 		});
 		
-	} 
+	}
+	
 }

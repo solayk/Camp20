@@ -23,7 +23,7 @@ import reservation.model.vo.UserVO;
 
 public class JP_Reserve extends JPanel {
 
-	JTextField tfName, tfTel, tfCarNo, tfPrice;
+	JTextField tfName, tfTel, tfCarNo, tfPrice , tfRequest;
 	JButton bToLogin, bRegist; 
 	
 	static ReservationVO vo;
@@ -62,6 +62,7 @@ public class JP_Reserve extends JPanel {
 		tfName = new JTextField();
 		tfTel = new JTextField();
 		tfCarNo = new JTextField();
+		tfRequest = new JTextField();
 		tfPrice = new JTextField();
 		
 		vo = new ReservationVO();
@@ -78,11 +79,15 @@ public class JP_Reserve extends JPanel {
 		tfTel.setEditable(false); 						//전화번호 편집 못하게 
 		add(tfTel);
 		
-		tfCarNo.setBounds(215, 318, 200, 25);			//373 -> 318
+		tfCarNo.setBounds(215, 310, 200, 25);		
 		tfCarNo.setColumns(10);
 		add(tfCarNo);
 		
-		tfPrice.setBounds(215, 373, 200, 25);			//426 -> 373
+		tfRequest.setBounds(215, 350, 200, 25);			//요청사항 텍스트필드 추가 
+		tfRequest.setColumns(10);
+		add(tfRequest);
+		
+		tfPrice.setBounds(215, 390, 200, 25);		
 		tfPrice.setColumns(10);
 		tfPrice.setEditable(false); 					//요금 편집못하게 (인원수,사이트넘버,날짜등등에따라 자동 조정) 
 		add(tfPrice);
@@ -92,17 +97,17 @@ public class JP_Reserve extends JPanel {
 		add(bToLogin);
 		
 		bRegist.setFont(new Font("맑은 고딕", Font.PLAIN, 12));    			
-		bRegist.setBounds(215, 480, 97, 23);								//514 -> 480
+		bRegist.setBounds(215, 480, 97, 23);							
 		add(bRegist);
 		
 		Integer []cbJanreStr = {1,2,3,4};  										// 인원수 콤보박스 데이터 추가 
 		personNumComboBox = new JComboBox(cbJanreStr);
-		personNumComboBox.setBounds(215, 211, 96, 21);               // 264 -> 211변경
+		personNumComboBox.setBounds(215, 211, 96, 21);            
 		add(personNumComboBox);
 		
 		String []cbJanreStr1 = {"12시~2시","2시~4시","4시~6시","6시~8시"}; 			// 도착예정시간 콤보박스 데이터 추가
 		estArrComboBox = new JComboBox(cbJanreStr1);
-		estArrComboBox.setBounds(215, 264, 96, 21);								//318->264
+		estArrComboBox.setBounds(215, 260, 96, 21);							
 		add(estArrComboBox);
 		
 //		JComboBox comboBox_2 = new JComboBox();									//숙박기간 콤보박스 [삭제예정]		
@@ -126,27 +131,27 @@ public class JP_Reserve extends JPanel {
 		
 		JLabel lblNewLabel_3 = new JLabel("인원수");
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(128, 211, 57, 15);							// 264 -> 211변경
+		lblNewLabel_3.setBounds(128, 211, 57, 15);							
 		add(lblNewLabel_3);
 	
 		JLabel lblNewLabel_3_1 = new JLabel("도착예정시간");
 		lblNewLabel_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_1.setBounds(128, 264, 75, 15);						//318 -> 264
+		lblNewLabel_3_1.setBounds(128, 260, 75, 15);						
 		add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("차 번호");
-		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));		//373 -> 318
-		lblNewLabel_1_1.setBounds(128, 318, 57, 15);
+		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));	
+		lblNewLabel_1_1.setBounds(128, 310, 57, 15);
 		add(lblNewLabel_1_1);
 		
-//		JLabel lblNewLabel_3_2 = new JLabel("숙박기간");
-//		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-//		lblNewLabel_3_2.setBounds(128, 212, 57, 15);
-//		add(lblNewLabel_3_2);
+		JLabel lblNewLabel_3_2 = new JLabel("요청사항");
+		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_2.setBounds(128, 350, 57, 15);
+		add(lblNewLabel_3_2);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("요금");
 		lblNewLabel_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_1_1.setBounds(128, 373, 57, 15);						//426 -> 373
+		lblNewLabel_1_1_1.setBounds(128, 390, 57, 15);					
 		add(lblNewLabel_1_1_1);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("이용규칙 동의");
@@ -178,7 +183,7 @@ public class JP_Reserve extends JPanel {
 		bRegist.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				if(chckbxNewCheckBox.isSelected() && chckbxNewCheckBox_1.isSelected()) {
-				reserve();
+				reserveCheck();
 				F.toLogin(); 
 				}else {
 					JOptionPane.showMessageDialog(null, "이용약관에 동의해 주세요 ");
@@ -258,12 +263,12 @@ public class JP_Reserve extends JPanel {
 		});
 	} 
 	/*
-	 * 함수명 : reserve
+	 * 함수명 : reserveCheck
 	 * 인자 : 없음
 	 * 반환값 : 없음 
 	 * 역할 : 결제완료를눌렀을때 실행되며 입력한 데이터를 VO에 담고 DAO의 PAMENT를실행해 DB에 저장한다. 
 	 */
-	public void reserve() {
+	public void reserveCheck() {
 		ReservationVO rvo = new ReservationVO(); 
 	//	CustomerVO cvo = new CustomerVO;  
 	//	cvo.setMemberID(memberID);
@@ -271,6 +276,7 @@ public class JP_Reserve extends JPanel {
 		rvo.setPerson_no((int)personNumComboBox.getSelectedItem());   			// 창에 입력된 인원수를 가져온다. 
 		rvo.setEst_arr_time((String)estArrComboBox.getSelectedItem()); 			// 창에 입력된 도착예정시간을 가져온다.
 		rvo.setCar_no(tfCarNo.getText());										// 창에 입력된 차번호를 가져온다. 
+		rvo.setRequestTerm(tfRequest.getText());								// 창에 입력된 요청사항을 가져온다. 
 		
 		try {
 			

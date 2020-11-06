@@ -13,25 +13,19 @@ public class ReservationVO {
 	private String est_arr_time; 	// 	도착예정 시간 **
 	private String status; 			//	상태 
 	private String manager_id; 		//	직원id
+	private String RequestTerm; 	//	요청사항
+	
 	
 	public ReservationVO() {
 		super();
 	}
 
-	public ReservationVO(String reserv_no, String customer_id, String site_no, int person_no, String reserve_date,
-			String check_in, String check_out, String car_no, String est_arr_time, String status, String manager_id) {
-		super();
-		this.reserv_no = reserv_no;
-		this.customer_id = customer_id;
-		this.site_no = site_no;
-		this.person_no = person_no;
-		this.reserve_date = reserve_date;
-		this.check_in = check_in;
-		this.check_out = check_out;
-		this.car_no = car_no;
-		this.est_arr_time = est_arr_time;
-		this.status = status;
-		this.manager_id = manager_id ;
+
+	public String getRequestTerm() {
+		return RequestTerm;
+	}
+	public void setRequestTerm(String requestTerm) {
+		RequestTerm = requestTerm;
 	}
 
 	public String getReserv_no() {
