@@ -58,7 +58,7 @@ public class ReservationDAO {
 				+ ",customer_id,site_no,check_in,check_out,manager_id) "
 				+ "VALUES((to_char(sysdate,'YYMMDD') || to_char(seq_reserve_id.nextval)),"  // 예약 번호
 				+ ""       //고객 id
-				+ "?,?,?,sysdate,'qwe5507',?,?,?+?,'zxc5507'"   //미구현
+				+ "?,?,?,sysdate,'qwe5507',?,?,?+?,'zxc5507'"   //id / 매니저 id 미구현
 				+ ") ";
 		
 		System.out.println(sql);
