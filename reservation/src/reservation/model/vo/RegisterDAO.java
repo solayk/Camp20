@@ -54,20 +54,22 @@ public class RegisterDAO {
 	
 	
 //	ID중복 확인 _201103 원우
-	public int overlapDeny(CustomerVO customer) throws Exception {
-		
-		int a = 0;
-		
-		String sql = "INSERT INTO customer(customer_id, tel, customer_pw, name, email, addr) VALUES(?, ?, ?, ?, ?, ?)";
-		
-		PreparedStatement gaib = con.prepareStatement(sql);
-		
-		int result = gaib.executeUpdate();
-		if(result>0) {
-			
-		}
-		
-		return a;
+	public boolean overlapDeny(String id) throws Exception {
+	      
+	      String sql = "SELECT customer_id FROM customer WHERE customer_id = ?";
+	      System.out.println(sql);
+	      
+	      PreparedStatement joongbok = con.prepareStatement(sql);
+	      joongbok.setString(1, id);
+	      ResultSet rs = joongbok.executeQuery();
+	      
+	      if(rs.next()) {
+	         int cnt = rs.getInt("cnt");
+	         if(cnt>0) {
+	            return true;
+	         }
+	      }
+	      return false;
 		
 		
 	}
