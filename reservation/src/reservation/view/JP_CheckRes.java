@@ -38,13 +38,13 @@ public class JP_CheckRes extends JPanel {
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.setColumns(10);
-		textField.setBounds(238, 170, 222, 21);
+		textField.setBounds(238, 180, 222, 21);
 		add(textField);
 		
 		JLabel lblNewLabel_3 = new JLabel("입금정보");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(124, 171, 102, 20);
+		lblNewLabel_3.setBounds(124, 180, 102, 20);
 		add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_2 = new JLabel("예약확인/취소");
@@ -61,88 +61,88 @@ public class JP_CheckRes extends JPanel {
 		bLogin.setBounds(457, 23, 97, 23);
 		add(bLogin);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_1.setColumns(10);
-		textField_1.setBounds(238, 201, 222, 21);
-		add(textField_1);
+//		textField_1 = new JTextField();
+//		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
+//		textField_1.setColumns(10);
+//		textField_1.setBounds(238, 201, 222, 21);
+//		add(textField_1);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("사용자");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_1.setBounds(124, 202, 102, 20);
-		add(lblNewLabel_3_1);
+//		JLabel lblNewLabel_3_1 = new JLabel("사용자");
+//		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.LEFT);
+//		lblNewLabel_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+//		lblNewLabel_3_1.setBounds(124, 202, 102, 20);
+//		add(lblNewLabel_3_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_2.setColumns(10);
-		textField_2.setBounds(238, 232, 222, 21);
+		textField_2.setBounds(238, 215, 222, 21);
 		add(textField_2);
 		
 		JLabel lblNewLabel_3_2 = new JLabel("예약상태");
 		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_2.setBounds(124, 233, 102, 20);
+		lblNewLabel_3_2.setBounds(124, 215, 102, 20);
 		add(lblNewLabel_3_2);
 		
 		textField_3 = new JTextField();
 		textField_3.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_3.setColumns(10);
-		textField_3.setBounds(238, 263, 222, 21);
+		textField_3.setBounds(238, 250, 222, 21);
 		add(textField_3);
 		
 		JLabel lblNewLabel_3_3 = new JLabel("예약번호");
 		lblNewLabel_3_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_3.setBounds(124, 264, 102, 20);
+		lblNewLabel_3_3.setBounds(124, 250, 102, 20);
 		add(lblNewLabel_3_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_4.setColumns(10);
-		textField_4.setBounds(238, 294, 222, 21);
+		textField_4.setBounds(238, 285, 222, 21);
 		add(textField_4);
 		
 		JLabel lblNewLabel_3_4 = new JLabel("예약자명");
 		lblNewLabel_3_4.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_4.setBounds(124, 295, 102, 20);
+		lblNewLabel_3_4.setBounds(124, 285, 102, 20);
 		add(lblNewLabel_3_4);
 		
 		textField_5 = new JTextField();
 		textField_5.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_5.setColumns(10);
-		textField_5.setBounds(238, 325, 222, 21);
+		textField_5.setBounds(238, 320, 222, 21);
 		add(textField_5);
 		
 		JLabel lblNewLabel_3_5 = new JLabel("핸드폰");
 		lblNewLabel_3_5.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_5.setBounds(124, 326, 102, 20);
+		lblNewLabel_3_5.setBounds(124, 320, 102, 20);
 		add(lblNewLabel_3_5);
 		
 		textField_6 = new JTextField();
 		textField_6.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_6.setColumns(10);
-		textField_6.setBounds(238, 356, 222, 21);
+		textField_6.setBounds(238, 355, 222, 21);
 		add(textField_6);
 		
 		JLabel lblNewLabel_3_6 = new JLabel("도착예정시간");
 		lblNewLabel_3_6.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_6.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_6.setBounds(124, 357, 102, 20);
+		lblNewLabel_3_6.setBounds(124, 355, 102, 20);
 		add(lblNewLabel_3_6);
 		
 		textField_7 = new JTextField();
 		textField_7.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_7.setColumns(10);
-		textField_7.setBounds(238, 387, 222, 21);
+		textField_7.setBounds(238, 390, 222, 21);
 		add(textField_7);
 		
 		JLabel lblNewLabel_3_7 = new JLabel("요청사항");
 		lblNewLabel_3_7.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_7.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_7.setBounds(124, 388, 102, 20);
+		lblNewLabel_3_7.setBounds(124, 390, 102, 20);
 		add(lblNewLabel_3_7);
 		
 		JButton bLogin_1 = new JButton("예약취소");

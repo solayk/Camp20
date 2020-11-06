@@ -55,36 +55,29 @@ public class ReservationDAO {
 		 *  
 		 */
 		String sql = "INSERT INTO reservation(reserv_no,person_no,car_no,est_arr_time,reserve_date"
-				+ ",customer_id,site_no,check_in,check_out,manager_id) "
+				+ ",customer_id,site_no,check_in,check_out,requestedterm,manager_id) "
 				+ "VALUES((to_char(sysdate,'YYMMDD') || to_char(seq_reserve_id.nextval)),"  // 예약 번호
 				+ ""       //고객 id
-				+ "?,?,?,sysdate,'qwe5507',?,?,?+?,'zxc5507'"   //id / 매니저 id 미구현
+				+ "?,?,?,sysdate,'qwe5507',?,?,?+?,?,'zxc5507'"   //id / 매니저 id 미구현
 				+ ") ";
 		
 		System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql); 
 		
-		ps.setInt(1,reserve.getPerson_no());          //인원수
-		ps.setString(2, reserve.getCar_no());  		  //차번호
-		ps.setString(3, reserve.getEst_arr_time());   //도착예정시간
-		ps.setString(4, UserVO.getSite_no());         //사이트넘버
+		ps.setInt(1,reserve.getPerson_no());         						//인원수
+		ps.setString(2, reserve.getCar_no());  		  						//차번호
+		ps.setString(3, reserve.getEst_arr_time());   						//도착예정시간
+		ps.setString(4, UserVO.getSite_no());         						//사이트넘버
 		ps.setDate(5,  new java.sql.Date(UserVO.getCheck_in().getTime()));  //체크인 //sql
 		ps.setDate(6,  new java.sql.Date(UserVO.getCheck_in().getTime()));  //체크아웃  (체크인+숙박일)
 		ps.setInt(7, (Integer)UserVO.getStayDays());						//숙박일
+		ps.setString(8, reserve.getRequestTerm());         					//요청사항 
 		
 		ps.executeUpdate(); 
 
 		ps.close(); 
 		
-		System.out.println("1");
-/*		String sql="INSERT INTO reservation(reserv_no,person_no,car_no,est_arr_time,reserve_date,customer_id,site_no,check_in,check_out,manager_id) \r\n" + 
-				"VALUES((to_char(sysdate,'YYMMDD') || to_char(seq_reserve_id.nextval)),?,'sdf','asdasd',sysdate,'qwe5507','1',sysdate,sysdate+'3','zxc5507') ";
-		PreparedStatement ps = con.prepareStatement(sql); 
-		ps.setInt(1,reserve.getPerson_no());
-		
-		ps.executeUpdate(); 
 
-		ps.close(); */
 	}
 	
 	/*
@@ -141,5 +134,6 @@ public class ReservationDAO {
 		
 		return list;
 	}
+
 	
 }
