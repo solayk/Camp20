@@ -29,7 +29,7 @@ import reservation.others.SendMail;
 public class JP_Login extends JPanel {
 	
 	JTextField tf_id, tf_pw;
-	JButton bNewRegister, bLogin, bToManager; 
+	JButton bNewRegister, bLogin, bToManager;
 	
 	/*
 	 * 테스트
