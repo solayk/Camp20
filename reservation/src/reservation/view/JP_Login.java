@@ -31,7 +31,7 @@ import reservation.others.SendMail;
 public class JP_Login extends JPanel {
 	
 	JTextField tf_id, tf_pw;
-	JButton bNewRegister, bLogin, bToManager;
+	JButton bNewRegister, bLogin, bSearchId, bSearchPw, bToManager;
 	
 	/*
 	 * 테스트
@@ -67,6 +67,8 @@ public class JP_Login extends JPanel {
 		bNewRegister = new JButton("회원가입"); 
 		bLogin = new JButton("로그인");
 		bToManager = new JButton("관리자");
+		bSearchId = new JButton("아이디");
+		bSearchPw = new JButton("비밀번호 찾기");
 		
 		/*
 		 * 임시 ****************************************
@@ -83,23 +85,31 @@ public class JP_Login extends JPanel {
 		
 		// Component 양식 설정
 		tf_id.setColumns(10);
-		tf_id.setBounds(257, 219, 150, 21);
+		tf_id.setBounds(257, 219, 152, 30);
 		add(tf_id);
 		
 		tf_pw.setColumns(10);
-		tf_pw.setBounds(257, 269, 150, 21);
+		tf_pw.setBounds(257, 260, 152, 30);
 		add(tf_pw);
-		
-		bNewRegister.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bNewRegister.setBounds(310, 326, 97, 23);
-		add(bNewRegister);
-		
+
 		bLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bLogin.setBounds(183, 328, 97, 23);
+		bLogin.setBounds(170, 300, 240, 30);
 		add(bLogin);
 		
+		bSearchId.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bSearchId.setBounds(170, 335, 80, 23);
+		add(bSearchId);
+		
+		bSearchPw.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bSearchPw.setBounds(170, 360, 110, 23);
+		add(bSearchPw);
+		
+		bNewRegister.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bNewRegister.setBounds(310, 335, 100, 23);
+		add(bNewRegister);
+		
 		bToManager.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToManager.setBounds(251, 375, 97, 23);
+		bToManager.setBounds(170, 385, 97, 23);
 		add(bToManager);
 		
 		bGaebal.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -144,12 +154,12 @@ public class JP_Login extends JPanel {
 		lb_title.setForeground(Color.WHITE);
 		add(lb_title);
 		
-		lb_id.setFont(new Font("완도희망체", Font.PLAIN, 20));
-		lb_id.setBounds(169, 222, 57, 15);
+		lb_id.setFont(new Font("완도희망체", Font.PLAIN, 22));
+		lb_id.setBounds(169, 222, 77, 15);
 		lb_id.setForeground(Color.WHITE);
 		add(lb_id);
 		
-		lb_pw.setFont(new Font("완도희망체", Font.PLAIN, 20));
+		lb_pw.setFont(new Font("완도희망체", Font.PLAIN, 22));
 		lb_pw.setBounds(169, 272, 77, 15);
 		lb_pw.setForeground(Color.WHITE);
 		add(lb_pw);
@@ -220,6 +230,29 @@ public class JP_Login extends JPanel {
 					
 				}
 				else System.out.println("로그인 bLogin 버튼 액션 리스너 확인");	
+			}
+		}); // END OF bLogin 액션 리스너
+		
+		bSearchPw.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) { 
+				
+				String input = JOptionPane.showInputDialog(null,"아이디를 입력하세요");
+				
+				CustomerVO vo = new CustomerVO();
+				
+				if(input != null) {
+					try {
+						vo = dao.toSend_pw(input);
+					} catch (Exception e) {
+						System.out.println("비밀번호 찾기로 이메일 전송 실패: " + e.toString());
+					}
+				}
+				if (vo.getMemberName() != null) {
+					SendMail mail = new SendMail();
+					mail.send_pw(vo.getMemberName(), vo.getMemberEmail(), vo.getMemberPw());
+				}
+				else JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다");
+				
 			}
 		});
 		
