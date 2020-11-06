@@ -54,42 +54,73 @@ public class RegisterDAO {
 	
 	
 //	ID중복 확인 _201103 원우
-	public boolean overlapDeny(String id) throws Exception {
+	public int overlapDeny(CustomerVO customer) throws Exception {
 		
-		String sql = "SELECT customer_id FROM customer WHERE customer_id = ?";
-		System.out.println(sql);
+		int a = 0;
 		
-		PreparedStatement joongbok = con.prepareStatement(sql);
-		joongbok.setString(1, id);
-		ResultSet rs = joongbok.executeQuery();
+		String sql = "INSERT INTO customer(customer_id, tel, customer_pw, name, email, addr) VALUES(?, ?, ?, ?, ?, ?)";
 		
-		if(rs.next()) {
-			int cnt = rs.getInt("cnt");
-			if(cnt>0) {
-				return true;
-			}
+		PreparedStatement gaib = con.prepareStatement(sql);
+		
+		int result = gaib.executeUpdate();
+		if(result>0) {
+			
 		}
-		return false;
+		
+		return a;
+		
+		
 	}
-		
-		
-//------------------------------------------------------------------------------		
-//		** 이거 왜 이렇게 하려 했는지 기억 중 _201103 원우
-//			
-//		int a = 0;
-//		
-//		String sql = "INSERT INTO customer(customer_id, tel, customer_pw, name, email, addr) VALUES(?, ?, ?, ?, ?, ?)";
-//		
-//		PreparedStatement gaib = con.prepareStatement(sql);
-//		
-//		int result = gaib.executeUpdate();
-//		if(result>0) {
-//			
-//		}
-//		
-//		return a;
-//------------------------------------------------------------------------------		
-		
 	
+	//
+	//
+	//
+	public int chk_idpw(String id, String pw) throws Exception {
+		
+		String sql1 = "SELECT * \r\n" + 
+				" FROM CUSTOMER\r\n" + 
+				" WHERE customer_id = ? \r\n" 
+				;
+		
+		PreparedStatement st1 = con.prepareStatement(sql1);
+		ResultSet rs1;
+		
+		st1.setString(1, id);
+		
+		rs1 = st1.executeQuery();
+		
+		String chk_id_only = null;
+		
+		while(rs1.next()) {
+			chk_id_only = rs1.getString("CUSTOMER_ID");
+		}
+		
+		// 아이디 존재여부 확인 => 만일 chk_id_only가 null이면 없는 id 
+		if(chk_id_only != null) {
+			System.out.println("아이디 존재함");
+			
+			String sql2 = "SELECT * \r\n" + 
+					" FROM CUSTOMER\r\n" + 
+					" WHERE customer_id = ? AND customer_pw = ? \r\n" 
+					;
+			PreparedStatement st2 = con.prepareStatement(sql2);
+			ResultSet rs2;
+			
+			st2.setString(1, id);
+			st2.setString(2, pw);
+			
+			rs2 = st2.executeQuery();
+			
+			String chk_both = null;
+			
+			while(rs2.next()) {
+				chk_both = rs2.getString("CUSTOMER_ID");
+			}
+				if(chk_both != null) return 1; // 아이디 비밀번호 일치 = 로그인 성공
+				else return 3;	// 에러: 아이디 비밀번호 불일치			
+		}
+		else return 2; // 에러: 아이디 존재하지 않음
+		
+	}
 }
 
