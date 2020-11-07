@@ -2,9 +2,13 @@ package reservation.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,9 +16,13 @@ import javax.swing.JTextField;
 
 public class JP_MainMenu extends JPanel {
 
-	private JLabel lb_title;
-	private JButton bToReserv, bToCheckReserve; 
-	private JFrame_main F; 
+	JLabel lb_title;
+	JButton bToReserv, bToCheckReserve; 
+	JFrame_main F; 
+	
+	ImageIcon imgBackground;
+	
+	ImageIcon iconTitle, iconToReserv, iconToCheckReserve;
 	
 	/*
 	 * 이름: JP_MainMenu 기본생성자
@@ -30,24 +38,31 @@ public class JP_MainMenu extends JPanel {
 		F = f; 
 		
 		// Component 생성
+		bToReserv = new JButton(""); 
+		bToCheckReserve = new JButton(""); 
 		
+		/*
+		 * 임시 ****************************************
+		 */
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_MainMenu_2.png");
 		
-		bToReserv = new JButton("캠핑사이트 예약"); 
-		bToCheckReserve = new JButton("예약내역 확인/취소"); 
-				
+		// 아이콘 설정
+		iconTitle = new ImageIcon("src/reservation/imgs/JP_MainMenu_title.png");
+		iconToReserv = new ImageIcon("src/reservation/imgs/JP_MainMenu_bToReserv.png");
+		iconToCheckReserve = new ImageIcon("src/reservation/imgs/JP_MainMenu_bToCheckReserve.png");
+		
 		// Component 양식 설정
 		bToReserv.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToReserv.setBounds(169, 178, 200, 100);
+		bToReserv.setBounds(150, 178, 300, 150);
+		bToReserv.setIcon(iconToReserv);
+		bToReserv.setIcon(resizeIcon(iconToReserv, bToReserv.getWidth(), bToReserv.getHeight()));
 		add(bToReserv);
 		
 		bToCheckReserve.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToCheckReserve.setBounds(169, 335, 200, 100);
+		bToCheckReserve.setBounds(150, 335, 300, 150);
+		bToCheckReserve.setIcon(iconToCheckReserve);
+		bToCheckReserve.setIcon(resizeIcon(iconToCheckReserve, bToReserv.getWidth(), bToReserv.getHeight()));
 		add(bToCheckReserve);
-		
-		lb_title = new JLabel("메인메뉴");
-		lb_title.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
-		lb_title.setBounds(211, 86, 211, 30);
-		add(lb_title);
 				
 		setVisible(true);
 		
@@ -71,5 +86,25 @@ public class JP_MainMenu extends JPanel {
 			}
 		});
 		
-	} 
+	}
+	
+	/*
+	 * 함수명: resizeIcon
+	 * 역할: 버튼 사진 크기 조절
+	 */
+	public Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
+		Image img = icon.getImage();
+		Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight, java.awt.Image.SCALE_SMOOTH);
+		return new ImageIcon(resizedImage);
+	}
+	
+	/*
+	 * 함수명: paintComponent
+	 * 역할: 배경이미지 설정
+	 */
+	public void paintComponent(Graphics g) {
+		  super.paintComponent(g);
+
+		  g.drawImage(imgBackground.getImage(), 0, 0, this);
+	}
 }

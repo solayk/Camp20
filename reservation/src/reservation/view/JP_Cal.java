@@ -2,6 +2,7 @@ package reservation.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -26,7 +28,9 @@ import reservation.model.vo.UserVO;
 public class JP_Cal extends JPanel {
 
 	JButton bToLogin, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
-	JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num, lb_able_gae, lb_price;
+	JLabel lb_check_in, lb_numStay, lb_able_sen, lb_able_Num, lb_able_gae,lb_price;
+	
+	ImageIcon imgBackground;
 	
 	ReservationDAO reserve_dao;
 	
@@ -61,7 +65,12 @@ public class JP_Cal extends JPanel {
 		bSite_3 = new JButton("사이트 3");
 		bSite_4 = new JButton("사이트 4");
 		bSite_5 = new JButton("사이트 5");
- 				
+ 		
+		/*
+		 * 임시 ****************************************
+		 */
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_Cal.png");
+		
 		// Component 양식 설정
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bToLogin.setBounds(457, 23, 97, 23);
@@ -100,11 +109,6 @@ public class JP_Cal extends JPanel {
 		bSite_5.setVisible(false);
 		
 		// 처음 화면에서만 보이는 라벨
-		lb_title = new JLabel("예약 캘린더");
-		lb_title.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
-		lb_title.setBounds(211, 86, 211, 30);
-		add(lb_title);
-				
 		lb_check_in = new JLabel("체크인");
 		lb_check_in.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lb_check_in.setBounds(100, 170, 211, 30);
@@ -133,7 +137,7 @@ public class JP_Cal extends JPanel {
 		lb_able_gae.setBounds(350, 350, 250, 30);
 		add(lb_able_gae);
 		lb_able_gae.setVisible(false);
-		
+				
 		// 체크IN 날짜 선택 달력 팝업
 		UtilDateModel model1 = new UtilDateModel();
         JDatePanelImpl datePanel1 = new JDatePanelImpl(model1);
@@ -148,7 +152,13 @@ public class JP_Cal extends JPanel {
 		cb_Stay.setToolTipText("숙박일수를 선택해주세요");
 		add(cb_Stay);
 		
-
+		// 성수기때 가격 비싸다고 표시해주는 라벨 
+		lb_price = new JLabel("7,8,9월은 추가요금 20000원이 추가 됩니다.");
+		lb_price.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lb_price.setBounds(320, 220, 250, 30);
+		lb_price.setForeground(Color.RED);
+		add(lb_price);
+		lb_price.setVisible(false);
 		
 		setVisible(true);
 		
@@ -170,7 +180,15 @@ public class JP_Cal extends JPanel {
 				Date date = new Date();
 				Date selectedDate = (Date) datepicker1.getModel().getValue();
 				
-
+				//성수기때 추가요금 라벨 표시 
+				String temp = String.valueOf(selectedDate);
+				if(temp.contains("Jul") || temp.contains("Aug") || temp.contains("Sep"))//     7,8,9월에 예약하면 20000원 추가 
+				{
+					lb_price.setVisible(true);
+				}else {
+					lb_price.setVisible(false);
+				}
+				//
 				
 				if(selectedDate!=null) {
 					int compare = date.compareTo(selectedDate); // 오늘 ~ 어제이하 1, 내일부터 -1
@@ -308,6 +326,16 @@ public class JP_Cal extends JPanel {
 		lb_able_Num.setText("");
 		lb_able_Num.setVisible(false);
 		lb_able_gae.setVisible(false);
+	}
+	
+	/*
+	 * 함수명: paintComponent
+	 * 역할: 배경이미지 설정
+	 */
+	public void paintComponent(Graphics g) {
+		  super.paintComponent(g);
+
+		  g.drawImage(imgBackground.getImage(), 0, 0, this);
 	}
 	
 }
