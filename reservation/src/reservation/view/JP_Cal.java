@@ -3,6 +3,7 @@ package reservation.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,14 +29,20 @@ import reservation.model.vo.UserVO;
 
 public class JP_Cal extends JPanel {
 
-	JButton bToLogin, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
+	JButton bToLogin, bTestSearch; 
+	JButton[] bSite = new JButton[5];
+	
 	JLabel lb_check_in, lb_numStay, lb_able_sen, lb_able_Num, lb_able_gae,lb_price;
 	
 	ImageIcon imgBackground;
 	
+	ImageIcon[] iNormal = new ImageIcon[5];
+	ImageIcon[] iRollOver = new ImageIcon[5];
+	ImageIcon[] iDisEnabled = new ImageIcon[5];
+	
 	ReservationDAO reserve_dao;
 	
-	private JFrame_main F; 
+	JFrame_main F; 
 	
 	/*
 	 * 이름: JP_MainMenu 기본생성자
@@ -60,16 +68,22 @@ public class JP_Cal extends JPanel {
 		// Component 생성
 		bToLogin = new JButton("홈"); 
 		bTestSearch = new JButton("예약조회");
-		bSite_1 = new JButton("사이트 1");
-		bSite_2 = new JButton("사이트 2");
-		bSite_3 = new JButton("사이트 3");
-		bSite_4 = new JButton("사이트 4");
-		bSite_5 = new JButton("사이트 5");
+		
+		for (int i = 0; i < bSite.length ; i++) {
+			bSite[i] = new JButton();
+			
+			iNormal[i] = new ImageIcon("src/reservation/imgs_button/JP_Cal_Nor_" + (i+1) + ".png");
+			iRollOver[i] = new ImageIcon("src/reservation/imgs_button/JP_Cal_RollOver_" + (i+1) + ".png");
+			iDisEnabled[i] = new ImageIcon("src/reservation/imgs_button/JP_Cal_Disabled_" + (i+1) + ".png");
+		}
+		
  		
 		/*
 		 * 임시 ****************************************
 		 */
 		imgBackground = new ImageIcon("src/reservation/imgs/JP_Cal.png");
+		
+		
 		
 		// Component 양식 설정
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -83,30 +97,31 @@ public class JP_Cal extends JPanel {
 		/*
 		 * 사이트 선택 버튼: "예약조회" 클릭 시 예약 가능한 사이트만 활성화 >>> 추후 반복 처리 시도 예정
 		 */
-		bSite_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bSite_1.setBounds(50, 400, 100, 100);
-		add(bSite_1);
-		bSite_1.setVisible(false);
+		bSite[0].setBounds(50, 400, 100, 100);
+		add(bSite[0]);
+		bSite[0].setVisible(false);
 		
-		bSite_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bSite_2.setBounds(150, 400, 100, 100);
-		add(bSite_2);
-		bSite_2.setVisible(false);
+		bSite[1].setBounds(150, 400, 100, 100);
+		add(bSite[1]);
+		bSite[1].setVisible(false);
 		
-		bSite_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bSite_3.setBounds(250, 400, 100, 100);
-		add(bSite_3);
-		bSite_3.setVisible(false);
+		bSite[2].setBounds(250, 400, 100, 100);
+		add(bSite[2]);
+		bSite[2].setVisible(false);
 		
-		bSite_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bSite_4.setBounds(350, 400, 100, 100);
-		add(bSite_4);
-		bSite_4.setVisible(false);
+		bSite[3].setBounds(350, 400, 100, 100);
+		add(bSite[3]);
+		bSite[3].setVisible(false);
 		
-		bSite_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bSite_5.setBounds(450, 400, 100, 100);
-		add(bSite_5);
-		bSite_5.setVisible(false);
+		bSite[4].setBounds(450, 400, 100, 100);
+		add(bSite[4]);
+		bSite[4].setVisible(false);
+		
+		for (int i = 0; i < bSite.length ; i++) {
+			bSite[i].setIcon(resizeIcon(iNormal[i], bSite[i].getWidth(), bSite[i].getHeight()));
+			bSite[i].setRolloverIcon(resizeIcon(iRollOver[i], bSite[i].getWidth(), bSite[i].getHeight()));
+			bSite[i].setDisabledIcon(resizeIcon(iDisEnabled[i], bSite[i].getWidth(), bSite[i].getHeight()));
+		}
 		
 		// 처음 화면에서만 보이는 라벨
 		lb_check_in = new JLabel("체크인");
@@ -216,35 +231,35 @@ public class JP_Cal extends JPanel {
 		/*
 		 * 사이트 선택 버튼 액션리스너 1~5
 		 */
-		bSite_1.addActionListener(new ActionListener() { 
+		bSite[0].addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				UserVO.setSite_no("1");
 				clearSearch();
 				F.toJP_Reserve(); 
 			}
 		});
-		bSite_2.addActionListener(new ActionListener() { 
+		bSite[1].addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				UserVO.setSite_no("2");
 				clearSearch();
 				F.toJP_Reserve(); 
 			}
 		});	
-		bSite_3.addActionListener(new ActionListener() { 
+		bSite[2].addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				UserVO.setSite_no("3");
 				clearSearch();
 				F.toJP_Reserve(); 
 			}
 		});	
-		bSite_4.addActionListener(new ActionListener() { 
+		bSite[3].addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				UserVO.setSite_no("4");
 				clearSearch();
 				F.toJP_Reserve(); 
 			}
 		});	
-		bSite_5.addActionListener(new ActionListener() { 
+		bSite[4].addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				UserVO.setSite_no("5");
 				clearSearch();
@@ -261,13 +276,14 @@ public class JP_Cal extends JPanel {
 		
 		ArrayList<ReservationVO> list = new ArrayList<ReservationVO>();	
 		
-		System.out.println(UserVO.getCheck_in());
+		for(int i=0; i<bSite.length; i++) {
+			bSite[i].setEnabled(true);
+		}
+		
+		/*
+		 * 테스트
+		 */
 
-		bSite_1.setEnabled(true);
-		bSite_2.setEnabled(true);
-		bSite_3.setEnabled(true);
-		bSite_4.setEnabled(true);
-		bSite_5.setEnabled(true);
 		
 		try {
 			list = reserve_dao.CheckAvailable(UserVO.getCheck_in());
@@ -278,7 +294,6 @@ public class JP_Cal extends JPanel {
 		// 남은 사이트 수 표시 목적 배열
 		String[] chk = new String[]{"1","2","3","4","5"};
 		ArrayList<String> chk_Site_no = new ArrayList<String>(Arrays.asList(chk));
-		System.out.println(chk_Site_no.size());
 		
 		for(ReservationVO data: list) {
 			
@@ -288,19 +303,17 @@ public class JP_Cal extends JPanel {
 			}
 								
 			switch(data.getSite_no()){
-				case "1": bSite_1.setEnabled(false); break;
-				case "2": bSite_2.setEnabled(false); break;
-				case "3": bSite_3.setEnabled(false); break;
-				case "4": bSite_4.setEnabled(false); break;
-				case "5": bSite_5.setEnabled(false); break;
+				case "1": bSite[0].setEnabled(false); break;
+				case "2": bSite[1].setEnabled(false); break;
+				case "3": bSite[2].setEnabled(false); break;
+				case "4": bSite[3].setEnabled(false); break;
+				case "5": bSite[4].setEnabled(false); break;
 			}
 		}
 		
-		bSite_1.setVisible(true);
-		bSite_2.setVisible(true);
-		bSite_3.setVisible(true);
-		bSite_4.setVisible(true);
-		bSite_5.setVisible(true);
+		for(int i=0; i<bSite.length; i++) {
+			bSite[i].setVisible(true);
+		}
 		
 		lb_able_sen.setVisible(true);
 		
@@ -317,15 +330,23 @@ public class JP_Cal extends JPanel {
 	 * 역할: "예약조회" 외 다른 버튼 클릭시 "예약조회"로 보였던 버튼 다시 숨기기
 	 */
 	void clearSearch() {
-		bSite_1.setVisible(false);
-		bSite_2.setVisible(false);
-		bSite_3.setVisible(false);
-		bSite_4.setVisible(false);
-		bSite_5.setVisible(false);
+		for(int i=0; i<bSite.length; i++) {
+			bSite[i].setVisible(false);
+		}
 		lb_able_sen.setVisible(false);
 		lb_able_Num.setText("");
 		lb_able_Num.setVisible(false);
 		lb_able_gae.setVisible(false);
+	}
+	
+	/*
+	 * 함수명: resizeIcon
+	 * 역할: 버튼 사진 크기 조절
+	 */
+	public Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
+		Image img = icon.getImage();
+		Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight, java.awt.Image.SCALE_SMOOTH);
+		return new ImageIcon(resizedImage);
 	}
 	
 	/*

@@ -223,15 +223,16 @@ public class JP_Reserve extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxNewCheckBox.isSelected()) {
-			    String text = "1. 떠들면 죽는다 2. 술먹으면안되 3. 남녀 혼숙 금지 \n "
-			    		+ "1. 떠들면 죽는다 2. 술먹으면안되 3. 남녀 혼숙 금지 \n"
-			    		+ "1. 떠들면 죽는다 2. 술먹으면안되 3. 남녀 혼숙 금지 \n"
-			    		+ "1. 떠들면 죽는다 2. 술먹으면안되 3. 남녀 혼숙 금지 \n"
-			    		+ "1. 떠들면 죽는다 2. 술먹으면안되 3. 남녀 혼숙 금지 \n";
-			    JTextArea textArea = new JTextArea(text);
+			    String text = "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
+			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
+			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
+			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
+			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n";
+			    JTextArea textArea = new JTextArea(text,10,50);
 			    textArea.setColumns(30);
-			    textArea.setLineWrap(true);					//행 넘길 때 행의 마지막 단어가 두행에 걸쳐 나뉘지 않도록 하기
-			    textArea.setWrapStyleWord(true);			// 편집이 불가능하도록 설정
+			 //   textArea.setLineWrap(true);					//행 넘길 때 행의 마지막 단어가 두행에 걸쳐 나뉘지 않도록 하기
+			  //  textArea.setWrapStyleWord(true);			
+			    textArea.setEditable(false);				// 편집이 불가능하도록 설정
 			    textArea.append(text);
 			    Border lineBorder = BorderFactory.createLineBorder(Color.black, 3);					// 텍스트와 TextArea 경계 사이에 여백을 두기 위해서 emptyBorder를 생성합니다.
 			    Border emptyBorder = BorderFactory.createEmptyBorder(7, 7, 7, 7);		   		 	//TextArea에 lineBorder(검정테두리), emptyBorder(여백)로 구성된 복합 경계선을 설정합니다.
@@ -259,15 +260,17 @@ public class JP_Reserve extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxNewCheckBox_1.isSelected()) {
-			    String text = "절대 환불 불가능\n"
-			    		+ "절대 환불 불가능\n"
-			    		+ "절대 환불 불가능\n"
-			    		+ "절대 환불 불가능";
+			    String text = 
+			    		  "1. 체크인 7일전 이전에  환불 시 100% 환불 \n"
+			    		+ "2. 체크인 7일 ~ 3일전 환불 시 80% 환불\n"
+			    		+ "3. 체크인 3일 ~ 당일 전 환불 시 50% 환불 \n"
+			    		+ "4. 당일 환불 불가능 \n"
+			    		+ "5. 팁 환영";
 			    JTextArea textArea = new JTextArea(text);
-			    textArea.setColumns(40);
-			    textArea.setLineWrap(true);					
-			    textArea.setWrapStyleWord(true);		
-			    textArea.append(text);
+			    textArea.setColumns(30);
+			  //textArea.setLineWrap(true);					
+			  //textArea.setWrapStyleWord(true);
+			    textArea.setEditable(false);				// 편집이 불가능하도록 설정
 			    Border lineBorder = BorderFactory.createLineBorder(Color.black, 3);			
 			    Border emptyBorder = BorderFactory.createEmptyBorder(7, 7, 7, 7);		   		
 			    textArea.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));	
