@@ -66,7 +66,7 @@ public class JP_Cal extends JPanel {
 		}
 		
 		// Component 생성
-		bToLogin = new JButton("홈"); 
+		bToLogin = new JButton(); 
 		bTestSearch = new JButton("예약조회");
 		
 		for (int i = 0; i < bSite.length ; i++) {
@@ -83,11 +83,12 @@ public class JP_Cal extends JPanel {
 		 */
 		imgBackground = new ImageIcon("src/reservation/imgs/JP_Cal.png");
 		
-		
-		
 		// Component 양식 설정
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToLogin.setBounds(457, 23, 97, 23);
+		bToLogin.setBounds(530, 15, 53, 53);
+			// JButton 투명하게
+			bToLogin.setContentAreaFilled(false);
+			bToLogin.setBorderPainted(false);
 		add(bToLogin);
 		
 		bTestSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -203,7 +204,7 @@ public class JP_Cal extends JPanel {
 				}else {
 					lb_price.setVisible(false);
 				}
-				//
+				//	
 				
 				if(selectedDate!=null) {
 					int compare = date.compareTo(selectedDate); // 오늘 ~ 어제이하 1, 내일부터 -1
@@ -283,7 +284,6 @@ public class JP_Cal extends JPanel {
 		/*
 		 * 테스트
 		 */
-
 		
 		try {
 			list = reserve_dao.CheckAvailable(UserVO.getCheck_in());

@@ -100,30 +100,35 @@ public class JP_Login extends JPanel {
 		bLogin.setBounds(170, 310, 250, 35);
 			// JButton 투명하게
 			bLogin.setContentAreaFilled(false);
+			bLogin.setBorderPainted(false);
 		add(bLogin);
 		
 		bSearchId.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bSearchId.setBounds(170, 353, 90, 23);
 			// JButton 투명하게
 			bSearchId.setContentAreaFilled(false);
+			bSearchId.setBorderPainted(false);
 		add(bSearchId);
 		
 		bSearchPw.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bSearchPw.setBounds(170, 378, 110, 23);
 			// JButton 투명하게
 			bSearchPw.setContentAreaFilled(false);
+			bSearchPw.setBorderPainted(false);
 		add(bSearchPw);
 		
 		bNewRegister.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bNewRegister.setBounds(340, 352, 80, 24);
 			// JButton 투명하게
 			bNewRegister.setContentAreaFilled(false);
+			bNewRegister.setBorderPainted(false);
 		add(bNewRegister);
 		
 		bToManager.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bToManager.setBounds(240, 546, 115, 25);
 			// JButton 투명하게
 			bToManager.setContentAreaFilled(false);
+			bToManager.setBorderPainted(false);
 		add(bToManager);
 		
 		/*

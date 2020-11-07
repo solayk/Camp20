@@ -223,17 +223,22 @@ public class JP_Reserve extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxNewCheckBox.isSelected()) {
-			    String text = "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
-			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
-			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
-			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n"
-			    		+ "1. 떠들면 죽는다 2. 술먹으면 안돼 3. 남녀 혼숙 금지 \n";
+			    String text = "1. 떠들면 쫒아냄 \n"
+			    		+ "2. 술먹으면 쫒아냄 \n"
+			    		+ "3. 남녀 혼숙 금지 \n"
+			    		+ "4. 팁 환영 \n"
+			    		+ "5. 쓰레기버리면 즉시 쫒아냄 \n"
+			    		+ "6. 담배피면 쫒아냄 \n"
+			    		+ "7. 10시 이후 취침 \n"
+			    		+ "8. 화재시 모든책임은 본인에게 있음 \n"
+			    		+ "9. 귀중품 분실시 모든책임은 본인에게 있음\n"
+			    		+ "10. 산짐승에게 해를 당할시 모든 책임은 본인에게 있음\n"
+			    	;
 			    JTextArea textArea = new JTextArea(text,10,50);
 			    textArea.setColumns(30);
 			 //   textArea.setLineWrap(true);					//행 넘길 때 행의 마지막 단어가 두행에 걸쳐 나뉘지 않도록 하기
 			  //  textArea.setWrapStyleWord(true);			
 			    textArea.setEditable(false);				// 편집이 불가능하도록 설정
-			    textArea.append(text);
 			    Border lineBorder = BorderFactory.createLineBorder(Color.black, 3);					// 텍스트와 TextArea 경계 사이에 여백을 두기 위해서 emptyBorder를 생성합니다.
 			    Border emptyBorder = BorderFactory.createEmptyBorder(7, 7, 7, 7);		   		 	//TextArea에 lineBorder(검정테두리), emptyBorder(여백)로 구성된 복합 경계선을 설정합니다.
 			    textArea.setBorder(BorderFactory.createCompoundBorder(lineBorder, emptyBorder));	// TextArea에 스크롤 기능을 추가한 후 Panel안에 집어 넣습니다.
