@@ -26,7 +26,7 @@ import reservation.model.vo.UserVO;
 public class JP_Cal extends JPanel {
 
 	JButton bToLogin, bTestSearch, bSite_1, bSite_2, bSite_3, bSite_4, bSite_5; 
-	JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num, lb_able_gae;
+	JLabel lb_title, lb_check_in, lb_numStay, lb_able_sen, lb_able_Num, lb_able_gae, lb_price;
 	
 	ReservationDAO reserve_dao;
 	
@@ -133,7 +133,7 @@ public class JP_Cal extends JPanel {
 		lb_able_gae.setBounds(350, 350, 250, 30);
 		add(lb_able_gae);
 		lb_able_gae.setVisible(false);
-				
+		
 		// 체크IN 날짜 선택 달력 팝업
 		UtilDateModel model1 = new UtilDateModel();
         JDatePanelImpl datePanel1 = new JDatePanelImpl(model1);
@@ -147,6 +147,8 @@ public class JP_Cal extends JPanel {
 		cb_Stay.setBounds(200, 220, 100, 25);
 		cb_Stay.setToolTipText("숙박일수를 선택해주세요");
 		add(cb_Stay);
+		
+
 		
 		setVisible(true);
 		
@@ -167,6 +169,8 @@ public class JP_Cal extends JPanel {
 				// 선택한 날짜가 오늘 이전이라면 예약조회 버튼 작동하지 않음 
 				Date date = new Date();
 				Date selectedDate = (Date) datepicker1.getModel().getValue();
+				
+
 				
 				if(selectedDate!=null) {
 					int compare = date.compareTo(selectedDate); // 오늘 ~ 어제이하 1, 내일부터 -1

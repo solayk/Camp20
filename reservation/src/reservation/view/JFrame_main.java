@@ -16,12 +16,15 @@ public class JFrame_main extends JFrame {
 	 */
 	public JFrame_main() { 
 		setBounds(100,100,600,600); 
+//		setUndecorated(true);					//테두리 없애기 setvisivle보다 먼저 호출되야한다 .. 
 		getContentPane().setLayout(cards); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		setResizable(false); 
 		getContentPane().add("JP_Login", new JP_Login(this));
 		getContentPane().add("JP_Register", new JP_Register(this));
 		getContentPane().add("JP_MainMenu", new JP_MainMenu(this));
+		
+		
 		getContentPane().add("JP_Cal", new JP_Cal(this));
 
 		getContentPane().add("JP_CheckRes", new JP_CheckRes(this));

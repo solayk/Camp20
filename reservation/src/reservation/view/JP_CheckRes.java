@@ -232,6 +232,7 @@ public class JP_CheckRes extends JPanel {
 		
 		}
 		
+		
 //		System.out.println("날짜 :" +rvo.getReserve_date().substring(0,10));
 		lblNewLabel_1.setText(rvo.getSite_type());
 		lblNewLabel_1_1.setText(rvo.getReserve_date());

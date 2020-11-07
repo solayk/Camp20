@@ -26,7 +26,8 @@ public class JP_Reserve extends JPanel {
 	JTextField tfName, tfTel, tfCarNo, tfPrice , tfRequest;
 	JButton bToLogin, bRegist; 
 	
-	static ReservationVO vo;
+	//static ReservationVO vo;
+	ReservationVO vo;
 	
 	JFrame_main F; 
 	
@@ -164,6 +165,30 @@ public class JP_Reserve extends JPanel {
 		chckbxNewCheckBox_1.setBounds(267, 440, 115, 23);
 		add(chckbxNewCheckBox_1);
 		
+		//이름, 전화번호 셋팅을 위한 코드 // start
+		
+		ReservationVO vo1;	
+		try {
+			vo1 = reserve_dao.SetName_Tel(UserVO.getCustomer_id());
+			tfName.setText(vo1.getCustomer_name());
+			tfTel.setText(vo1.getTel());
+			//요금 셋팅  //start
+			String temp = String.valueOf(UserVO.getCheck_in());
+			System.out.println(temp);			
+			
+			if(temp.contains("Jul") || temp.contains("Aug") || temp.contains("Sep"))//     7,8,9월에 예약하면 20000원 추가 
+			{
+				tfPrice.setText(Integer.toString((UserVO.getStayDays()*40000)+20000));
+			}else {
+				tfPrice.setText(Integer.toString((UserVO.getStayDays()*40000)));
+			}
+			//요금 셋팅  //end
+			
+		} catch (Exception e1) {
+			System.out.println("셋팅실패 :" + e1.toString());
+			e1.printStackTrace();
+		}
+		//이름,전화번호 셋팅을 위한 코드  - end
 		setVisible(true);
 		
 		/*
@@ -277,6 +302,8 @@ public class JP_Reserve extends JPanel {
 		rvo.setEst_arr_time((String)estArrComboBox.getSelectedItem()); 			// 창에 입력된 도착예정시간을 가져온다.
 		rvo.setCar_no(tfCarNo.getText());										// 창에 입력된 차번호를 가져온다. 
 		rvo.setRequestTerm(tfRequest.getText());								// 창에 입력된 요청사항을 가져온다. 
+		rvo.setPrice(Integer.parseInt(tfPrice.getText()));
+		
 		
 		try {
 			

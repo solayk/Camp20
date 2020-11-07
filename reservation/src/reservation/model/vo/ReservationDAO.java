@@ -55,10 +55,10 @@ public class ReservationDAO {
 		 *  
 		 */
 		String sql = "INSERT INTO reservation(reserv_no,person_no,car_no,est_arr_time,reserve_date"
-				+ ",customer_id,site_no,check_in,check_out,requestedterm,manager_id) "
+				+ ",customer_id,site_no,check_in,check_out,requestedterm,manager_id,price) "
 				+ "VALUES((to_char(sysdate,'YYMMDD') || to_char(seq_reserve_id.nextval)),"  // 예약 번호
 				+ ""       //고객 id
-				+ "?,?,?,sysdate,'qwe5507',?,?,?+?,?,'zxc5507'"   //id / 매니저 id 미구현
+				+ "?,?,?,sysdate,?,?,?,?+?,?,'zxc5507',?"   // 매니저 id 미구현
 				+ ") ";
 		
 		System.out.println(sql);
@@ -67,11 +67,16 @@ public class ReservationDAO {
 		ps.setInt(1,reserve.getPerson_no());         						//인원수
 		ps.setString(2, reserve.getCar_no());  		  						//차번호
 		ps.setString(3, reserve.getEst_arr_time());   						//도착예정시간
-		ps.setString(4, UserVO.getSite_no());         						//사이트넘버
-		ps.setDate(5,  new java.sql.Date(UserVO.getCheck_in().getTime()));  //체크인 //sql
-		ps.setDate(6,  new java.sql.Date(UserVO.getCheck_in().getTime()));  //체크아웃  (체크인+숙박일)
-		ps.setInt(7, (Integer)UserVO.getStayDays());						//숙박일
-		ps.setString(8, reserve.getRequestTerm());         					//요청사항 
+		
+		ps.setString(4, UserVO.getCustomer_id());   						//ID
+		
+		ps.setString(5, UserVO.getSite_no());         						//사이트넘버
+		ps.setDate(6,  new java.sql.Date(UserVO.getCheck_in().getTime()));  //체크인 //sql
+		ps.setDate(7,  new java.sql.Date(UserVO.getCheck_in().getTime()));  //체크아웃  (체크인+숙박일)
+		ps.setInt(8, (Integer)UserVO.getStayDays());						//숙박일
+		ps.setString(9, reserve.getRequestTerm());         					//요청사항 
+		ps.setInt(10, reserve.getPrice());									//숙박일
+		
 		
 		ps.executeUpdate(); 
 
@@ -133,6 +138,34 @@ public class ReservationDAO {
 		st.close();
 		
 		return list;
+	}
+	
+	/*
+	 * 함수명  : SetName_Tel
+	 * 인자 : ?
+	 * 반환값 : ?
+	 * 역할 : id값으로 Name과 Tel을 셋팅하기위한 용도  
+	 * 
+	 */
+	public ReservationVO SetName_Tel(String Customer_id) throws Exception {
+		ResultSet rs;
+
+		String sql = "SELECT name,tel FROM customer WHERE customer_id = ?";
+		
+		System.out.println(sql);
+		
+		PreparedStatement ps = con.prepareStatement(sql); 
+		ps.setString(1, Customer_id);  		  				
+		
+		rs = ps.executeQuery();
+		
+		ReservationVO vo = new ReservationVO();
+		
+		if(rs.next()) {
+			vo.setCustomer_name(rs.getString("name"));
+			vo.setTel(rs.getString("tel"));
+		}
+		return vo;
 	}
 	
 	/*
