@@ -6,11 +6,14 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -33,9 +36,13 @@ public class JP_CheckRes extends JPanel {
 	
 	private JFrame_main F;
 	
+	ReservationVO rvo;
+	
 	ReservationDAO reserve_dao;
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
+	SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+	Date time = new Date();
 	
 	public JP_CheckRes(JFrame_main f) {
 		
@@ -225,7 +232,7 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_1_4.setBounds(440, 125, 57, 15);   // 427
 		add(lblNewLabel_1_4);
 		
-		ReservationVO rvo = new ReservationVO();
+		rvo = new ReservationVO();
 		
 		if(UserVO.getReserv_no() != null) {
 		rvo = reserve_dao.SettingRes(UserVO.getReserv_no());
@@ -265,8 +272,109 @@ public class JP_CheckRes extends JPanel {
 		 */
 		bLogin_1.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
-				F.toLogin(); 
-			}
+				//F.toLogin(); 
+				try {
+					System.out.println(rvo.getCheck_in()); // 체크인날짜 
+					//Date tempDate = dateFormat1.parse(rvo.getCheck_in());
+					String tempCheckTime = rvo.getCheck_in();
+					System.out.println(tempCheckTime);
+					//현재날짜
+					Date nowTime = new Date();				//현재 날짜 
+ 
+					Calendar cal = Calendar.getInstance();
+					cal.set(Calendar.YEAR, Integer.parseInt(tempCheckTime.substring(0, 4))); // 년도 지정 
+					cal.set(Calendar.MONTH, Integer.parseInt(tempCheckTime.substring(5,7))-1); // 월 지정 
+					cal.set(Calendar.DATE, Integer.parseInt(tempCheckTime.substring(8,10))); // 일 지정 
+					Date checkTime = new Date(cal.getTimeInMillis());   // 캘린더타입을 date타입으로
+					System.out.println("check in time: "+ checkTime);
+					System.out.println("Now in time: "+ nowTime);
+					cal.add(Calendar.DATE, -3);
+					Date checkTime_Minus3 = new Date(cal.getTimeInMillis());   // 체크인기준 3일뺀것 [순서바꾸지마시오절대절대절대 ]
+					System.out.println(" check -3 time : "+ checkTime_Minus3);
+					cal.add(Calendar.DATE, -4);
+					Date checkTime_Minus7 = new Date(cal.getTimeInMillis());   // 체크인기준 7일뺀것 [순서바꾸지마시오절대절대절대 ]
+					System.out.println(" check -7 time : "+ checkTime_Minus7);
+//					 date1.compare(date2)  -> date1이 date2보다 큰날이면 1리턴  / date1이 date2보다 작은날이면 -1 리턴 / 같으면 0리턴 
+					//현재시간과 체크인 7일전 비교
+					int compare = nowTime.compareTo(checkTime_Minus7);
+					System.out.println(compare);
+					//현재시간과 체크일 3일전 비교 
+					int compare1 = nowTime.compareTo(checkTime_Minus3);
+					System.out.println(compare1);
+					int compare2 = nowTime.compareTo(checkTime);
+					System.out.println(compare2);
+					
+					
+					if(compare == -1) { 						//현재일이 체크인 7일전보다 적을때
+						System.out.println(" 100 % 환불"); 		  
+					}else if(compare == 1 && compare1 == -1 ) {
+						System.out.println(" 80 % 환불");
+					}else if(compare1 == 1 && compare2 == -1 ) {
+						System.out.println(" 50 % 환불");
+					}else {
+						System.out.println("현재일이 체크인날짜과 같거나 체크인날짜가 과거일때 / 취소불가 ");
+					}
+					
+					
+				System.out.println(rvo.getStatus());   // 예약 상태 
+				
+				if(rvo.getStatus().equals("입금대기")) {  // 입금 대기중이라면 
+					int reply = JOptionPane.showConfirmDialog(null, "예약을 취소하시겠습니까? ", "예약 취소", JOptionPane.YES_NO_OPTION);
+					if (reply == JOptionPane.YES_OPTION) {
+						
+						reserve_dao.resCancle(textField_3.getText());
+						
+						JOptionPane.showMessageDialog(null,"취소되었습니다.","취소완료",JOptionPane.INFORMATION_MESSAGE);
+						F.toJP_CheckResNo();    //  JP_CheckResNo페이지로 이동 [뒤로가기]
+					}
+				}else if(rvo.getStatus().equals("본인취소")) {
+					JOptionPane.showMessageDialog(null,"이미 취소상태 입니다.","",JOptionPane.INFORMATION_MESSAGE);
+					
+				}else if(rvo.getStatus().equals("이용완료")) {
+					JOptionPane.showMessageDialog(null,"이미 이용하신 예약입니다.","",JOptionPane.INFORMATION_MESSAGE);
+				}else if(rvo.getStatus().equals("예약확정")) {
+					if(compare == -1) { 				
+						//현재일이 체크인 7일전보다 적을때
+						int reply1 = JOptionPane.showConfirmDialog(null, "100% 환불 가능 합니다, 취소하시겠습니까? ", "예약 취소", JOptionPane.YES_NO_OPTION);
+						if (reply1 == JOptionPane.YES_OPTION) {
+							
+							reserve_dao.resCancle(textField_3.getText());
+							
+							JOptionPane.showMessageDialog(null,"취소되었습니다.","취소완료",JOptionPane.INFORMATION_MESSAGE);
+							F.toJP_CheckResNo();    //  JP_CheckResNo페이지로 이동 [뒤로가기]
+						}
+					}else if(compare == 1 && compare1 == -1 ) {
+						int reply2 = JOptionPane.showConfirmDialog(null, "80% 환불 가능 합니다, 취소하시겠습니까? ", "예약 취소", JOptionPane.YES_NO_OPTION);
+						if (reply2 == JOptionPane.YES_OPTION) {
+							
+							reserve_dao.resCancle(textField_3.getText());
+							
+							JOptionPane.showMessageDialog(null,"취소되었습니다.","취소완료",JOptionPane.INFORMATION_MESSAGE);
+							F.toJP_CheckResNo();    //  JP_CheckResNo페이지로 이동 [뒤로가기]
+						}
+					}else if(compare1 == 1 && compare2 == -1 ) {
+						int reply3 = JOptionPane.showConfirmDialog(null, "50% 환불 가능 합니다, 취소하시겠습니까? ", "예약 취소", JOptionPane.YES_NO_OPTION);
+						if (reply3 == JOptionPane.YES_OPTION) {
+							
+							reserve_dao.resCancle(textField_3.getText());
+							
+							JOptionPane.showMessageDialog(null,"취소되었습니다.","취소완료",JOptionPane.INFORMATION_MESSAGE);
+							F.toJP_CheckResNo();    //  JP_CheckResNo페이지로 이동 [뒤로가기]
+						}
+					}else {
+						JOptionPane.showMessageDialog(null,"취소가 불가능합니다.","",JOptionPane.INFORMATION_MESSAGE);
+						System.out.println("현재일이 체크인날짜과 같거나 체크인날짜가 과거일때 / 취소불가 ");
+					}
+					
+					
+					
+				}
+				} catch (Exception e) {
+					System.out.println("취소 실패 : " + e.toString());
+					e.printStackTrace();
+				}
+					
+				}
 		});
 	}
 //	/*

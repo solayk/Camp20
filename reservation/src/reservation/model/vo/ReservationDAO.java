@@ -246,11 +246,27 @@ public class ReservationDAO {
 			System.out.println("무슨예외인지 알고싶지않아 ");
 			e.printStackTrace();
 		} 
-		
-		
-		
-		
 		return vo;
+	}
+	/*
+	 * 함수명 : resCancle()
+	 * 역할 : 예약취소했을때 예약번호를 인자로 받아 예약번호로 Reservation테이블의 status 상태를 '본인취소'로바꾸는 함수
+	 */
+	public void resCancle(String resNum) throws Exception {
+		ReservationVO vo = new ReservationVO();
+		
+		String sql = "UPDATE  reservation  SET  status='본인취소'  WHERE  reserv_no = ?";
+		
+		System.out.println(sql);
+		PreparedStatement ps = con.prepareStatement(sql); 
+		
+		ps.setString(1, resNum);  
+		
+		
+		ps.executeUpdate(); 
+
+		ps.close(); 
+		
 	}
 	
 	
