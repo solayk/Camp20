@@ -361,7 +361,7 @@ public class JP_CheckRes extends JPanel {
 				}else if(rvo.getStatus().equals("본인취소")) {
 					JOptionPane.showMessageDialog(null,"이미 취소상태 입니다.","",JOptionPane.INFORMATION_MESSAGE);
 					
-				}else if(rvo.getStatus().equals("관리자취소")) {
+				}else if(rvo.getStatus().equals("예약불가")) {
 					JOptionPane.showMessageDialog(null,"관리자에 의해 취소된 예약입니다.","",JOptionPane.INFORMATION_MESSAGE);
 				}else if(rvo.getStatus().equals("이용완료")) {
 					JOptionPane.showMessageDialog(null,"이미 이용하신 예약입니다.","",JOptionPane.INFORMATION_MESSAGE);

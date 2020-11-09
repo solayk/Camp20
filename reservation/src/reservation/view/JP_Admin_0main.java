@@ -13,10 +13,10 @@ public class JP_Admin_0main extends JFrame{
 	
 	public JP_Admin_0main() {
 		
+		super("관리자 페이지");
 		reserveList = new JP_Admin_1reservation();
 		memberList = new JP_Admin_2member();
 		statList = new JP_Admin_3statistics();
-		
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("예약관리", reserveList);
 		pane.addTab("회원관리", memberList);
