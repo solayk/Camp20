@@ -20,7 +20,7 @@ public class JP_Admin_0main extends JFrame{
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("예약관리", reserveList);
 		pane.addTab("회원관리", memberList);
-		pane.addTab("통계", statList);
+//		pane.addTab("통계", statList);
 		
 		pane.setSelectedIndex(2);
 		
