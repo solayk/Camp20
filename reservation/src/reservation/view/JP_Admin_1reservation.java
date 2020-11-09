@@ -95,22 +95,31 @@ public class JP_Admin_1reservation extends JPanel implements ActionListener{
 					System.out.println("더블클릭");
 					
 					String[] statusList = {"선택", "입금대기", "예약확정", "예약불가", "이용완료"}; 
-					Object changeStatus = JOptionPane.showInputDialog(null, "현재 예약 상태 : "+value, "예약상태 고르셈",
-							JOptionPane.QUESTION_MESSAGE, null, statusList, statusList[0]);
+					Object changeStatus = JOptionPane.showInputDialog(null, "현재 예약 상태 : "+value, "예약상태 고르셈", JOptionPane.QUESTION_MESSAGE, null, statusList, statusList[0]);
 					System.out.println(changeStatus);
 					if(value.equals(changeStatus)) {
 						JOptionPane.showMessageDialog(null, "똑같음");
 					}
 					
 					else if(changeStatus == null || changeStatus.equals("선택")) {
+						JOptionPane.showMessageDialog(null, "예약상태 선택 ㄱ");
 					}
 					
 					else {
-						JOptionPane.showConfirmDialog(null, changeStatus+"로 바뀜");
-						rdao.changeStatus(value2, changeStatus);
-						rStatus();
-						
+						int result = JOptionPane.showConfirmDialog(null, changeStatus+"로 바뀜", "정말?", JOptionPane.YES_NO_CANCEL_OPTION);
+						if(result==JOptionPane.YES_OPTION) {
+							rdao.changeStatus(value2, changeStatus);
+							rStatus();
+						}
+						else if(result==JOptionPane.CANCEL_OPTION) {
+							JOptionPane.showMessageDialog(null, "취소됨");
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "안바뀜");
+						}
+							
 					}
+					
 				}
 				
 			}

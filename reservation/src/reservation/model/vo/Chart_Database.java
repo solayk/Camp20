@@ -1,10 +1,65 @@
 package reservation.model.vo;
 
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Chart_Database {
 	
+	String url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
+	String user = "positive";
+	String pass = "1004";
+	
 
+
+	public ArrayList<ArrayList> getData() {
+		
+		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = DriverManager.getConnection(url, user, pass);
+			
+			//=======================================================
+			/**
+			 * SQL문장
+			 * 1) 월
+			 */
+			String sql = "SELECT"
+					+ "FROM"
+					+ "WHERE"
+					;
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getString(""));
+				temp.add(rs.getString(""));
+				data.add(temp);
+				
+			}
+			rs.close();
+			ps.close();
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println("에러: " + e.toString());
+			e.printStackTrace();
+		}
+		
+		return data;
+		
+	}
+	
+	
+	
+	
+	
 
 }
 

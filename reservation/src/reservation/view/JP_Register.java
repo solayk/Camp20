@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
@@ -31,6 +32,8 @@ public class JP_Register extends JPanel implements ActionListener {
 	
 //	이메일 드롭박스 _201105 원우
 	JComboBox emailBox;
+	
+	JLabel lblNewLabel_overlap;
 	
 	
 	/*
@@ -109,7 +112,7 @@ public class JP_Register extends JPanel implements ActionListener {
 		
 
 //		중복검사 _201106 원우
-		JLabel lblNewLabel_overlap = new JLabel("사용가능");
+		lblNewLabel_overlap = new JLabel();
 		lblNewLabel_overlap.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lblNewLabel_overlap.setBounds(400, 107, 57, 15);
 		add(lblNewLabel_overlap);
@@ -211,7 +214,38 @@ public class JP_Register extends JPanel implements ActionListener {
 	
 //	이벤트 실행 _201103 원우
 	void eventProc() {
+		
+		String id = tfID.getText();
+
 		bRegist.addActionListener(this);
+		
+		
+		tfID.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				try {
+					dao = new RegisterDAO();
+					if(dao.overlapDeny(id)) {
+						lblNewLabel_overlap.setForeground(Color.RED);
+						lblNewLabel_overlap.setText("사용 불가");
+					}
+					else {
+						lblNewLabel_overlap.setForeground(Color.BLUE);
+						lblNewLabel_overlap.setText("사용 가능");
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+					
+				lblNewLabel_overlap.setText("사용가능");
+			}
+			
+			
+		});
+			
+			
 		
 	}
 	
@@ -227,6 +261,7 @@ public class JP_Register extends JPanel implements ActionListener {
 			emailAdd();
 			insertMember();
 		}
+		
 		
 
 	}
@@ -348,27 +383,6 @@ public class JP_Register extends JPanel implements ActionListener {
 		
 	} // end of insertMember()
 	
-	
-/*	
-	// ID 중복 검사 _201106 원우
-	public void overlapId() {
-		
-		
-		overlapDeny()
-		
-	}
-	
-	
-	@Override
-	public synchronized void addKeyListener(KeyListener l) {
-		// TODO Auto-generated method stub
-		super.addKeyListener(l);
-	}
-	
-	public void keyPress(KeyEvent e) {
-		dao = 
-	}
-*/	
 	
 	
 	// email = textfield + dropbox _201105 원우
