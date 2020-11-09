@@ -210,11 +210,14 @@ public class JP_Reserve extends JPanel {
 				System.out.println(tfCarNo.getText());
 				int reply = JOptionPane.showConfirmDialog(null, "예약 하시겠습니까? ", "예약", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
-				if(chckbxNewCheckBox.isSelected() && chckbxNewCheckBox_1.isSelected()) {
+				if(chckbxNewCheckBox.isSelected() && chckbxNewCheckBox_1.isSelected() && !tfCarNo.getText().equals("")) {
 				reserveCheck();
 				JOptionPane.showMessageDialog(null, "예약이 완료되었습니다.");
 				F.toMainMenu(); 
-				}else {
+				}else if(tfCarNo.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "차번호를 입력해주세요. ");
+				}
+				else {
 					JOptionPane.showMessageDialog(null, "이용약관에 동의해 주세요 ");
 				}
 				}
@@ -238,6 +241,7 @@ public class JP_Reserve extends JPanel {
 			    		+ "8. 화재시 모든책임은 본인에게 있음 \n"
 			    		+ "9. 귀중품 분실시 모든책임은 본인에게 있음\n"
 			    		+ "10. 산짐승에게 해를 당할시 모든 책임은 본인에게 있음\n"
+			    		+ "11. 오전 9시 체크아웃 "
 			    	;
 			    JTextArea textArea = new JTextArea(text,10,50);
 			    textArea.setColumns(30);

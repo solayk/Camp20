@@ -224,8 +224,8 @@ public class JP_Register extends JPanel implements ActionListener {
 		Object evt = e.getSource();
 		
 		if(evt == bRegist) {
-			insertMember();
 			emailAdd();
+			insertMember();
 		}
 		
 
@@ -332,11 +332,13 @@ public class JP_Register extends JPanel implements ActionListener {
 			
 			// 
 			else {
+				
 				dao.regist(vo);
 				clearTextField();
+				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
+				System.out.println("입력성공");
 			}
 			
-			System.out.println("입력성공");
 			
 			
 		} catch(Exception e) {
