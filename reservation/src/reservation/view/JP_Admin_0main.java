@@ -22,7 +22,7 @@ public class JP_Admin_0main extends JFrame{
 		pane.addTab("회원관리", memberList);
 //		pane.addTab("통계", statList);
 		
-		pane.setSelectedIndex(1);
+		pane.setSelectedIndex(0);
 		
 		getContentPane().add("Center", pane);
 		pack();

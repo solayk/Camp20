@@ -163,9 +163,20 @@ public class JP_Login extends JPanel {
 		bToManager.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JP_Admin_0main management = new JP_Admin_0main();	
-				management.setBounds(100,100,600,600); 
-				management.setVisible(true);
+				String input = JOptionPane.showInputDialog(null,"관리자만 접속");
+				
+					try {
+						if (input.equals("1004") ) {
+							JP_Admin_0main management = new JP_Admin_0main();	
+							management.setBounds(500,250,900,600); 
+							management.setVisible(true);
+						}else { JOptionPane.showMessageDialog(null, "너 누구야");
+						
+						}
+					} catch (Exception e1) {
+						System.out.println("관리자 페이지 접속실패 : " + e1.toString());
+					}
+				
 			}
 		});
 		
