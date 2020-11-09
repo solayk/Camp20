@@ -293,7 +293,7 @@ public class JP_CheckRes extends JPanel {
 		 */
 		bLogin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
-				F.toLogin(); 
+				F.toMainMenu(); 
 			}
 		});
 		

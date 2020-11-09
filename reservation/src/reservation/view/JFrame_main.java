@@ -92,7 +92,7 @@ public class JFrame_main extends JFrame {
 	 * 역할: "로그인" 버튼 클릭 시 아이디와 비밀번호 일치하면 JP_MainMenu로 화면 전환
 	 * 작성: 김영권
 	 */
-	public void LoginSuccess() { 
+	public void toMainMenu() { 
 		cards.show(getContentPane(),"JP_MainMenu");
 	}
 	

@@ -194,7 +194,7 @@ public class JP_Login extends JPanel {
 				
 				if(i==1) { 
 					UserVO.setCustomer_id(tf_id.getText());
-					F.LoginSuccess();
+					F.toMainMenu();
 					tf_id.setText("");
 					tf_pw.setText("");
 				}
@@ -244,7 +244,7 @@ public class JP_Login extends JPanel {
 				
 				if(i==1) { 
 					UserVO.setCustomer_id(tf_id.getText());
-					F.LoginSuccess();
+					F.toMainMenu();
 					tf_id.setText("");
 					tf_pw.setText("");
 				}

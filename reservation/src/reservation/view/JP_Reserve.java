@@ -197,7 +197,7 @@ public class JP_Reserve extends JPanel {
 		 */
 		bToLogin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
-				F.toLogin(); 
+				F.toMainMenu(); 
 			}
 		});
 		
@@ -207,11 +207,16 @@ public class JP_Reserve extends JPanel {
 		 */
 		bRegist.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
+				System.out.println(tfCarNo.getText());
+				int reply = JOptionPane.showConfirmDialog(null, "예약 하시겠습니까? ", "예약", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
 				if(chckbxNewCheckBox.isSelected() && chckbxNewCheckBox_1.isSelected()) {
 				reserveCheck();
-				F.toLogin(); 
+				JOptionPane.showMessageDialog(null, "예약이 완료되었습니다.");
+				F.toMainMenu(); 
 				}else {
 					JOptionPane.showMessageDialog(null, "이용약관에 동의해 주세요 ");
+				}
 				}
 			}
 		});

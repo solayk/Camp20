@@ -11,14 +11,17 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
+import reservation.model.vo.UserVO;
+
 public class JP_MainMenu extends JPanel {
 
 	JLabel lb_title;
-	JButton bToReserv, bToCheckReserve; 
+	JButton bToReserv, bToCheckReserve, bToLogin; 
 	JFrame_main F; 
 	
 	ImageIcon imgBackground;
@@ -42,6 +45,7 @@ public class JP_MainMenu extends JPanel {
 		// Component 생성
 		bToReserv = new JButton(""); 
 		bToCheckReserve = new JButton(""); 
+		bToLogin = new JButton("로그아웃"); 
 		
 		/*
 		 * 임시 ****************************************
@@ -54,6 +58,13 @@ public class JP_MainMenu extends JPanel {
 		iconToCheckReserve = new ImageIcon("src/reservation/imgs/JP_MainMenu_bToCheckReserve.png");
 		
 		// Component 양식 설정
+		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bToLogin.setBounds(500, 15, 90, 25);
+			// JButton 투명하게
+//			bToLogin.setContentAreaFilled(false);
+//			bToLogin.setBorderPainted(false);
+		add(bToLogin);
+		
 		bToReserv.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bToReserv.setBounds(150, 140, 300, 150);
 		bToReserv.setIcon(iconToReserv);
@@ -68,6 +79,18 @@ public class JP_MainMenu extends JPanel {
 				
 		setVisible(true);
 		
+		/*
+		 * 역할 : 로그아웃 버튼누르면 toLogin으로 이동 
+		 * 
+		 */
+		bToLogin.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent arg0) {
+				int reply = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까? ", "로그아웃", JOptionPane.YES_NO_OPTION);
+				if (reply == JOptionPane.YES_OPTION) {
+					F.toLogin();
+				}
+			}
+		});
 		/*
 		 * 이름: 버튼 액션 리스너
 		 * 역할: "사이트 예약" 버튼 클릭 시 동작 설정

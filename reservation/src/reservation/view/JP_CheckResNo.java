@@ -131,7 +131,7 @@ public class JP_CheckResNo extends JPanel {
 		bToLogin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 			//	change();
-			F.toLogin(); 
+			F.toMainMenu(); 
 			}
 		});
 		

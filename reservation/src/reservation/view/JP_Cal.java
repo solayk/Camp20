@@ -185,7 +185,7 @@ public class JP_Cal extends JPanel {
 		bToLogin.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				clearSearch();
-				F.toLogin();
+				F.toMainMenu();
 			}
 		});
 		
