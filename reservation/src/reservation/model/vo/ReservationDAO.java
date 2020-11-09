@@ -223,7 +223,7 @@ public class ReservationDAO {
 				vo.setSite_type(rs.getString("site_type"));
 				
 				//TODO 선생님한테 물어볼것
-//				vo.setReserve_date(rs.getString("reserve_date"));
+//				vo.setReserve_date(rs.getString("reserve_date").substring(0,10));
 				String resDate = rs.getString("reserve_date");			
 				vo.setReserve_date(resDate.substring(0,10));
 				String chInDate = rs.getString("check_in");	

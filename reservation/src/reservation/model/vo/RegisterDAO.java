@@ -167,5 +167,31 @@ public class RegisterDAO {
 		else return 2; // 에러: 아이디 존재하지 않음
 		
 	}
+	/*
+	 * 함수명: toSend_Id
+	 * 작성자: 이진현
+	 * 역할: 아이디 전송
+	 */
+	public CustomerVO toSend_Id(String tel) throws Exception {
+		String sql = "SELECT customer_id FROM customer WHERE tel = ?" ;
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs;
+		
+		st.setString(1, tel);
+		
+		rs = st.executeQuery();
+		
+		CustomerVO vo = new CustomerVO();
+		if(rs.next()) {
+			vo.setMemberName(rs.getString("customer_id"));
+		}
+		
+		st.close();
+		rs.close();
+		
+		return vo;
+		
+		
+	}
 }
 

@@ -72,7 +72,7 @@ public class UI_CheckRes extends JFrame {
 			}
 		});
 		bLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bLogin.setBounds(457, 23, 97, 23);
+		bLogin.setBounds(362, 94, 97, 23);
 		contentPane.add(bLogin);
 		
 		textField_2 = new JTextField();
@@ -201,5 +201,9 @@ public class UI_CheckRes extends JFrame {
 		lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_4.setBounds(427, 125, 57, 15);
 		contentPane.add(lblNewLabel_1_4);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(527, 0, 57, 37);
+		contentPane.add(btnNewButton);
 	}
 }

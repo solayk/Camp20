@@ -3,6 +3,7 @@ package reservation.view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,6 +41,7 @@ public class JP_CheckRes extends JPanel {
 	ReservationVO rvo;
 	
 	ReservationDAO reserve_dao;
+	ImageIcon imgBackground;
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 	SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -52,6 +55,7 @@ public class JP_CheckRes extends JPanel {
 			System.out.println("DB연동 실패  : "+ e.toString());
 			e.printStackTrace();
 		}
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_Res.png");
 		
 		// 배경 설정
 		setBackground(Color.WHITE); 
@@ -68,14 +72,15 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel_3 = new JLabel("입금정보");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3.setForeground(Color.WHITE);
+		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_3.setBounds(124, 180, 102, 20);
 		add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_2 = new JLabel("예약확인/취소");
-		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
-		lblNewLabel_2.setBounds(194, 23, 211, 30);
-		add(lblNewLabel_2);
+	//	JLabel lblNewLabel_2 = new JLabel("예약확인/취소");
+	//	lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
+	//	lblNewLabel_2.setBounds(194, 23, 211, 30);
+	//	add(lblNewLabel_2);
 		
 		JButton bLogin = new JButton("홈");
 //		bLogin.addActionListener(new ActionListener() {
@@ -107,7 +112,8 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel_3_2 = new JLabel("예약상태");
 		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_2.setForeground(Color.WHITE);
+		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_3_2.setBounds(124, 215, 102, 20);
 		add(lblNewLabel_3_2);
 		
@@ -121,7 +127,8 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel_3_3 = new JLabel("예약번호");
 		lblNewLabel_3_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_3.setForeground(Color.WHITE);
+		lblNewLabel_3_3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_3_3.setBounds(124, 250, 102, 20);
 		add(lblNewLabel_3_3);
 		
@@ -134,7 +141,8 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel_3_4 = new JLabel("예약자명");
 		lblNewLabel_3_4.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_4.setForeground(Color.WHITE);
+		lblNewLabel_3_4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_3_4.setBounds(124, 285, 102, 20);
 		add(lblNewLabel_3_4);
 		
@@ -147,7 +155,8 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel_3_5 = new JLabel("핸드폰");
 		lblNewLabel_3_5.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_5.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_5.setForeground(Color.WHITE);
+		lblNewLabel_3_5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_3_5.setBounds(124, 320, 102, 20);
 		add(lblNewLabel_3_5);
 		
@@ -160,7 +169,8 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel_3_6 = new JLabel("도착예정시간");
 		lblNewLabel_3_6.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_6.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_6.setForeground(Color.WHITE);
+		lblNewLabel_3_6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_3_6.setBounds(124, 355, 102, 20);
 		add(lblNewLabel_3_6);
 		
@@ -173,7 +183,8 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel_3_7 = new JLabel("요청사항");
 		lblNewLabel_3_7.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3_7.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lblNewLabel_3_7.setForeground(Color.WHITE);
+		lblNewLabel_3_7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_3_7.setBounds(124, 390, 102, 20);
 		add(lblNewLabel_3_7);
 		
@@ -184,52 +195,72 @@ public class JP_CheckRes extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("사이트명");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel.setBounds(66, 100, 57, 15);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_1.setBounds(66, 125, 57, 15);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("예약일");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setForeground(Color.WHITE);
+		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_4.setBounds(149, 100, 57, 15);
 		add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("New label");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1.setForeground(Color.WHITE);
+		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_1_1.setBounds(130, 125, 100, 15);//57
 		add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_5 = new JLabel("기간");
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_5.setForeground(Color.WHITE);
+		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		lblNewLabel_5.setBounds(280, 100, 57, 15);
 		add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("New label");
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setBounds(230, 125, 150, 15);
+		lblNewLabel_1_2.setForeground(Color.WHITE);
+		lblNewLabel_1_2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		lblNewLabel_1_2.setBounds(230, 125, 170, 15);
 		add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_6 = new JLabel("인원");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setBounds(390, 100, 57, 15);
+		lblNewLabel_6.setForeground(Color.WHITE);
+		lblNewLabel_6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		lblNewLabel_6.setBounds(410, 100, 57, 15);
 		add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("New label");
 		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_3.setBounds(390, 125, 57, 15);    // 337
+		lblNewLabel_1_3.setForeground(Color.WHITE);
+		lblNewLabel_1_3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		lblNewLabel_1_3.setBounds(410, 125, 57, 15);    // 337
 		add(lblNewLabel_1_3);
 		
 		JLabel lblNewLabel_7 = new JLabel("요금");
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_7.setBounds(440, 100, 57, 15);
+		lblNewLabel_7.setForeground(Color.WHITE);
+		lblNewLabel_7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		lblNewLabel_7.setBounds(460, 100, 57, 15);
 		add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("New label");
 		lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_4.setBounds(440, 125, 57, 15);   // 427
+		lblNewLabel_1_4.setForeground(Color.WHITE);
+		lblNewLabel_1_4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		lblNewLabel_1_4.setBounds(460, 125, 57, 15);   // 427
 		add(lblNewLabel_1_4);
 		
 		rvo = new ReservationVO();
@@ -330,6 +361,8 @@ public class JP_CheckRes extends JPanel {
 				}else if(rvo.getStatus().equals("본인취소")) {
 					JOptionPane.showMessageDialog(null,"이미 취소상태 입니다.","",JOptionPane.INFORMATION_MESSAGE);
 					
+				}else if(rvo.getStatus().equals("관리자취소")) {
+					JOptionPane.showMessageDialog(null,"관리자에 의해 취소된 예약입니다.","",JOptionPane.INFORMATION_MESSAGE);
 				}else if(rvo.getStatus().equals("이용완료")) {
 					JOptionPane.showMessageDialog(null,"이미 이용하신 예약입니다.","",JOptionPane.INFORMATION_MESSAGE);
 				}else if(rvo.getStatus().equals("예약확정")) {
@@ -376,6 +409,15 @@ public class JP_CheckRes extends JPanel {
 					
 				}
 		});
+	}
+	/*
+	 * 함수명: paintComponent
+	 * 역할: 배경이미지 설정
+	 */
+	public void paintComponent(Graphics g) {
+		  super.paintComponent(g);
+
+		  g.drawImage(imgBackground.getImage(), 0, 0, this);
 	}
 //	/*
 //	 * 역할 : 들어온 예약번호로 예약내용들을 세팅하는 함수 

@@ -49,7 +49,7 @@ public class JP_Reserve extends JPanel {
 			reserve_dao = new ReservationDAO();
 			System.out.println("DB 연결 성공 ");
 		} catch (Exception e) {
-			System.out.println("DB 연결실패 :" + e.toString());
+			System.out.println("DB 연결실패 Reserve :" + e.toString());
 		}
 		// 배경 설정
 		setBackground(Color.WHITE); 

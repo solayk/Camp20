@@ -3,12 +3,14 @@ package reservation.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,6 +34,7 @@ public class JP_CheckResNo extends JPanel {
 	MyTableModel tbModel;		//모델 
 	
 	ReservationDAO reserve_dao;   //  ReservationDAO 변수 생성 . 
+	ImageIcon imgBackground;
 	
 	/*
 	 * 이름: JP_MainMenu 기본생성자
@@ -46,11 +49,13 @@ public class JP_CheckResNo extends JPanel {
 		} catch (Exception e) {
 			System.out.println("DB 연결실패 :" + e.toString());
 		}
+		
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_ResNo.png");
 		// 테이블 , 모델 
 		tbModel = new MyTableModel();
 		tbl = new JTable(tbModel);
 		bToLogin = new JButton("홈");
-		JLabel lb_title = new JLabel("예약 조회");
+		//JLabel lb_title = new JLabel("예약 조회");
 		JPanel Center = new JPanel();
 		
 		// 배경 설정
@@ -60,16 +65,16 @@ public class JP_CheckResNo extends JPanel {
 		setLayout(null); 
 		
 			bToLogin.setBounds(457, 23, 97, 23);
-			lb_title.setBounds(211, 30, 211, 30);
-			Center.setBounds(50,80,500,450);
+		//	lb_title.setBounds(211, 30, 211, 30);
+			Center.setBounds(50,90,500,450);
 			Center.setLayout(new BorderLayout());
 			
 			bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-			lb_title.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
+		//	lb_title.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
 			
 		
 		add(bToLogin);
-		add(lb_title);
+	//	add(lb_title);
 			Center.add(new JScrollPane(tbl)); 					// JTable 은 스크롤을 반드시넣어서 붙여줘야한다
 		add(Center);
 		F = f; 
@@ -154,6 +159,14 @@ public class JP_CheckResNo extends JPanel {
 		}
 		
 	}
-	
+	/*
+	 * 함수명: paintComponent
+	 * 역할: 배경이미지 설정
+	 */
+	public void paintComponent(Graphics g) {
+		  super.paintComponent(g);
+
+		  g.drawImage(imgBackground.getImage(), 0, 0, this);
+	}
 	
 }

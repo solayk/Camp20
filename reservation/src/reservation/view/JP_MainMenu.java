@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 
 public class JP_MainMenu extends JPanel {
 
@@ -37,6 +38,7 @@ public class JP_MainMenu extends JPanel {
 		setLayout(null); 
 		F = f; 
 		
+		
 		// Component 생성
 		bToReserv = new JButton(""); 
 		bToCheckReserve = new JButton(""); 
@@ -44,7 +46,7 @@ public class JP_MainMenu extends JPanel {
 		/*
 		 * 임시 ****************************************
 		 */
-		imgBackground = new ImageIcon("src/reservation/imgs/JP_MainMenu_2.png");
+		imgBackground = new ImageIcon("src/reservation/imgs/mainmemu_test5.png");
 		
 		// 아이콘 설정
 		iconTitle = new ImageIcon("src/reservation/imgs/JP_MainMenu_title.png");
@@ -53,7 +55,7 @@ public class JP_MainMenu extends JPanel {
 		
 		// Component 양식 설정
 		bToReserv.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToReserv.setBounds(150, 178, 300, 150);
+		bToReserv.setBounds(150, 140, 300, 150);
 		bToReserv.setIcon(iconToReserv);
 		bToReserv.setIcon(resizeIcon(iconToReserv, bToReserv.getWidth(), bToReserv.getHeight()));
 		add(bToReserv);
