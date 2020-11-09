@@ -22,13 +22,14 @@ public class JP_Admin_0main extends JFrame{
 		pane.addTab("회원관리", memberList);
 //		pane.addTab("통계", statList);
 		
-		pane.setSelectedIndex(2);
+		pane.setSelectedIndex(1);
 		
 		getContentPane().add("Center", pane);
 		pack();
+		dispose();
 		setVisible(true);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 	}

@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -154,10 +155,26 @@ public class JP_Login extends JPanel {
 //			}
 //		});
 //		
+		
+		/*
+		 * 역할 : 관리자 페이지단추눌렀을때 관리자페이지 접속 
+		 * 
+		 */
+		bToManager.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JP_Admin_0main management = new JP_Admin_0main();	
+				management.setBounds(100,100,600,600); 
+				management.setVisible(true);
+			}
+		});
+		
 		/*
 		 * 이름: bNewRegister 버튼 액션 리스너
 		 * 역할: "회원가입" 버튼 클릭 시 동작 설정
 		 */
+		
+		
 		bNewRegister.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				F.to_JP_Register();
