@@ -18,7 +18,7 @@ public class Chart_Database {
 	Connection con;
 
 
-	public ArrayList<ArrayList> getData() {
+	public ArrayList<ArrayList> getMonRevData() {
 		
 		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
 		
@@ -52,7 +52,6 @@ public class Chart_Database {
 			}
 			rs.close();
 			ps.close();
-			con.close();
 			
 		} catch (Exception e) {
 			System.out.println("Chart_Database/ getData/ 에러: " + e.toString());
@@ -65,7 +64,46 @@ public class Chart_Database {
 	
 	
 	
-	
+	//=======================================================
+	/**
+	 * 월 예약건
+	 * 201110 원우
+	 */
+	public ArrayList<ArrayList> getMonReservData() {
+		
+		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
+		
+		try {
+			con = DBCon.getInstance();
+			
+			String sql = "SELECT to_char(check_in, 'YYYY-MM') MON, COUNT(*) count "
+					+ " FROM RESERVATION "
+					+ " WHERE (check_in>='20/01/01' AND check_in<='20/12/31') AND STATUS IN('이용완료','예약확정') "
+					+ " GROUP BY to_char(check_in, 'YYYY-MM') "
+					+ " ORDER BY MON "
+					;
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList temp = new ArrayList();
+				temp.add(rs.getString("MON"));
+				temp.add(rs.getInt("count"));
+				data.add(temp);
+				
+			}
+			rs.close();
+			ps.close();
+			
+		} catch (Exception e) {
+			System.out.println("Chart_Database/ getData/ 에러: " + e.toString());
+			e.printStackTrace();
+		}
+		
+		return data;
+		
+	}
 	
 
 }

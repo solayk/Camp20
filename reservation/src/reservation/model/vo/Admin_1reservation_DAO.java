@@ -19,20 +19,7 @@ public class Admin_1reservation_DAO {
 	
 	public Admin_1reservation_DAO() throws Exception {
 		con = DBCon.getInstance();
-//		connectDB();
-		
 	}
-	
-//	void connectDB() throws Exception {
-//		
-////		Class.forName("oracle.jdbc.driver.OracleDriver");
-////		url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
-////		user = "positive";
-////		pass = "1004";
-////		con = DriverManager.getConnection(url, user, pass);
-//	}
-	
-	
 	
 	public void changeStatus(Object cc, Object cs){
 		
@@ -56,20 +43,11 @@ public class Admin_1reservation_DAO {
 			System.out.println("변경X : " + e.toString());
 			e.printStackTrace();
 		}
-		
-		
 	}
-	
-		
-	
-	
 	
 	public ArrayList rStatus(String cb, String tf) throws Exception {
 		
-//		무한루프의 원인이었음 ㅄ
-//		JP_Admin_1reservation vo = new JP_Admin_1reservation();
 		PreparedStatement st = null;
-		
 		
 		if(tf.length()==0) {
 			String nullSql =
@@ -179,8 +157,6 @@ public class Admin_1reservation_DAO {
 		st.close();
 		
 		return data;		
-				
-				
 	}
 	
 	

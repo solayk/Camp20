@@ -3,6 +3,8 @@ package reservation.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -13,6 +15,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -26,9 +29,44 @@ public class JP_Admin_3statistics extends JPanel{
 	JRadioButton revenueMonth, revenueYear, revenueChoice,
 				countMonth, countYear, countChoice;
 	JTable statTbl;
+	JFreeChart chart;
+	ChartPanel chartPanel;
+	JP_Admin_3Chart demo;
 	
 	public JP_Admin_3statistics() {
 		s_AddLayout();
+		eventProc();
+	}
+	
+
+	
+	
+	// *****************************************************
+	/*
+	 * 이벤트
+	 * 201110 원우
+	 */
+	public void eventProc() {
+		
+		ButtonEventHandler hdlr = new ButtonEventHandler();
+		runGraph.addActionListener(hdlr);
+		
+	}
+	
+	
+	
+	class ButtonEventHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Object o = e.getSource();
+			
+			if(o==runGraph) {
+				showChart();
+			}
+			
+		}
+		
 	}
 	
 	
@@ -38,7 +76,7 @@ public class JP_Admin_3statistics extends JPanel{
 	private void s_AddLayout() {
 		
 		// 매출
-		reserveRevenue = new JCheckBox("매출 보기", true);	// 기본 선택 (매출+예약건수)
+		reserveRevenue = new JCheckBox("매출 보기", false);	// 기본 선택 (매출+예약건수)
 		revenueMonth = new JRadioButton();
 		revenueMonth.setSelected(true);			// 월간 보기를 기본 선택
 		revenueYear = new JRadioButton();
@@ -51,7 +89,7 @@ public class JP_Admin_3statistics extends JPanel{
 		
 		
 		// 예약건수
-		reserveCount = new JCheckBox("예약건수 보기", true);	// 기본 선택 (매출+예약건수)
+		reserveCount = new JCheckBox("예약건수 보기", false);	// 기본 선택 (매출+예약건수)
 		countMonth = new JRadioButton();
 		countMonth.setSelected(true);			// 월간 보기를 기본 선택
 		countYear = new JRadioButton();
@@ -65,11 +103,6 @@ public class JP_Admin_3statistics extends JPanel{
 		
 		// 실행 버튼
 		runGraph = new JButton("실행");
-		
-		
-		// 그래프 담을 패널
-		JFreeChart chart;
-		ChartPanel chartPanel;
 		
 		
 		//=============================
@@ -125,9 +158,10 @@ public class JP_Admin_3statistics extends JPanel{
 			
 			
 			// 그래프
-			JP_Admin_3Chart demo = new JP_Admin_3Chart();
-			chart = demo.getChart();
+			demo = new JP_Admin_3Chart();
+			chart = demo.getMonthReservCountChart();
 			chartPanel = new ChartPanel(chart);
+			chartPanel.setVisible(false);
 			
 			
 		add(graphStandard, BorderLayout.NORTH);
@@ -138,8 +172,71 @@ public class JP_Admin_3statistics extends JPanel{
 	}
 	
 	
-	
+	// 그래프를 보이게
+	void showChart() {
+		
+		
+		Object rCBox = reserveRevenue.getSelectedObjects();
+		Object cCBox = reserveCount.getSelectedObjects();
+		Object rRM = revenueMonth.getSelectedObjects();
+		Object rRY = revenueYear.getSelectedObjects();
+		Object rRPC = revenueChoice.getSelectedObjects();
+		Object cRM = countMonth.getSelectedObjects();
+		Object cRY = countYear.getSelectedObjects();
+		Object cRPC = countChoice.getSelectedObjects();
+		
+		
+		// 매출체크박스
+		// 매출월 
+		if(rCBox != null && rRM != null && cCBox == null) {
+			chart = demo.getMonthRevenueChart();
+			chartPanel = new ChartPanel(chart);
+			chartPanel.setVisible(true);
+		}
+		
+		// 매출연도
+		else if(rCBox != null && rRY != null && cCBox == null) {
+			chart = demo.getMonthReservCountChart();
+			chartPanel = new ChartPanel(chart);
+			chartPanel.setVisible(true);
+		}
+		
+		// 매출기간선택
+		else if(rCBox != null && rRPC != null && cCBox == null) {
+			
+		}
+		
+		// 예약체크박스
+		// 예약월
+		else if(cCBox != null && cRM != null && rCBox == null) {
+			
+		}
+		
+		// 예약연도
+		else if(cCBox != null && cRY != null && rCBox == null) {
+			
+		}
+		
+		// 예약기간선택
+		else if(cCBox != null && cRPC != null && rCBox == null) {
+			
+		}
+		
+		
+			
+	}
 	
 	
 	
 }
+	
+	
+
+
+
+
+
+
+
+
+
