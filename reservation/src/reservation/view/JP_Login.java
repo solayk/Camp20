@@ -159,7 +159,6 @@ public class JP_Login extends JPanel {
 		 * 역할 : 관리자 페이지단추눌렀을때 관리자페이지 접속 
 		 */
 		bToManager.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				String input = JOptionPane.showInputDialog(null,"관리자만 접속");
 				
@@ -168,7 +167,7 @@ public class JP_Login extends JPanel {
 							JP_Admin_0main management = new JP_Admin_0main();	
 							management.setBounds(500,250,900,600); 
 							management.setVisible(true);
-						}else { JOptionPane.showMessageDialog(null, "너 누구야");
+						}else { JOptionPane.showMessageDialog(null, "관리자 비밀번호가 틀렸습니다");
 						
 						}
 					} catch (Exception e1) {
@@ -182,8 +181,6 @@ public class JP_Login extends JPanel {
 		 * 이름: bNewRegister 버튼 액션 리스너
 		 * 역할: "회원가입" 버튼 클릭 시 동작 설정
 		 */
-		
-		
 		bNewRegister.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				F.to_JP_Register();
