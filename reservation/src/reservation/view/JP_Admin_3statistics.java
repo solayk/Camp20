@@ -161,7 +161,7 @@ public class JP_Admin_3statistics extends JPanel {
 			
 		}
 		
-		// 매출연도
+		// 예약월
 		else if(cbCount.isSelected() && rbCountMonth.isSelected()) {
 			chart = demo.getMonthReservCountChart();
 			chartPanel.setVisible(false);
@@ -174,22 +174,22 @@ public class JP_Admin_3statistics extends JPanel {
 		//JRadioButton rbRevenueMonth, rbRevenueYear,	rbCountMonth, rbCountYear;
 		
 		// 예약체크박스
-		// 예약월
+		// 매츨연도
 		else if(cbRevenue.isSelected() && rbRevenueYear.isSelected()) {
-			//chart = demo.getMonthReservCountChart();
+			chart = demo.getYearRevenueChart();
 			chartPanel.setVisible(false);
-			//chartPanel = new ChartPanel(chart);
-			//chartPanel.setVisible(true);
-			//add(chartPanel, BorderLayout.CENTER);
+			chartPanel = new ChartPanel(chart);
+			chartPanel.setVisible(true);
+			add(chartPanel, BorderLayout.CENTER);
 		}
 		
 		// 예약연도
 		else if(cbCount.isSelected() && rbCountYear.isSelected()) {
-			//chart = demo.getMonthReservCountChart();
+			chart = demo.getYearReservCountChart();
 			chartPanel.setVisible(false);
-			//chartPanel = new ChartPanel(chart);
-			//chartPanel.setVisible(true);
-			//add(chartPanel, BorderLayout.CENTER);
+			chartPanel = new ChartPanel(chart);
+			chartPanel.setVisible(true);
+			add(chartPanel, BorderLayout.CENTER);
 		}
 		
 			
