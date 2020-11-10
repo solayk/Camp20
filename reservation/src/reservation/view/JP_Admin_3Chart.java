@@ -160,32 +160,20 @@ public class JP_Admin_3Chart {
 		// 그래프2 _월별예약
 		monReserveCount_rendere.setBaseItemLabelGenerator(generator);
 		monReserveCount_rendere.setBaseItemLabelsVisible(true);
-//		monReserveCount_rendere.setBaseShapesVisible(true);
-//		monReserveCount_rendere.setDrawOutlines(true);
-//		monReserveCount_rendere.setUseFillPaint(true);
 		monReserveCount_rendere.setBaseFillPaint(Color.WHITE);
 		monReserveCount_rendere.setBaseItemLabelFont(f);
 		monReserveCount_rendere.setBasePositiveItemLabelPosition(p_below);
 		monReserveCount_rendere.setSeriesPaint(0,new Color(219,121,22));
 		monReserveCount_rendere.setSeriesStroke(0,new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 3.0f));
 
-
-		// plot 생성 / plot에 데이터 적재 / 렌더링 순서 정의
-		// plot 생성
 		final CategoryPlot plot = new CategoryPlot();
 
-
-
-		// plot에 데이터 적재
 		plot.setDataset(monReservCount_dataset);
 		plot.setRenderer(monReserveCount_rendere);
 
-
-		// plot 기본 설정
 		plot.setOrientation(PlotOrientation.VERTICAL);
 		plot.setRangeGridlinesVisible(true);
 		plot.setDomainGridlinesVisible(true);
-
 
 		// 렌더링 순서 정의
 		plot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
@@ -220,6 +208,192 @@ public class JP_Admin_3Chart {
 
 
 	}
+	
+    public JFreeChart getYearRevenueChart() {
+
+        // 데이터설정
+        DefaultCategoryDataset yeaerRevenue_dataset = new DefaultCategoryDataset();
+
+
+        // 데이터입력
+        Chart_Database db = new Chart_Database();
+        ArrayList<ArrayList> data = db.getYearRevData();
+
+        for(ArrayList temp : data) {
+           String cate = (String)temp.get(0);
+           int value = (int)temp.get(1);
+           yeaerRevenue_dataset.addValue(value, "연간매출", cate);
+
+        }
+
+
+        // 렌더링 생성 / 옵션정의 / 렌더링 세팅
+        // 렌더링 생성
+        final LineAndShapeRenderer yearRevenue_rendere = new LineAndShapeRenderer();
+
+
+        // 옵션 정의
+        final CategoryItemLabelGenerator generator = new StandardCategoryItemLabelGenerator();
+        final ItemLabelPosition p_center = new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER);
+        final ItemLabelPosition p_below = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_LEFT);
+
+        Font f = new Font("완도희망체", Font.BOLD, 14);
+        Font axisF = new Font("완도희망체",Font.ITALIC, 14);
+
+
+        // 렌더링 세팅
+        // 그래프1 _월별매출
+        yearRevenue_rendere.setBaseItemLabelGenerator(generator);
+        yearRevenue_rendere.setBaseItemLabelsVisible(true);
+        yearRevenue_rendere.setBasePositiveItemLabelPosition(p_center);
+        yearRevenue_rendere.setBaseItemLabelFont(f);
+        yearRevenue_rendere.setSeriesPaint(0, new Color(0,162,255));
+
+
+        // plot 생성 / plot에 데이터 적재 / 렌더링 순서 정의
+        // plot 생성
+        final CategoryPlot plot = new CategoryPlot();
+
+
+        // plot에 데이터 적재
+        plot.setDataset(yeaerRevenue_dataset);
+        plot.setRenderer(yearRevenue_rendere);
+
+
+        // plot 기본 설정
+        plot.setOrientation(PlotOrientation.VERTICAL);
+        plot.setRangeGridlinesVisible(true);
+        plot.setDomainGridlinesVisible(true);
+
+
+        // 렌더링 순서 정의
+        plot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
+
+
+        // X축 / Y축
+        // X축
+        plot.setDomainAxis(new CategoryAxis());
+        plot.getDomainAxis().setTickLabelFont(axisF);
+        plot.getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.STANDARD);
+
+
+        // Y축
+        plot.setRangeAxis(new NumberAxis());
+        plot.getRangeAxis().setTickLabelFont(axisF);
+
+
+        // chart 생성
+        final JFreeChart chart = new JFreeChart(plot);
+
+
+        // 타이틀
+        chart.setTitle("연간 매출");
+
+
+        // 서브타이틀
+        TextTitle copyright = new TextTitle("JFreeChart WaferMapPlot", new Font("SansSerif", Font.PLAIN, 9));
+        copyright.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        chart.addSubtitle(copyright);
+        return chart;
+
+
+    }
+    
+    public JFreeChart getYearReservCountChart() {
+
+        // 데이터설정
+        DefaultCategoryDataset yearReservCount_dataset = new DefaultCategoryDataset();
+
+
+        // 데이터입력
+        Chart_Database db = new Chart_Database();
+        ArrayList<ArrayList> data = db.getYearReservData();
+
+        for(ArrayList temp : data) {
+           String cate = (String)temp.get(0);
+           int value = (int)temp.get(1);
+           yearReservCount_dataset.addValue(value, "연간예약건", cate); 
+        }
+
+
+        // 렌더링 생성 / 옵션정의 / 렌더링 세팅
+        // 렌더링 생성
+        final BarRenderer yearReserveCount_rendere = new BarRenderer();
+
+
+        // 옵션 정의
+        final CategoryItemLabelGenerator generator = new StandardCategoryItemLabelGenerator();
+        final ItemLabelPosition p_center = new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER);
+        final ItemLabelPosition p_below = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_LEFT);
+
+        Font f = new Font("완도희망체", Font.BOLD, 14);
+        Font axisF = new Font("완도희망체",Font.ITALIC, 14);
+
+
+        // 렌더링 세팅
+        // 그래프2 _월별예약
+        yearReserveCount_rendere.setBaseItemLabelGenerator(generator);
+        yearReserveCount_rendere.setBaseItemLabelsVisible(true);
+
+
+
+        yearReserveCount_rendere.setBaseFillPaint(Color.WHITE);
+        yearReserveCount_rendere.setBaseItemLabelFont(f);
+        yearReserveCount_rendere.setBasePositiveItemLabelPosition(p_below);
+        yearReserveCount_rendere.setSeriesPaint(0,new Color(219,121,22));
+        yearReserveCount_rendere.setSeriesStroke(0,new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 3.0f));
+
+
+        // plot 생성 / plot에 데이터 적재 / 렌더링 순서 정의
+        // plot 생성
+        final CategoryPlot plot = new CategoryPlot();
+
+
+
+        // plot에 데이터 적재
+        plot.setDataset(yearReservCount_dataset);
+        plot.setRenderer(yearReserveCount_rendere);
+
+
+        // plot 기본 설정
+        plot.setOrientation(PlotOrientation.VERTICAL);
+        plot.setRangeGridlinesVisible(true);
+        plot.setDomainGridlinesVisible(true);
+
+
+        // 렌더링 순서 정의
+        plot.setDatasetRenderingOrder(DatasetRenderingOrder.FORWARD);
+
+
+        // X축 / Y축
+        // X축
+        plot.setDomainAxis(new CategoryAxis());
+        plot.getDomainAxis().setTickLabelFont(axisF);
+        plot.getDomainAxis().setCategoryLabelPositions(CategoryLabelPositions.STANDARD);
+
+
+        // Y축
+        plot.setRangeAxis(new NumberAxis());
+        plot.getRangeAxis().setTickLabelFont(axisF);
+
+
+        // chart 생성
+        final JFreeChart chart = new JFreeChart(plot);
+
+        
+        // 타이틀
+        chart.setTitle("연간 예약");
+
+        
+        // 서브타이틀
+        TextTitle copyright = new TextTitle("JFreeChart WaferMapPlot", new Font("SansSerif", Font.PLAIN, 9));
+        copyright.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        chart.addSubtitle(copyright);
+        return chart;
+        
+    }
+    
+    
 
 }
 

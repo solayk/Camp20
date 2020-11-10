@@ -127,30 +127,17 @@ public class JP_Admin_1reservation extends JPanel implements ActionListener{
 				
 			}
 		});
-		
 	}
 	
-	
-	
-	
-	
-	
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object evt = e.getSource();
 		
 		if(evt == reserveSearch) {
 			rStatus();
 		}
-		
 	}
 	
-	
-	
-	
-	
-	// *****************************************************
-	/**
+	/*
 	 * 역할 : 레이아웃
 	 * 201108 원우 
 	 */
@@ -170,8 +157,6 @@ public class JP_Admin_1reservation extends JPanel implements ActionListener{
 		rmodel = new reserveStatusModel();
 		reserveStatusTbl = new JTable(rmodel);
 		
-		
-		//=============================
 		// 화면 구성
 		setBounds(100, 100, 600, 600);
 		setLayout(new BorderLayout());
@@ -184,14 +169,6 @@ public class JP_Admin_1reservation extends JPanel implements ActionListener{
 			reserveChoice.add(reserveChoiceBox);
 			reserveChoice.add(reserveChoicetf);
 			reserveChoice.add(reserveSearch);
-			
-//			grid layout 으로 할 경우
-//			JPanel blank1 = new JPanel();
-//			JPanel blank2 = new JPanel();
-//			JPanel blank3 = new JPanel();
-//			reserveChoice.add(blank1);
-//			reserveChoice.add(blank2);
-//			reserveChoice.add(blank3);
 			
 			// 센터
 			JPanel reserveStatus = new JPanel();
@@ -237,7 +214,7 @@ public class JP_Admin_1reservation extends JPanel implements ActionListener{
 	 * 1109 : 예약상태 변경시 가장 마지막 열이 선택 되도록 컬럼네임 밖으로 뺌 (eventProc())
 	 */
 	
-	String[] columnNames = {"예약번호", "이름", "전화번호", "사이트 번호", "투숙인원수",
+	String[] columnNames = {"예약번호", "아이디", "이름", "전화번호", "사이트 번호", "투숙인원수",
 			"예약일", "체크인", "체크아웃", "차량번호", "도착예정시간", "상태"};
 	class reserveStatusModel extends AbstractTableModel{
 		
