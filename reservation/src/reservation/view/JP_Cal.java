@@ -155,9 +155,9 @@ public class JP_Cal extends JPanel {
 		add(cb_Stay);
 		
 		// 성수기때 가격 비싸다고 표시해주는 라벨 
-		lb_price = new JLabel("7,8,9월은 추가요금 20000원이 추가 됩니다.");
+		lb_price = new JLabel("+ 성수기 추가요금 20000원");
 		lb_price.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lb_price.setBounds(320, 220, 250, 30);
+		lb_price.setBounds(430, 220, 250, 30);
 		lb_price.setForeground(Color.RED);
 		add(lb_price);
 		lb_price.setVisible(false);
