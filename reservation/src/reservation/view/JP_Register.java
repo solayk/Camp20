@@ -194,7 +194,7 @@ public class JP_Register extends JPanel implements ActionListener {
 						lbIdCheck.setText("8자 이하는 사용할 수 없습니다");
 					}
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					System.out.println("아이디 유효성 검사 오류");
 				}
 			}
 		}); //아이디 유효성 검사 끝
@@ -233,7 +233,7 @@ public class JP_Register extends JPanel implements ActionListener {
 						lbPwCheck.setText("8자 이하입니다");
 					}
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					System.out.println("비밀번호 유효성 검사 오류");
 				}
 			}
 		}); //비밀번호 유효성 검사 끝
@@ -241,7 +241,46 @@ public class JP_Register extends JPanel implements ActionListener {
 		/*
 		 * 비밀번호 다시 입력 유효성 검사
 		 */
-		
+		tfPwConfirm.addKeyListener(new KeyAdapter() {
+			
+			public void keyReleased(KeyEvent e) {
+				try {
+					String pw="";
+					String pwConfirm="";
+					char[] pw_arr = tfPW.getPassword();
+					char[] pwConfirm_arr = tfPwConfirm.getPassword();
+					
+					if(tfPW.getText().length() == tfPwConfirm.getText().length()) {
+						
+						for(char cha : pw_arr) { 
+							Character.toString(cha); 
+							pw += (pw.equals("")) ? ""+cha+"" : ""+cha+"";
+						}
+						for(char cha : pwConfirm_arr) { 
+							Character.toString(cha); 
+							pwConfirm += (pwConfirm.equals("")) ? ""+cha+"" : ""+cha+"";
+						}
+						
+						String regExp = "^(?=.*[0-9])(?=.*[a-z]).{8,20}$";
+						
+						if(pw.matches(regExp) == false) {
+							lbPwConfirmChk.setText("");
+						}
+						else if(pw.equals(pwConfirm)) {
+							lbPwConfirmChk.setForeground(Color.BLUE);
+							lbPwConfirmChk.setText("비밀번호가 일치합니다");
+						}
+						else {
+							lbPwConfirmChk.setForeground(Color.RED);
+							lbPwConfirmChk.setText("비밀번호가 일치하지 않습니다");
+						}
+					}
+					else lbPwConfirmChk.setText("");
+				} catch (Exception e1) {
+					System.out.println("비밀번호 재입력 유효성 검사 오류");
+				}
+			}
+		}); //비밀번호 다시 입력 유효성 검사 끝
 		
 	}
 	
@@ -333,7 +372,7 @@ public class JP_Register extends JPanel implements ActionListener {
 			
 			// 6. 메일 유효성 검사 _201105 원우
 			// 6-1. 공백 확인
-			else if(false == Pattern.matches("^[a-z0-9]*$", checkEmail)) {
+			else if(false == Pattern.matches("^[a-z0-9.]*$", checkEmail)) {
 				JOptionPane.showMessageDialog(null, "메일은 소문자랑 숫자만 됨", "WARNING_MESSAGE", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
