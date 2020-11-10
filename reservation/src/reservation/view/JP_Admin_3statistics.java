@@ -67,9 +67,9 @@ public class JP_Admin_3statistics extends JPanel{
 		runGraph = new JButton("실행");
 		
 		
-		// 그래프 담을 테이블? 패널?
-		// statTbl = new JTable();
-		// statPanel = new JPanel();
+		// 그래프 담을 패널
+		JFreeChart chart;
+		ChartPanel chartPanel;
 		
 		
 		//=============================
@@ -126,16 +126,14 @@ public class JP_Admin_3statistics extends JPanel{
 			
 			// 그래프
 			JP_Admin_3Chart demo = new JP_Admin_3Chart();
-			JFreeChart chart = demo.getChart();
-			ChartPanel chartPanel=new ChartPanel(chart);
-			
-			
+			chart = demo.getChart();
+			chartPanel = new ChartPanel(chart);
 			
 			
 		add(graphStandard, BorderLayout.NORTH);
 		add(chartPanel, BorderLayout.CENTER);
-			
-			
+		setSize(800, 400);
+		setVisible(true);
 		
 	}
 	

@@ -53,8 +53,8 @@ public class JP_Admin_3Chart {
 		// 1) 월
 		// if
 		for(ArrayList temp : data) {
-			int value = (Integer)temp.get(0);
-			String cate = (String)temp.get(1);
+			String cate = (String)temp.get(0);
+			int value = (int)temp.get(1);
 			datasetMonth.addValue(value, "월별", cate);
 			
 		}
@@ -99,6 +99,7 @@ public class JP_Admin_3Chart {
         
         // plot에 데이터 적재
         plot.setDataset(datasetMonth);
+        plot.setRenderer(renderer);
         
         
         // plot 기본 설정

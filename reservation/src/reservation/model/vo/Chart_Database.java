@@ -28,9 +28,11 @@ public class Chart_Database {
 			 * SQL문장
 			 * 1) 월
 			 */
-			String sql = "SELECT"
-					+ "FROM"
-					+ "WHERE"
+			String sql = "SELECT to_char(check_in, 'YYYY-MM') MON, SUM(PRICE)"
+					+ " FROM RESERVATION "
+					+ " WHERE (check_in>='20/01/01' AND check_in<='20/12/31') AND STATUS IN('이용완료','예약확정') "
+					+ " GROUP BY to_char(check_in, 'YYYY-MM') "
+					+ " ORDER BY MON "
 					;
 			
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -38,8 +40,8 @@ public class Chart_Database {
 			
 			while(rs.next()) {
 				ArrayList temp = new ArrayList();
-				temp.add(rs.getString(""));
-				temp.add(rs.getString(""));
+				temp.add(rs.getString("MON"));
+				temp.add(rs.getInt("SUM(PRICE)"));
 				data.add(temp);
 				
 			}
@@ -48,7 +50,7 @@ public class Chart_Database {
 			con.close();
 			
 		} catch (Exception e) {
-			System.out.println("에러: " + e.toString());
+			System.out.println("Chart_Database/ getData/ 에러: " + e.toString());
 			e.printStackTrace();
 		}
 		
