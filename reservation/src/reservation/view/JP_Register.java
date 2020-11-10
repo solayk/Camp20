@@ -2,6 +2,7 @@ package reservation.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -9,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Pattern;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -33,6 +35,8 @@ public class JP_Register extends JPanel implements ActionListener {
 //	이메일 드롭박스 _201105 원우
 	JComboBox emailBox;
 	
+	ImageIcon imgBackground;
+	
 	JLabel lblNewLabel_overlap;
 	
 	
@@ -44,7 +48,7 @@ public class JP_Register extends JPanel implements ActionListener {
 	public JP_Register(JFrame_main f) { 
 		
 		// 배경 설정
-		setBackground(Color.LIGHT_GRAY); 
+		setBackground(Color.WHITE); 
 		setBounds(100, 100, 600, 600);
 		setLayout(null); 
 		
@@ -61,117 +65,80 @@ public class JP_Register extends JPanel implements ActionListener {
 //		비밀번호 확인 텍스트필드 _201105 원우
 		tfPwConfirm = new JPasswordField();
 		
-		bRegist = new JButton("회원가입"); 
-		bToLogin = new JButton("홈"); 
+		bRegist = new JButton(); 
+		bToLogin = new JButton(); 
 				
 		// Component 양식 설정
-		tfID.setBounds(187, 102, 200, 25);
+		tfID.setBounds(211, 182, 200, 25);
 		tfID.setColumns(10);
 		add(tfID);
 
-		tfTel.setBounds(187, 142, 200, 25);
+		tfTel.setBounds(211, 222, 200, 25);
 		tfTel.setColumns(10);
 		add(tfTel);
 		
-		tfPW.setBounds(187, 182, 200, 25);
+		tfPW.setBounds(211, 262, 200, 25);
 		tfPW.setColumns(10);
 		add(tfPW);
 		
 //		여기부터 전체적으로 위치 조정 > 비번확인 tf 들어옴 _201105 원우
 //		비번 확인 텍스트 필드 _201105 원우
-		tfPwConfirm.setBounds(187, 222, 200, 25);
+		tfPwConfirm.setBounds(211, 302, 200, 25);
 		tfPwConfirm.setColumns(10);
 		add(tfPwConfirm);
 		
-		tfName.setBounds(187, 262, 200, 25);
+		tfName.setBounds(211, 342, 200, 25);
 		tfName.setColumns(10);
 		add(tfName);
 		
-		tfEmail.setBounds(187, 302, 200, 25);
+		tfEmail.setBounds(211, 382, 200, 25);
 		tfEmail.setColumns(10);
 		add(tfEmail);
 		
-		tfAddr.setBounds(187, 342, 200, 25);
+		tfAddr.setBounds(211, 422, 200, 25);
 		tfAddr.setColumns(10);
 		add(tfAddr);
 
 		bRegist.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bRegist.setBounds(225, 404, 97, 23);
+		bRegist.setBounds(180, 484, 250, 35);
+		// JButton 투명하게
+			bRegist.setContentAreaFilled(false);
+			bRegist.setBorderPainted(false);
 		add(bRegist);
 		
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToLogin.setBounds(457, 23, 97, 23);
+		bToLogin.setBounds(530, 15, 53, 53);
+			// JButton 투명하게
+			bToLogin.setContentAreaFilled(false);
+			bToLogin.setBorderPainted(false);
 		add(bToLogin);
+		
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_Register.png");
 		
 		
 		// 라벨 설정
-		JLabel lblNewLabel = new JLabel("아이디");
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel.setBounds(100, 107, 57, 15);
-		add(lblNewLabel);
-		
 
+		/*
+		 * 삭제예정?
+		 */
 //		중복검사 _201106 원우
 		lblNewLabel_overlap = new JLabel();
 		lblNewLabel_overlap.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_overlap.setBounds(400, 107, 57, 15);
+		lblNewLabel_overlap.setBounds(405, 187, 57, 15);
 		add(lblNewLabel_overlap);
-		
-		
-		JLabel lblNewLabel_1 = new JLabel("전화번호");
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1.setBounds(100, 147, 57, 15);
-		add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("비밀번호");
-		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_1.setBounds(100, 187, 57, 15);
-		add(lblNewLabel_1_1);
-		
-		
-//		비밀번호 관련 라벨 붙여놓음 _201105 원우
-		JLabel lblNewLabel_1_3 = new JLabel("알파벳소문자/숫자 8~20자");
-		lblNewLabel_1_3.setFont(new Font("맑은 고딕", Font.PLAIN, 10));
-		lblNewLabel_1_3.setForeground(Color.red);
-		lblNewLabel_1_3.setBounds(400, 187, 200, 20);
-		add(lblNewLabel_1_3);
-		
-		
-//		여기부터 전체적으로 위치 조정 > 비번확인 tf 들어옴 _201105 원우
-//		비번 확인 텍스트 필드 _201105 원우
-		JLabel lblNewLabel_1_2 = new JLabel("비밀번호확인");
-		lblNewLabel_1_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_2.setBounds(100, 227, 80, 15);
-		add(lblNewLabel_1_2);
-		
-		
-		JLabel lblNewLabel_1_1_1 = new JLabel("이름");
-		lblNewLabel_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_1_1.setBounds(100, 267, 70, 15);
-		add(lblNewLabel_1_1_1);
-		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("이메일주소");
-		lblNewLabel_1_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1.setBounds(100, 307, 80, 15);
-		add(lblNewLabel_1_1_1_1);
-		
 		
 //		이메일 드롭박스 _201105 원우
 		String[] mail = {"메일 선택", "@gmail.com", "@naver.com", "@hanmail.net", "@yahoo.co.kr"};
 		emailBox = new JComboBox(mail);
-		emailBox.setBounds(400, 302, 120, 25);
+		emailBox.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		emailBox.setBounds(430, 382, 120, 25);
 		add(emailBox);
 		
 		
 		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("주소");
 		lblNewLabel_1_1_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1_1.setBounds(100, 347, 57, 15);
+		lblNewLabel_1_1_1_1_1.setBounds(105, 427, 57, 15);
 		add(lblNewLabel_1_1_1_1_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("회원가입");
-		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
-		lblNewLabel_2.setBounds(233, 34, 100, 30);
-		add(lblNewLabel_2);
 		
 		setVisible(true);
 		
@@ -409,6 +376,15 @@ public class JP_Register extends JPanel implements ActionListener {
 		
 	}
 		
-		
+	/*
+	 * 함수명: paintComponent
+	 * 역할: 배경이미지 설정
+	 */
+	public void paintComponent(Graphics g) {
+		  super.paintComponent(g);
+
+		  g.drawImage(imgBackground.getImage(), 0, 0, this);
+		 // g.drawRoundRect(120, 10, 50, 50, 30, 20);
+	}
 } 
 
