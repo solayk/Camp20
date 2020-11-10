@@ -17,8 +17,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import reservation.model.vo.Admin_2member_DAO;
 
@@ -142,6 +145,8 @@ public class JP_Admin_2member extends JPanel implements ActionListener{
 			JPanel memberList = new JPanel();
 			memberList.setBorder(new TitledBorder("회원현황"));
 			memberList.setLayout(new BorderLayout());
+			RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mmodel);
+			memberListTbl.setRowSorter(sorter);
 			memberList.add(new JScrollPane(memberListTbl));
 			
 		// 상단+센터

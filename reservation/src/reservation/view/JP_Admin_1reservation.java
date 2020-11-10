@@ -22,8 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowSorter;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import reservation.model.vo.Admin_1reservation_DAO;
 
@@ -194,6 +197,9 @@ public class JP_Admin_1reservation extends JPanel implements ActionListener{
 			JPanel reserveStatus = new JPanel();
 			reserveStatus.setBorder(new TitledBorder("예약현황"));
 			reserveStatus.setLayout(new BorderLayout());
+			
+			RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(rmodel);
+			reserveStatusTbl.setRowSorter(sorter);
 			reserveStatus.add(new JScrollPane(reserveStatusTbl));
 			
 		// 상단+센터
