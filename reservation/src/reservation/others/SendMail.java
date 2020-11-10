@@ -36,6 +36,20 @@ public class SendMail {
 		sending();
 	}
 	
+	public void send_confirm(String name, String email, String pw) {
+		
+		recipient = email;   
+		subject = "감성캠핑입니다.";  
+		body = "\r\n" +
+			   " 안녕하세요.\r\n" +
+			   " 감성캠핑입니다.\r\n" +
+			   " " + name + " 회원님의 비밀번호는 " + pw + " 입니다.\r\n" +
+			   " 감사합니다. \r\n"
+			   ;
+		
+		sending();
+	}
+	
 	public void sending() {
 
 		int port=465; 
