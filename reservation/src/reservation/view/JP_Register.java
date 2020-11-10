@@ -25,20 +25,19 @@ import reservation.others.HintTextField;
 
 public class JP_Register extends JPanel implements ActionListener {
 	
-	private JTextField tfID, tfTel, tfName, tfEmail, tfAddr;
-	private JButton bRegist, bToLogin; 
+	JTextField tfID, tfTel, tfName, tfEmail, tfAddr;
+	JButton bRegist, bToLogin; 
 	
-//	비밀번호 표시 필드 _201103 원우
-//	비번확인 텍스트필드 생성 (tfPwConfirm) _201105 원우
-	private JPasswordField tfPW, tfPwConfirm;
+	JPasswordField tfPW, tfPwConfirm;
 	
-//	이메일 드롭박스 _201105 원우
 	JComboBox emailBox;
 	
 	ImageIcon imgBackground;
 	
 	JLabel lblNewLabel_overlap;
 	
+	// 테스트
+	JLabel lbIdCheck;
 	
 	/*
 	 * 이름: JP_Login 기본생성자
@@ -127,18 +126,11 @@ public class JP_Register extends JPanel implements ActionListener {
 		lblNewLabel_overlap.setBounds(405, 187, 57, 15);
 		add(lblNewLabel_overlap);
 		
-//		이메일 드롭박스 _201105 원우
 		String[] mail = {"메일 선택", "@gmail.com", "@naver.com", "@hanmail.net", "@yahoo.co.kr"};
 		emailBox = new JComboBox(mail);
 		emailBox.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		emailBox.setBounds(430, 382, 120, 25);
 		add(emailBox);
-		
-		
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("주소");
-		lblNewLabel_1_1_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1_1.setBounds(105, 427, 57, 15);
-		add(lblNewLabel_1_1_1_1_1);
 		
 		setVisible(true);
 		

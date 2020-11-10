@@ -29,7 +29,7 @@ import reservation.model.vo.UserVO;
 
 public class JP_Cal extends JPanel {
 
-	JButton bToLogin, bTestSearch; 
+	JButton bToLogin, bSearch; 
 	JButton[] bSite = new JButton[5];
 	
 	JLabel lb_check_in, lb_numStay, lb_able_sen, lb_able_Num, lb_able_gae,lb_price;
@@ -67,7 +67,7 @@ public class JP_Cal extends JPanel {
 		
 		// Component 생성
 		bToLogin = new JButton(); 
-		bTestSearch = new JButton("예약조회");
+		bSearch = new JButton();
 		
 		for (int i = 0; i < bSite.length ; i++) {
 			bSite[i] = new JButton();
@@ -77,23 +77,20 @@ public class JP_Cal extends JPanel {
 			iDisEnabled[i] = new ImageIcon("src/reservation/imgs_button/JP_Cal_Disabled_" + (i+1) + ".png");
 		}
 		
- 		
-		/*
-		 * 임시 ****************************************
-		 */
 		imgBackground = new ImageIcon("src/reservation/imgs/JP_Cal.png");
 		
 		// Component 양식 설정
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bToLogin.setBounds(530, 15, 53, 53);
-			// JButton 투명하게
-			bToLogin.setContentAreaFilled(false);
-			bToLogin.setBorderPainted(false);
+		bToLogin.setContentAreaFilled(false);
+		bToLogin.setBorderPainted(false);
 		add(bToLogin);
 		
-		bTestSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bTestSearch.setBounds(200, 270, 97, 40);
-		add(bTestSearch);
+		bSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bSearch.setBounds(220, 270, 160, 45);
+		bSearch.setContentAreaFilled(false);
+		bSearch.setBorderPainted(false);
+		add(bSearch);
 		
 		/*
 		 * 사이트 선택 버튼: "예약조회" 클릭 시 예약 가능한 사이트만 활성화 >>> 추후 반복 처리 시도 예정
@@ -124,27 +121,16 @@ public class JP_Cal extends JPanel {
 			bSite[i].setDisabledIcon(resizeIcon(iDisEnabled[i], bSite[i].getWidth(), bSite[i].getHeight()));
 		}
 		
-		// 처음 화면에서만 보이는 라벨
-		lb_check_in = new JLabel("체크인");
-		lb_check_in.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lb_check_in.setBounds(100, 170, 211, 30);
-		add(lb_check_in);
-
-		lb_numStay = new JLabel("숙박일수");
-		lb_numStay.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lb_numStay.setBounds(100, 220, 211, 30);
-		add(lb_numStay);
-		
 		// "예약조회" 클릭 시 보이는 라벨
 		lb_able_sen = new JLabel("예약 가능한 사이트 수 ");
 		lb_able_sen.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
-		lb_able_sen.setBounds(100, 350, 250, 30);
+		lb_able_sen.setBounds(120, 350, 250, 30);
 		add(lb_able_sen);
 		lb_able_sen.setVisible(false);
 		
-		lb_able_Num = new JLabel("");
+		lb_able_Num = new JLabel();
 		lb_able_Num.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		lb_able_Num.setBounds(300, 349, 200, 30);
+		lb_able_Num.setBounds(320, 349, 100, 30);
 		add(lb_able_Num);
 		lb_able_Num.setVisible(false);
 		
@@ -158,13 +144,13 @@ public class JP_Cal extends JPanel {
 		UtilDateModel model1 = new UtilDateModel();
         JDatePanelImpl datePanel1 = new JDatePanelImpl(model1);
         JDatePickerImpl datepicker1 = new JDatePickerImpl(datePanel1);
-        datepicker1.setBounds(200,170,200,30);
+        datepicker1.setBounds(220,180,200,30);
         add(datepicker1);
         
         // JComboBox 숙박일수 선택
         String [] numStay = {"1","2"};
         JComboBox cb_Stay = new JComboBox(numStay);
-		cb_Stay.setBounds(200, 220, 100, 25);
+		cb_Stay.setBounds(320, 230, 100, 25);
 		cb_Stay.setToolTipText("숙박일수를 선택해주세요");
 		add(cb_Stay);
 		
@@ -189,7 +175,7 @@ public class JP_Cal extends JPanel {
 			}
 		});
 		
-		bTestSearch.addActionListener(new ActionListener() { 
+		bSearch.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				
 				// 선택한 날짜가 오늘 이전이라면 예약조회 버튼 작동하지 않음 
