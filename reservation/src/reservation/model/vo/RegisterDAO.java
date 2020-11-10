@@ -55,28 +55,28 @@ public class RegisterDAO {
 		
 	}
 	
+	/*
+	 * 함수명: overlapDeny
+	 * 역할: 아이디 중복 확인
+	 */
 	
-	
-//	ID중복 확인 _201103 원우
 	public boolean overlapDeny(String id) throws Exception {
 	      
 	      String sql = "SELECT customer_id FROM customer WHERE customer_id = ?";
-	      System.out.println(sql);
 	      
-	      PreparedStatement joongbok = con.prepareStatement(sql);
-	      joongbok.setString(1, id);
-	      ResultSet rs = joongbok.executeQuery();
+	      PreparedStatement st = con.prepareStatement(sql);
+	      st.setString(1, id);
+	      ResultSet rs = st.executeQuery();
 	      
-	      if(rs.next()) {
-	         int cnt = rs.getInt("cnt");
-	         if(cnt>0) {
-	            return true;
-	         }
+	      String foundId = null;
+	      
+	      while(rs.next()) {
+	    	  foundId = rs.getString("customer_id");
 	      }
-	      return false;
-		
-		
-	}
+	      if(foundId != null) return true;
+	      else return false;
+	
+	} // END OF overlapDeny
 	
 	/*
 	 * 함수명: toSend_pw 

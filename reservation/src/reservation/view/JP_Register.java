@@ -34,10 +34,7 @@ public class JP_Register extends JPanel implements ActionListener {
 	
 	ImageIcon imgBackground;
 	
-	JLabel lblNewLabel_overlap;
-	
-	// 테스트
-	JLabel lbIdCheck;
+	JLabel lbIdCheck, lbPwCheck, lbPwConfirmChk;
 	
 	/*
 	 * 이름: JP_Login 기본생성자
@@ -55,13 +52,11 @@ public class JP_Register extends JPanel implements ActionListener {
 		tfID = new HintTextField("알파벳 소문자/숫자로 8~20자");
 		tfTel = new HintTextField("하이픈'-' 없이 입력하세요");
 		
-//		비밀번호 필드 얘도 바꿔줌 _201103 원우
 		tfPW = new JPasswordField();
 		tfName = new HintTextField("이름을 입력하세요");
 		tfEmail = new JTextField();
 		tfAddr = new JTextField();
 		
-//		비밀번호 확인 텍스트필드 _201105 원우
 		tfPwConfirm = new JPasswordField();
 		
 		bRegist = new JButton(); 
@@ -114,17 +109,21 @@ public class JP_Register extends JPanel implements ActionListener {
 		
 		imgBackground = new ImageIcon("src/reservation/imgs/JP_Register.png");
 		
-		
 		// 라벨 설정
-
-		/*
-		 * 삭제예정?
-		 */
-//		중복검사 _201106 원우
-		lblNewLabel_overlap = new JLabel();
-		lblNewLabel_overlap.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_overlap.setBounds(405, 187, 57, 15);
-		add(lblNewLabel_overlap);
+		lbIdCheck = new JLabel();
+		lbIdCheck.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lbIdCheck.setBounds(420, 186, 180, 15);
+		add(lbIdCheck);
+		
+		lbPwCheck = new JLabel();
+		lbPwCheck.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lbPwCheck.setBounds(420, 266, 180, 15);
+		add(lbPwCheck);
+		
+		lbPwConfirmChk = new JLabel();
+		lbPwConfirmChk.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		lbPwConfirmChk.setBounds(420, 306, 180, 15);
+		add(lbPwConfirmChk);
 		
 		String[] mail = {"메일 선택", "@gmail.com", "@naver.com", "@hanmail.net", "@yahoo.co.kr"};
 		emailBox = new JComboBox(mail);
@@ -144,13 +143,6 @@ public class JP_Register extends JPanel implements ActionListener {
 			}
 		});
 		
-		
-		
-		
-	// -----------------------------------------------------------------------------		
-	// -----------------------------------------------------------------------------		
-		
-		
 //		이벤트 실행 _201103 원우
 		eventProc();
 		
@@ -161,57 +153,99 @@ public class JP_Register extends JPanel implements ActionListener {
 		} catch (Exception e) {
 			System.out.println("DB 연결 실패");
 		}
-		
 	}
-	
-	
-	
+		
 //	데이터베이스 연결? _201103 원우
 	RegisterDAO dao;
-	
-	
-	
+		
 //	이벤트 실행 _201103 원우
 	void eventProc() {
-		
-		String id = tfID.getText();
 
 		bRegist.addActionListener(this);
 		
-		
+		/*
+		 * 아이디 유효성 검사
+		 */
 		tfID.addKeyListener(new KeyAdapter() {
 			
-			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyReleased(KeyEvent e) {
 				try {
-					dao = new RegisterDAO();
-					if(dao.overlapDeny(id)) {
-						lblNewLabel_overlap.setForeground(Color.RED);
-						lblNewLabel_overlap.setText("사용 불가");
+					String id = tfID.getText();
+					
+					if(id.length()>=8 && id.length()<=20) {
+						if(dao.overlapDeny(id)) {
+							lbIdCheck.setForeground(Color.RED);
+							lbIdCheck.setText("사용할 수 없는 아이디입니다");
+						}
+						else {
+						lbIdCheck.setForeground(Color.BLUE);
+						lbIdCheck.setText("사용가능합니다");
+						}
+					} 
+					else if (id.length()==0) {
+						lbIdCheck.setText("");
+					}
+					else if (id.length()>20) {
+						lbIdCheck.setForeground(Color.RED);
+						lbIdCheck.setText("20자를 초과했습니다");
 					}
 					else {
-						lblNewLabel_overlap.setForeground(Color.BLUE);
-						lblNewLabel_overlap.setText("사용 가능");
+						lbIdCheck.setForeground(Color.RED);
+						lbIdCheck.setText("8자 이하는 사용할 수 없습니다");
 					}
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-					
-				lblNewLabel_overlap.setText("사용가능");
 			}
+		}); //아이디 유효성 검사 끝
+		
+		/*
+		 * 비밀번호 유효성 검사
+		 */
+		tfPW.addKeyListener(new KeyAdapter() {
 			
-			
-		});
-			
-			
+			public void keyReleased(KeyEvent e) {
+				try {
+					String pw = tfPW.getText();
+					
+					if(pw.length()>=8 && pw.length()<=20) {
+						
+						String regExp = "^(?=.*[0-9])(?=.*[a-z]).{8,20}$";
+						
+						if(pw.matches(regExp) == false) {
+							lbPwCheck.setForeground(Color.RED);
+							lbPwCheck.setText("소문자 또는 숫자 최소 한개 포함");
+						}
+						else {
+						lbPwCheck.setForeground(Color.BLUE);
+						lbPwCheck.setText("사용가능합니다");
+						}
+					} 
+					else if (pw.length()==0) {
+						lbPwCheck.setText("");
+					}
+					else if (pw.length()>20) {
+						lbPwCheck.setForeground(Color.RED);
+						lbPwCheck.setText("20자를 초과했습니다");
+					}
+					else {
+						lbPwCheck.setForeground(Color.RED);
+						lbPwCheck.setText("8자 이하입니다");
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		}); //비밀번호 유효성 검사 끝
+		
+		/*
+		 * 비밀번호 다시 입력 유효성 검사
+		 */
+		
 		
 	}
 	
-	
-	
 //	회원가입 버튼 클릭 _201103 원우
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		Object evt = e.getSource();
@@ -220,33 +254,15 @@ public class JP_Register extends JPanel implements ActionListener {
 			emailAdd();
 			insertMember();
 		}
-		
-		
-
 	}
 	
-	
-	
-//	회원가입 _201103 원우
 	CustomerVO vo = new CustomerVO();
 	public void insertMember() {
-//		List<String> list = new ArrayList<String>();
-		
-//		list.add(vo.setMemberID(tfID.getText()));
-//		list.add(tfID.getText());
-//		for(int i = 0; i<list.size(); i++) {
-//			if(list.get(i).contains(" "){
-
 		vo.setMemberID(tfID.getText());
 		vo.setMemberTel(tfTel.getText());
 		vo.setMemberPw(tfPW.getText());
 		vo.setMemberName(tfName.getText());
 		vo.setMemberAddr(tfAddr.getText());
-		
-		
-		
-		
-		
 		
 		// 유효성 검사를 위한 변수들임 _201105 원우
 		String checkId = tfID.getText();
@@ -256,8 +272,6 @@ public class JP_Register extends JPanel implements ActionListener {
 		String checkName = tfName.getText();
 		String checkEmail = tfEmail.getText();
 		String checkAddr = tfAddr.getText();
-		
-		
 		
 		try {
 			// 1. id 유효성 검사 _201105 원우
@@ -343,21 +357,22 @@ public class JP_Register extends JPanel implements ActionListener {
 	} // end of insertMember()
 	
 	
-	
-	// email = textfield + dropbox _201105 원우
+	/*
+	 * 함수명: emailAdd
+	 * 역할: email = textfield + dropbox
+	 */
 	public void emailAdd() {
 		String mailadr =  (String) emailBox.getSelectedItem();
 		String writeMail = tfEmail.getText();
 		
 		vo.setMemberEmail(writeMail+mailadr);
-				
 	}
 
-
-	
-//	회원가입 버튼 클릭시 textfield 초기화 _201103 원우
+	/*
+	 * 함수명: clearTextField
+	 * 역할: 회원가입 버튼 클릭시 textfield 초기화
+	 */
 	private void clearTextField() {
-		
 		tfID.setText(null);
 		tfTel.setText(null);
 		tfPW.setText(null);
@@ -379,4 +394,3 @@ public class JP_Register extends JPanel implements ActionListener {
 		 // g.drawRoundRect(120, 10, 50, 50, 30, 20);
 	}
 } 
-
