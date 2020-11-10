@@ -2,10 +2,12 @@ package reservation.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -35,6 +37,8 @@ public class JP_Reserve extends JPanel {
 	private JComboBox estArrComboBox;
 	private JComboBox comboBox_2;
 	
+	ImageIcon imgBackground;
+	
 	ReservationDAO reserve_dao;   //  ReservationDAO 변수 생성 . 
 	
 	/*
@@ -57,9 +61,11 @@ public class JP_Reserve extends JPanel {
 		setLayout(null); 
 		F = f; 
 		
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_Reserve_1.png");
+		
 		// Component 생성
-		bToLogin = new JButton("홈");
-		bRegist = new JButton("결제완료");
+		bToLogin = new JButton("");
+		bRegist = new JButton("");
 		tfName = new JTextField();
 		tfTel = new JTextField();
 		tfCarNo = new JTextField();
@@ -69,100 +75,104 @@ public class JP_Reserve extends JPanel {
 		vo = new ReservationVO();
  				
 		// Component 양식 설정
-		tfName.setBounds(215, 111, 200, 25);
+		tfName.setBounds(290, 155, 200, 25);
 		tfName.setColumns(10);
 		tfName.setEditable(false); 						//이름 편집 못하게 
 		
 		add(tfName);
 		
-		tfTel.setBounds(215, 155, 200, 25);
+		tfTel.setBounds(290, 194, 200, 25);
 		tfTel.setColumns(10);
 		tfTel.setEditable(false); 						//전화번호 편집 못하게 
 		add(tfTel);
 		
-		tfCarNo.setBounds(215, 310, 200, 25);		
+		tfCarNo.setBounds(290, 314, 200, 25);		
 		tfCarNo.setColumns(10);
 		add(tfCarNo);
 		
-		tfRequest.setBounds(215, 350, 200, 25);			//요청사항 텍스트필드 추가 
+		tfRequest.setBounds(290, 354, 200, 25);			//요청사항 텍스트필드 추가 
 		tfRequest.setColumns(10);
 		add(tfRequest);
 		
-		tfPrice.setBounds(215, 390, 200, 25);		
+		tfPrice.setBounds(290, 395, 200, 25);		
 		tfPrice.setColumns(10);
 		tfPrice.setEditable(false); 					//요금 편집못하게 (인원수,사이트넘버,날짜등등에따라 자동 조정) 
 		add(tfPrice);
 		
 		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToLogin.setBounds(457, 23, 97, 23);
+		bToLogin.setBounds(530, 15, 53, 53);
+		bToLogin.setContentAreaFilled(false);
+		bToLogin.setBorderPainted(false);
 		add(bToLogin);
 		
 		bRegist.setFont(new Font("맑은 고딕", Font.PLAIN, 12));    			
-		bRegist.setBounds(215, 480, 97, 23);							
+		bRegist.setBounds(243, 495, 120, 29);	
+		bRegist.setContentAreaFilled(false);
+		bRegist.setBorderPainted(false);
 		add(bRegist);
 		
 		Integer []cbJanreStr = {1,2,3,4};  										// 인원수 콤보박스 데이터 추가 
 		personNumComboBox = new JComboBox(cbJanreStr);
-		personNumComboBox.setBounds(215, 211, 96, 21);            
+		personNumComboBox.setBounds(290, 237, 96, 21);            
 		add(personNumComboBox);
 		
 		String []cbJanreStr1 = {"12시~2시","2시~4시","4시~6시","6시~8시"}; 			// 도착예정시간 콤보박스 데이터 추가
 		estArrComboBox = new JComboBox(cbJanreStr1);
-		estArrComboBox.setBounds(215, 260, 96, 21);							
+		estArrComboBox.setBounds(290, 277, 96, 21);							
 		add(estArrComboBox);
 		
 //		JComboBox comboBox_2 = new JComboBox();									//숙박기간 콤보박스 [삭제예정]		
 //		comboBox_2.setBounds(215, 211, 96, 21);	
 //		add(comboBox_2);
 		
-		JLabel lblNewLabel_2 = new JLabel("예약정보 입력");
-		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
-		lblNewLabel_2.setBounds(171, 40, 211, 30);
-		add(lblNewLabel_2);
+//		JLabel lblNewLabel_2 = new JLabel("예약정보 입력");
+//		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
+//		lblNewLabel_2.setBounds(171, 40, 211, 30);
+//		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel = new JLabel("예약자");
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel.setBounds(128, 116, 57, 15);
-		add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("전화번호");
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1.setBounds(128, 160, 57, 15);
-		add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_3 = new JLabel("인원수");
-		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(128, 211, 57, 15);							
-		add(lblNewLabel_3);
-	
-		JLabel lblNewLabel_3_1 = new JLabel("도착예정시간");
-		lblNewLabel_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_1.setBounds(128, 260, 75, 15);						
-		add(lblNewLabel_3_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("차 번호");
-		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));	
-		lblNewLabel_1_1.setBounds(128, 310, 57, 15);
-		add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_3_2 = new JLabel("요청사항");
-		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_3_2.setBounds(128, 350, 57, 15);
-		add(lblNewLabel_3_2);
-		
-		JLabel lblNewLabel_1_1_1 = new JLabel("요금");
-		lblNewLabel_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lblNewLabel_1_1_1.setBounds(128, 390, 57, 15);					
-		add(lblNewLabel_1_1_1);
+//		JLabel lblNewLabel = new JLabel("예약자");
+//		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+//		lblNewLabel.setBounds(128, 116, 57, 15);
+//		add(lblNewLabel);
+//		
+//		JLabel lblNewLabel_1 = new JLabel("전화번호");
+//		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+//		lblNewLabel_1.setBounds(128, 160, 57, 15);
+//		add(lblNewLabel_1);
+//		
+//		JLabel lblNewLabel_3 = new JLabel("인원수");
+//		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+//		lblNewLabel_3.setBounds(128, 211, 57, 15);							
+//		add(lblNewLabel_3);
+//	
+//		JLabel lblNewLabel_3_1 = new JLabel("도착예정시간");
+//		lblNewLabel_3_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+//		lblNewLabel_3_1.setBounds(128, 260, 75, 15);						
+//		add(lblNewLabel_3_1);
+//		
+//		JLabel lblNewLabel_1_1 = new JLabel("차 번호");
+//		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));	
+//		lblNewLabel_1_1.setBounds(128, 310, 57, 15);
+//		add(lblNewLabel_1_1);
+//		
+//		JLabel lblNewLabel_3_2 = new JLabel("요청사항");
+//		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+//		lblNewLabel_3_2.setBounds(128, 350, 57, 15);
+//		add(lblNewLabel_3_2);
+//		
+//		JLabel lblNewLabel_1_1_1 = new JLabel("요금");
+//		lblNewLabel_1_1_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+//		lblNewLabel_1_1_1.setBounds(128, 390, 57, 15);					
+//		add(lblNewLabel_1_1_1);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("이용규칙 동의");
 		chckbxNewCheckBox.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		chckbxNewCheckBox.setBounds(128, 440, 115, 23);
+		chckbxNewCheckBox.setBounds(173, 450, 115, 23);
 		add(chckbxNewCheckBox);
 		
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("환불규정 동의");
 		chckbxNewCheckBox_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		chckbxNewCheckBox_1.setBounds(267, 440, 115, 23);
+		chckbxNewCheckBox_1.setBounds(312, 450, 115, 23);
 		add(chckbxNewCheckBox_1);
 		
 		//이름, 전화번호 셋팅을 위한 코드 // start
@@ -331,6 +341,16 @@ public class JP_Reserve extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	/*
+	 * 함수명: paintComponent
+	 * 역할: 배경이미지 설정
+	 */
+	public void paintComponent(Graphics g) {
+		  super.paintComponent(g);
+
+		  g.drawImage(imgBackground.getImage(), 0, 0, this);
+	}
+	
 
 	
 	
