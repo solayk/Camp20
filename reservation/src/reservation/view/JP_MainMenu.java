@@ -21,7 +21,7 @@ import reservation.model.vo.UserVO;
 public class JP_MainMenu extends JPanel {
 
 	JLabel lb_title;
-	JButton bToReserv, bToCheckReserve, bToLogin; 
+	JButton bToReserv, bToCheckReserve, bLogout; 
 	JFrame_main F; 
 	
 	ImageIcon imgBackground;
@@ -43,14 +43,14 @@ public class JP_MainMenu extends JPanel {
 		
 		
 		// Component 생성
-		bToReserv = new JButton(""); 
-		bToCheckReserve = new JButton(""); 
-		bToLogin = new JButton("로그아웃"); 
+		bToReserv = new JButton(); 
+		bToCheckReserve = new JButton(); 
+		bLogout = new JButton(); 
 		
 		/*
 		 * 임시 ****************************************
 		 */
-		imgBackground = new ImageIcon("src/reservation/imgs/mainmemu_test5.png");
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_MainMenu_3.png");
 		
 		// 아이콘 설정
 		iconTitle = new ImageIcon("src/reservation/imgs/JP_MainMenu_title.png");
@@ -58,12 +58,12 @@ public class JP_MainMenu extends JPanel {
 		iconToCheckReserve = new ImageIcon("src/reservation/imgs/JP_MainMenu_bToCheckReserve.png");
 		
 		// Component 양식 설정
-		bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bToLogin.setBounds(500, 15, 90, 25);
+		bLogout.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		bLogout.setBounds(510, 15, 80, 90);
 			// JButton 투명하게
-//			bToLogin.setContentAreaFilled(false);
-//			bToLogin.setBorderPainted(false);
-		add(bToLogin);
+			bLogout.setContentAreaFilled(false);
+			bLogout.setBorderPainted(false);
+		add(bLogout);
 		
 		bToReserv.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		bToReserv.setBounds(150, 140, 300, 150);
@@ -83,9 +83,11 @@ public class JP_MainMenu extends JPanel {
 		 * 역할 : 로그아웃 버튼누르면 toLogin으로 이동 
 		 * 
 		 */
-		bToLogin.addActionListener(new ActionListener() { 
+		bLogout.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) {
-				int reply = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까? ", "로그아웃", JOptionPane.YES_NO_OPTION);
+				JLabel msg = new JLabel("로그아웃 하시겠습니까? ");
+				msg.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+				int reply = JOptionPane.showConfirmDialog(null, msg, "로그아웃", JOptionPane.YES_NO_OPTION);
 				if (reply == JOptionPane.YES_OPTION) {
 					F.toLogin();
 				}

@@ -154,7 +154,6 @@ public class JP_Login extends JPanel {
 //				F.LoginSuccess();
 //			}
 //		});
-//		
 		
 		/*
 		 * 역할 : 관리자 페이지단추눌렀을때 관리자페이지 접속 
