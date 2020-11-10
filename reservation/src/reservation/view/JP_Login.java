@@ -158,7 +158,6 @@ public class JP_Login extends JPanel {
 		
 		/*
 		 * 역할 : 관리자 페이지단추눌렀을때 관리자페이지 접속 
-		 * 
 		 */
 		bToManager.addActionListener(new ActionListener() {
 			@Override
@@ -201,7 +200,10 @@ public class JP_Login extends JPanel {
 		bexit.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-					int reply = JOptionPane.showConfirmDialog(null, "감성캠핑을 종료하시겠습니까 ?" , "종료", JOptionPane.YES_NO_OPTION);
+					
+	            	JLabel msg = new JLabel("감성캠핑을 종료하시겠습니까?");
+					msg.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+	            	int reply = JOptionPane.showConfirmDialog(null, msg, "종료", JOptionPane.YES_NO_OPTION);
 					if (reply == JOptionPane.YES_OPTION) {
 						System.exit(0);
 					}
@@ -312,19 +314,36 @@ public class JP_Login extends JPanel {
 		bSearchPw.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) { 
 				
-				String input = JOptionPane.showInputDialog(null,"아이디를 입력하세요");
+				JLabel idIn = new JLabel("아이디를 입력하세요");
+				idIn.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+				String input = JOptionPane.showInputDialog(null,idIn);
 				
 				CustomerVO vo = new CustomerVO();
 				
 				if(input != null) {
 					try {
+						/*
+						 * 비밀번호 랜덤 생성 업데이트
+						 */
+						
+						/*
+						 * 비밀번호 전송
+						 */
 						vo = dao.toSend_pw(input);
+						
 						if (vo.getMemberName() != null) {
-							JOptionPane.showMessageDialog(null, "회원님의 이메일 : "+ vo.getMemberEmail() + " 로 비밀번호를 전송하였습니다.");
+							JLabel msg = new JLabel("회원님의 이메일 : "+ vo.getMemberEmail() + " 로 비밀번호를 전송하였습니다.");
+							msg.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+							JOptionPane.showMessageDialog(null,msg);
+														
 							SendMail mail = new SendMail();
 							mail.send_pw(vo.getMemberName(), vo.getMemberEmail(), vo.getMemberPw());
 						}
-						else JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다");
+						else {
+							JLabel msg = new JLabel("존재하지 않는 아이디입니다");
+							msg.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+							JOptionPane.showMessageDialog(null,msg);
+						}
 					} catch (Exception e) {
 						System.out.println("비밀번호 찾기로 이메일 전송 실패: " + e.toString());
 					}
@@ -332,42 +351,41 @@ public class JP_Login extends JPanel {
 				
 			}
 		});
+		
 		/*
 		 * 역할 : bSearchId 버튼 클릭시 아이디 찾기 실행
-		 * 
 		 */
 		bSearchId.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) { 
 				
-					String input = JOptionPane.showInputDialog(null,"전화번호를 입력하세요 ('-'없이 입력) ");
+					JLabel inst = new JLabel("전화번호를 입력하세요 ('-'없이 입력)");
+					inst.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+					String input = JOptionPane.showInputDialog(null,inst);
 					String id = null;
 					
-					System.out.println(input);
-					//System.out.println(input.length());
 					CustomerVO vo = new CustomerVO();
 					try {
-					if(input != null ) {
-						System.out.println("제대로 입력 ");
-						vo = dao.toSend_Id(input);
-					
-						id = vo.getMemberName();
-						System.out.println(id.length());
-						String star = "";
-						for(int i =0;i<id.substring(id.length()-3,id.length()).length();i++) { 
-							star += "*";
+						if(input != null ) {
+							System.out.println("제대로 입력 ");
+							vo = dao.toSend_Id(input);
+						
+							id = vo.getMemberName();
+							System.out.println(id.length());
+							String star = "";
+							for(int i =0;i<id.substring(id.length()-3,id.length()).length();i++) { 
+								star += "*";
+							}
+							JLabel msg = new JLabel("회원님의 id는 "+ id.substring(0,id.length()-3) + star +" 입니다.");
+							msg.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+							JOptionPane.showMessageDialog(null,msg);
 						}
-						System.out.println(star);
-						JOptionPane.showMessageDialog(null,"회원님의 id는 "+id.substring(0,id.length()-3) + star +" 입니다."); // 아이디최소 8글자
-					}
-
-					
 					
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null," 없는 전화번호 입니다."); 
+						JLabel msg = new JLabel(" 없는 전화번호 입니다.");
+						msg.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+						JOptionPane.showMessageDialog(null,msg); 
 						System.out.println("id찾기 실패  " + e.toString());
 					}
-
-				
 				
 			}
 		});
