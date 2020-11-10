@@ -190,9 +190,11 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3_7.setBounds(124, 420, 102, 20);
 		add(lblNewLabel_3_7);
 		
-		JButton bLogin_1 = new JButton("예약취소");
+		JButton bLogin_1 = new JButton("");
 		bLogin_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bLogin_1.setBounds(238, 501, 97, 23);
+		bLogin_1.setBounds(238, 501, 130, 31);
+		bLogin_1.setContentAreaFilled(false);
+		bLogin_1.setBorderPainted(false);
 		add(bLogin_1);
 		
 		JLabel lblNewLabel = new JLabel("사이트명");
