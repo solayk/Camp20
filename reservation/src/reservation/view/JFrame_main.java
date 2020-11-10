@@ -25,8 +25,8 @@ public class JFrame_main extends JFrame {
 	//	frameDragListener = new FrameDragListener(this); 		// 드래그 이벤트 
 		
 		setBounds(100,100,600,600); 
-		setUndecorated(true);					//테두리 없애기 setvisivle보다 먼저 호출되야한다 .. 
-		setShape(new RoundRectangle2D.Double(0, 0, 600, 600, 50, 40));      // JFrame 을 둥글게하는 코드 // /setUndecorated(true)가 있어야 사용할수있다. 
+		setUndecorated(true);
+		setShape(new RoundRectangle2D.Double(0, 0, 600, 600, 50, 40)); // JFrame 을 둥글게하는 코드 // /setUndecorated(true)가 있어야 사용할수있다. 
 		getContentPane().setLayout(cards); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		setResizable(false);
