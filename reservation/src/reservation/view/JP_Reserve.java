@@ -166,13 +166,15 @@ public class JP_Reserve extends JPanel {
 //		add(lblNewLabel_1_1_1);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("이용규칙 동의");
-		chckbxNewCheckBox.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		chckbxNewCheckBox.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		chckbxNewCheckBox.setBounds(173, 450, 115, 23);
+		chckbxNewCheckBox.setForeground(Color.RED);
 		add(chckbxNewCheckBox);
 		
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("환불규정 동의");
-		chckbxNewCheckBox_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		chckbxNewCheckBox_1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
 		chckbxNewCheckBox_1.setBounds(312, 450, 115, 23);
+		chckbxNewCheckBox_1.setForeground(Color.RED);
 		add(chckbxNewCheckBox_1);
 		
 		//이름, 전화번호 셋팅을 위한 코드 // start
@@ -185,12 +187,12 @@ public class JP_Reserve extends JPanel {
 			//요금 셋팅  //start
 			String temp = String.valueOf(UserVO.getCheck_in());
 			System.out.println(temp);			
-			
+			String str = null;
 			if(temp.contains("Jul") || temp.contains("Aug") || temp.contains("Sep"))//     7,8,9월에 예약하면 20000원 추가 
 			{
-				tfPrice.setText(Integer.toString((UserVO.getStayDays()*40000)+20000));
+				tfPrice.setText(String.format("%,d", (UserVO.getStayDays()*40000)+20000));
 			}else {
-				tfPrice.setText(Integer.toString((UserVO.getStayDays()*40000)));
+				tfPrice.setText(String.format("%,d", (UserVO.getStayDays()*40000)));
 			}
 			//요금 셋팅  //end
 			
