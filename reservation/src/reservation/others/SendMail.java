@@ -25,11 +25,11 @@ public class SendMail {
 	public void send_pw(String name, String email, String pw) {
 		
 		recipient = email;   
-		subject = "캄파진현 비밀번호를 확인하세요";  
+		subject = "감성캠핑입니다.";  
 		body = "\r\n" +
 			   " 안녕하세요.\r\n" +
-			   " 캄파진현입니다.\r\n" +
-			   name + " 회원님의 비밀번호는 " + pw + " 입니다.\r\n" +
+			   " 감성캠핑입니다.\r\n" +
+			   " " + name + " 회원님의 비밀번호는 " + pw + " 입니다.\r\n" +
 			   " 감사합니다. \r\n"
 			   ;
 		
