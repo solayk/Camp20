@@ -2,6 +2,7 @@ package reservation.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -18,8 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.RowSorter;
 import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import reservation.model.vo.ReservationDAO;
 import reservation.model.vo.UserVO;
@@ -50,11 +57,11 @@ public class JP_CheckResNo extends JPanel {
 			System.out.println("DB 연결실패 :" + e.toString());
 		}
 		
-		imgBackground = new ImageIcon("src/reservation/imgs/JP_ResNo.png");
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_ResNo_1.png");
 		// 테이블 , 모델 
 		tbModel = new MyTableModel();
 		tbl = new JTable(tbModel);
-		bToLogin = new JButton("홈");
+		bToLogin = new JButton("");
 		//JLabel lb_title = new JLabel("예약 조회");
 		JPanel Center = new JPanel();
 		
@@ -64,17 +71,21 @@ public class JP_CheckResNo extends JPanel {
 		setVisible(true);
 		setLayout(null); 
 		
-			bToLogin.setBounds(457, 23, 97, 23);
-		//	lb_title.setBounds(211, 30, 211, 30);
-			Center.setBounds(50,90,500,450);
+			bToLogin.setBounds(510, 23, 50, 50);
+			bToLogin.setContentAreaFilled(false);
+			bToLogin.setBorderPainted(false);
+			Center.setBounds(50,110,500,450);
 			Center.setLayout(new BorderLayout());
-			
 			bToLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		//	lb_title.setFont(new Font("맑은 고딕", Font.PLAIN, 24));
-			
 		
 		add(bToLogin);
-	//	add(lb_title);
+		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tbModel);
+		tbl.setRowSorter(sorter);
+
+		tbl.getTableHeader().setFont(new Font("맑은 고딕", Font.BOLD, 15));   // 헤더 폰트 
+		tbl.setFont(new Font("맑은 고딕", Font.BOLD, 14)); 					//데이터 폰트 
+		tbl.setRowHeight(25);
 			Center.add(new JScrollPane(tbl)); 					// JTable 은 스크롤을 반드시넣어서 붙여줘야한다
 		add(Center);
 		F = f; 
@@ -84,6 +95,7 @@ public class JP_CheckResNo extends JPanel {
 			
 			reserveList = reserve_dao.CheckResList(UserVO.getCustomer_id());
 			//reserveList = reserve_dao.CheckResList("qwe5507");
+			
 			
 			tbModel.list = reserveList;  // 2차원배열을 모델클래스의 list에 저장 
 			
@@ -142,6 +154,7 @@ public class JP_CheckResNo extends JPanel {
 		ArrayList list = new ArrayList();  //   데이터
 		String [] columnNames = {"예약 번호","예약일","체크 인","체크 아웃","예약 상태"};  // 제목
 		
+		
 		public int getRowCount() { 
 			return list.size();  
 		}
@@ -157,6 +170,7 @@ public class JP_CheckResNo extends JPanel {
 		public String getColumnName(int col) { 
 			return columnNames[col];
 		}
+
 		
 	}
 	/*
@@ -170,3 +184,7 @@ public class JP_CheckResNo extends JPanel {
 	}
 	
 }
+
+
+
+

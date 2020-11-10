@@ -55,7 +55,7 @@ public class JP_CheckRes extends JPanel {
 			System.out.println("DB연동 실패  : "+ e.toString());
 			e.printStackTrace();
 		}
-		imgBackground = new ImageIcon("src/reservation/imgs/JP_Res.png");
+		imgBackground = new ImageIcon("src/reservation/imgs/JP_Res_1.png");
 		
 		// 배경 설정
 		setBackground(Color.WHITE); 
@@ -66,7 +66,7 @@ public class JP_CheckRes extends JPanel {
 		textField = new JTextField("입금계좌 : 카카오뱅크 1112132123131 이진강");
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.setColumns(10);
-		textField.setBounds(238, 180, 270, 21);
+		textField.setBounds(238, 210, 270, 21);
 		textField.setEditable(false); 	
 		add(textField);
 		
@@ -74,7 +74,7 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3.setForeground(Color.WHITE);
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_3.setBounds(124, 180, 102, 20);
+		lblNewLabel_3.setBounds(124, 210, 102, 20);
 		add(lblNewLabel_3);
 		
 	//	JLabel lblNewLabel_2 = new JLabel("예약확인/취소");
@@ -82,13 +82,15 @@ public class JP_CheckRes extends JPanel {
 	//	lblNewLabel_2.setBounds(194, 23, 211, 30);
 	//	add(lblNewLabel_2);
 		
-		JButton bLogin = new JButton("홈");
+		JButton bLogin = new JButton("");
 //		bLogin.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //			}
 //		});
 		bLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bLogin.setBounds(457, 23, 97, 23);
+		bLogin.setBounds(510, 23, 50, 50);
+		bLogin.setContentAreaFilled(false);
+		bLogin.setBorderPainted(false);
 		add(bLogin);
 		
 //		textField_1 = new JTextField();
@@ -106,7 +108,7 @@ public class JP_CheckRes extends JPanel {
 		textField_2 = new JTextField();
 		textField_2.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_2.setColumns(10);
-		textField_2.setBounds(238, 215, 270, 21);
+		textField_2.setBounds(238, 245, 270, 21);
 		textField_2.setEditable(false); 	
 		add(textField_2);
 		
@@ -114,14 +116,14 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_2.setForeground(Color.WHITE);
 		lblNewLabel_3_2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_3_2.setBounds(124, 215, 102, 20);
+		lblNewLabel_3_2.setBounds(124, 245, 102, 20);
 		add(lblNewLabel_3_2);
 		
 		
 		textField_3 = new JTextField();
 		textField_3.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_3.setColumns(10);
-		textField_3.setBounds(238, 250, 270, 21);
+		textField_3.setBounds(238, 280, 270, 21);
 		textField_3.setEditable(false); 
 		add(textField_3);
 		
@@ -129,13 +131,13 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_3.setForeground(Color.WHITE);
 		lblNewLabel_3_3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_3_3.setBounds(124, 250, 102, 20);
+		lblNewLabel_3_3.setBounds(124, 280, 102, 20);
 		add(lblNewLabel_3_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_4.setColumns(10);
-		textField_4.setBounds(238, 285, 270, 21);
+		textField_4.setBounds(238, 315, 270, 21);
 		textField_4.setEditable(false);
 		add(textField_4);
 		
@@ -143,13 +145,13 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3_4.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_4.setForeground(Color.WHITE);
 		lblNewLabel_3_4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_3_4.setBounds(124, 285, 102, 20);
+		lblNewLabel_3_4.setBounds(124, 315, 102, 20);
 		add(lblNewLabel_3_4);
 		
 		textField_5 = new JTextField();
 		textField_5.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_5.setColumns(10);
-		textField_5.setBounds(238, 320, 270, 21);
+		textField_5.setBounds(238, 350, 270, 21);
 		textField_5.setEditable(false);
 		add(textField_5);
 		
@@ -157,13 +159,13 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3_5.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_5.setForeground(Color.WHITE);
 		lblNewLabel_3_5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_3_5.setBounds(124, 320, 102, 20);
+		lblNewLabel_3_5.setBounds(124, 350, 102, 20);
 		add(lblNewLabel_3_5);
 		
 		textField_6 = new JTextField();
 		textField_6.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_6.setColumns(10);
-		textField_6.setBounds(238, 355, 270, 21);
+		textField_6.setBounds(238, 385, 270, 21);
 		textField_6.setEditable(false);
 		add(textField_6);
 		
@@ -171,13 +173,13 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3_6.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_6.setForeground(Color.WHITE);
 		lblNewLabel_3_6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_3_6.setBounds(124, 355, 102, 20);
+		lblNewLabel_3_6.setBounds(124, 385, 102, 20);
 		add(lblNewLabel_3_6);
 		
 		textField_7 = new JTextField();
 		textField_7.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_7.setColumns(10);
-		textField_7.setBounds(238, 390, 270, 21);
+		textField_7.setBounds(238, 420, 270, 21);
 		textField_7.setEditable(false);
 		add(textField_7);
 		
@@ -185,82 +187,82 @@ public class JP_CheckRes extends JPanel {
 		lblNewLabel_3_7.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3_7.setForeground(Color.WHITE);
 		lblNewLabel_3_7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_3_7.setBounds(124, 390, 102, 20);
+		lblNewLabel_3_7.setBounds(124, 420, 102, 20);
 		add(lblNewLabel_3_7);
 		
 		JButton bLogin_1 = new JButton("예약취소");
 		bLogin_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		bLogin_1.setBounds(238, 471, 97, 23);
+		bLogin_1.setBounds(238, 501, 97, 23);
 		add(bLogin_1);
 		
 		JLabel lblNewLabel = new JLabel("사이트명");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel.setBounds(66, 100, 57, 15);
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel.setBounds(66, 120, 60, 15);
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_1.setBounds(66, 125, 57, 15);
+		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_1.setBounds(66, 145, 60, 15);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_4 = new JLabel("예약일");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setForeground(Color.WHITE);
-		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_4.setBounds(149, 100, 57, 15);
+		lblNewLabel_4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_4.setBounds(149, 120, 60, 15);
 		add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("New label");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_1_1.setBounds(130, 125, 100, 15);//57
+		lblNewLabel_1_1.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_1_1.setBounds(130, 145, 100, 15);//57
 		add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_5 = new JLabel("기간");
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setForeground(Color.WHITE);
-		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_5.setBounds(280, 100, 57, 15);
+		lblNewLabel_5.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_5.setBounds(280, 120, 60, 15);
 		add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("New label");
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_2.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_1_2.setBounds(230, 125, 170, 15);
+		lblNewLabel_1_2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_1_2.setBounds(230, 145, 190, 15);
 		add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_6 = new JLabel("인원");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setForeground(Color.WHITE);
-		lblNewLabel_6.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_6.setBounds(410, 100, 57, 15);
+		lblNewLabel_6.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_6.setBounds(410, 120, 60, 15);
 		add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("New label");
 		lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_3.setForeground(Color.WHITE);
-		lblNewLabel_1_3.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_1_3.setBounds(410, 125, 57, 15);    // 337
+		lblNewLabel_1_3.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_1_3.setBounds(410, 145, 60, 15);    // 337
 		add(lblNewLabel_1_3);
 		
 		JLabel lblNewLabel_7 = new JLabel("요금");
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_7.setForeground(Color.WHITE);
-		lblNewLabel_7.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_7.setBounds(460, 100, 57, 15);
+		lblNewLabel_7.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_7.setBounds(460, 120, 60, 15);
 		add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("New label");
 		lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_4.setForeground(Color.WHITE);
-		lblNewLabel_1_4.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		lblNewLabel_1_4.setBounds(460, 125, 57, 15);   // 427
+		lblNewLabel_1_4.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lblNewLabel_1_4.setBounds(460, 145, 60, 15);   // 427
 		add(lblNewLabel_1_4);
 		
 		rvo = new ReservationVO();
