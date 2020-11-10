@@ -10,22 +10,26 @@ import reservation.model.vo.CustomerVO;
 
 public class RegisterDAO {
 	
-	public RegisterDAO() throws Exception{
-		connectDB();
-	}
-	
-	
+	String url;
+	String user;
+	String pass;
 	Connection con;
+	public RegisterDAO() throws Exception{
+//		connectDB();
+		con = DBCon.getInstance();
+	}
+	
+	
 
-	String url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
-	String user = "positive";
-	String pass = "1004";
+//	String url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
+//	String user = "positive";
+//	String pass = "1004";
 
 	
-	void connectDB() throws Exception {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		con = DriverManager.getConnection(url, user, pass);
-	}
+//	void connectDB() throws Exception {
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//		con = DriverManager.getConnection(url, user, pass);
+//	}
 
 
 

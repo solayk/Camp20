@@ -18,18 +18,19 @@ public class Admin_1reservation_DAO {
 	Connection con;
 	
 	public Admin_1reservation_DAO() throws Exception {
-		connectDB();
+		con = DBCon.getInstance();
+//		connectDB();
 		
 	}
 	
-	void connectDB() throws Exception {
-		
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
-		user = "positive";
-		pass = "1004";
-		con = DriverManager.getConnection(url, user, pass);
-	}
+//	void connectDB() throws Exception {
+//		
+////		Class.forName("oracle.jdbc.driver.OracleDriver");
+////		url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
+////		user = "positive";
+////		pass = "1004";
+////		con = DriverManager.getConnection(url, user, pass);
+//	}
 	
 	
 	

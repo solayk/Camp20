@@ -9,10 +9,13 @@ import java.util.ArrayList;
 
 public class Chart_Database {
 	
-	String url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
-	String user = "positive";
-	String pass = "1004";
-	
+//	String url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
+//	String user = "positive";
+//	String pass = "1004";
+	String url;
+	String user;
+	String pass;
+	Connection con;
 
 
 	public ArrayList<ArrayList> getData() {
@@ -20,8 +23,10 @@ public class Chart_Database {
 		ArrayList<ArrayList> data = new ArrayList<ArrayList>();
 		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, user, pass);
+//			con = DBCon.getInstance();
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Connection con = DriverManager.getConnection(url, user, pass);
+			con = DBCon.getInstance();
 			
 			//=======================================================
 			/**

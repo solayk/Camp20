@@ -26,23 +26,24 @@ public class ReservationDAO {
 
 	// constructor
 	public ReservationDAO() throws Exception {
-		connectDB();
+//		connectDB();
+		con = DBCon.getInstance();
 	}
 
 	// ###########################################################
 	// DB control method
 
-	void connectDB() throws Exception {
-		/*
-		 * 1. 드라이버를 드라이버메니저에 등록 2. 연결 객체 얻어오기
-		 */
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
-		user = "positive";
-		pass = "1004";
-		con = DriverManager.getConnection(url, user, pass);
-	}
-	
+//	void connectDB() throws Exception {
+//		/*
+//		 * 1. 드라이버를 드라이버메니저에 등록 2. 연결 객체 얻어오기
+//		 */
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//		url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
+//		user = "positive";
+//		pass = "1004";
+//		con = DriverManager.getConnection(url, user, pass);
+//	}
+//	
 	
 	/*
 	 * 함수명 : Payment  //결제하다 

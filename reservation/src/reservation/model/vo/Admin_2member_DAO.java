@@ -16,19 +16,20 @@ public class Admin_2member_DAO {
 	Connection con;
 	
 	public Admin_2member_DAO() throws Exception {
-		connectDB();
+//		connectDB();
+		con = DBCon.getInstance();
 		
 	}
 
-	private void connectDB() throws Exception {
-		
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
-		user = "positive";
-		pass = "1004";
-		con = DriverManager.getConnection(url, user, pass);
-		
-	}
+//	private void connectDB() throws Exception {
+//		
+//		Class.forName("oracle.jdbc.driver.OracleDriver");
+//		url = "jdbc:oracle:thin:@192.168.0.23:1521:orcl";
+//		user = "positive";
+//		pass = "1004";
+//		con = DriverManager.getConnection(url, user, pass);
+//		
+//	}
 
 	public ArrayList mStatus(String cb, String tf) throws Exception {
 		
