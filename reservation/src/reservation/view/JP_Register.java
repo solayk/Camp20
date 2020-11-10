@@ -275,6 +275,10 @@ public class JP_Register extends JPanel implements ActionListener {
 							lbPwConfirmChk.setText("비밀번호가 일치하지 않습니다");
 						}
 					}
+					else if(tfPW.getText().length() < tfPwConfirm.getText().length()) {
+						lbPwConfirmChk.setForeground(Color.RED);
+						lbPwConfirmChk.setText("비밀번호가 일치하지 않습니다");
+					}
 					else lbPwConfirmChk.setText("");
 				} catch (Exception e1) {
 					System.out.println("비밀번호 재입력 유효성 검사 오류");
